@@ -70,7 +70,7 @@ struct Config {
     int pairMinutes = 5;
     int lanGraceSeconds = 45;                 // a LAN session whose link broke keeps the virtual monitor this long, waiting for the tablet to reconnect                      // how long a pairing window (code) stays open
     int port = 38700;
-    int requiredAppBuild = 16;
+    int requiredAppBuild = 18;
     int modeHz = 60;
 
     void load(const std::wstring& ini) {

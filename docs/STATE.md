@@ -32,7 +32,7 @@
 | 阶段 | 状态 |
 |---|---|
 | Phase 0 探测与基线 | ✅ |
-| 平板 App（`android/app`） | ✅ **build 17 / v1.1.3**（原 build 9 / v1.0 的基础上加了旋转/音量键等）：主页 `HomeActivity`（UDP 发现、已配对电脑列表、配对码数字键盘、手动输入 IP、自动连接上次的电脑、忘记）+ 显示 `MainActivity`；客户端握手 `PcClient`（连接/配对 PD2）、`Discovery`、`PcStore`（多电脑）；USB 回环服务保留（免码配对）；渲染器三类分开合并；三指轻点整屏刷新；触控回传；应用图标（自适应图标）。**平板没有摄像头 → 无扫码**。 |
+| 平板 App（`android/app`） | ✅ **build 18 / v1.1.3**（原 build 9 / v1.0 的基础上加了旋转/音量键等）：主页 `HomeActivity`（UDP 发现、已配对电脑列表、配对码数字键盘、手动输入 IP、自动连接上次的电脑、忘记）+ 显示 `MainActivity`；客户端握手 `PcClient`（连接/配对 PD2）、`Discovery`、`PcStore`（多电脑）；USB 回环服务保留（免码配对）；渲染器三类分开合并；三指轻点整屏刷新；触控回传；应用图标（自适应图标）。**平板没有摄像头 → 无扫码**。 |
 | 虚拟显示器 | ✅ Parsec VDD 0.41 已装；Padreen 自己增删（`vdd.cpp`） |
 | **C++ Padreen**（`host/padreen`） | ✅ **托盘常驻、自动检测平板（adb track-devices）、自动装/升级 App、转发端口、拉起 App、插虚拟屏、DXGI 桌面复制、1-bit 化、补灰阶、指针、白壁纸守护、拔线即拔屏、断线自动恢复、设置记忆、开机自启开关、A2 刷新方式子菜单、Wi-Fi（配对/记住 IP/扫描/50 ms 保活/加密）、LZ4 压缩 mono 更新**。抓取处理 0.1–7 ms（Python 原型 ~50 ms） |
 | Python 原型（`host/poc`） | 保留作实验/测量工具：`mirror.py`、`stress.py`、`vdd.py`、`phctl.py`（给运行中的 Padreen 发托盘命令）、延迟测量脚本 |
@@ -43,7 +43,7 @@
 
 ## 3. 现场状态
 
-**平板（HMW-W09）**：`com.padreen.app`（11-09 起；当前 **build 17 / v1.1.3**，已装）。USB 调试保持开启。**没有写入任何平板系统设置**。卸载：`adb uninstall com.padreen.app`。**没有摄像头**（`pm list features` 无 camera）。
+**平板（HMW-W09）**：`com.padreen.app`（11-09 起）。已发布的是 **build 18 / v1.1.3**（新界面）；这台平板上现在装的是 build 17 的新界面版（11-10 调试时装的，与 build 18 只差版本号），装上电脑端 1.1.3 后插 USB 会自动升到 18。USB 调试保持开启。**没有写入任何平板系统设置**。卸载：`adb uninstall com.padreen.app`。**没有摄像头**（`pm list features` 无 camera）。
 
 **电脑**：
 - **虚拟显示驱动**（用户装）：设备 `ROOT\DISPLAY\0000`「Parsec Virtual Display Adapter」；驱动包在 `C:\Windows\System32\DriverStore`，`mm.dll` 在 `...\drivers\UMDF`；注册表 `HKLM\SOFTWARE\Parsec\vdd\0/1`。卸载：管理员运行 `tools\vdd\pkg\uninstall-vdd.ps1`；状态：`tools\vdd\pkg\status-vdd.ps1`。
@@ -87,8 +87,8 @@
   - 电脑端（`ui.cpp` / `main.cpp` / `driver.cpp` / `adb.cpp` / `power.cpp`）：主界面 8 个开关 = Wi-Fi 连接 / 优先 USB / 触控 / 三指手势 / 自动旋转 / 纯白壁纸 / 开机启动 / 合盖不休眠，按钮 = 配对… / 已配对… / 全屏刷新 / 日志 / 关闭；「安装驱动…」按钮只在没装驱动时出现，「启用…」只在防火墙规则缺失时出现，合盖开关在没装电源助手时变灰并注明；配对窗口只留一行指引 + 配对码 + 剩余时间；托盘菜单、状态行、各类提示都改成短句（失败原因的细节进日志）。
   - 平板主页（`HomeActivity.java` 等）：副标题只剩版本，「搜索」「输入 IP」「自动连接」「三指手势」「自动旋转」「音量键控制电脑」；**去掉了「使用说明」按钮和 `showHelp()`**；列表为空只写「没有找到电脑」。安装包向导（`Padreen.iss`）的组件/任务名也缩成几个字。
   - README 与 `host\padreen\README-dist.txt`（装成 `使用说明.txt`）重写成 介绍 / 展示（`docs/images/panel.png`：电脑主界面截图，IP 是占位值）/ 使用，其余内容（目录、构建、发布、驱动、设计要点）只在本文件。
-  - 验证：电脑端窗口用临时测试程序（`ui.cpp` + 假数据 + `PrintWindow`，不进库）逐个截图看过：主界面三种状态（正常 / 缺驱动 + 缺电源助手 + 防火墙未放行 / 长状态换行）、配对窗口三种状态（等待 / 过期 / 已配对）、已配对窗口；**别在用户的 Padreen 运行时再起一个真实实例**（单实例互斥体 `Local\PadreenSingleton` 会让它直接退出并只弹出已运行实例的主界面）。平板主页的新版 APK 已编译（`android\app\build\padreen.apk`），装到平板上目视检查需要先征得用户同意：会打断正在进行的显示会话。
-  - **版本号没动**（电脑端 1.1.2；平板 build 17 / v1.1.3）。发布带新 UI 的版本时：电脑端升 `res/resource.h` 的 `PD_VER_STRING` 和 `Padreen.iss` 的 `AppVersion`；平板端 `AndroidManifest.xml` 的 versionCode / versionName 与 `Receiver.APP_BUILD` 升一版，并把电脑端的 `requiredAppBuild` 提到同一值，已装的平板才会被自动升级（平板 App 的文字变了，但 build 17 的平板不升级就还是旧界面）。
+  - 验证：电脑端窗口用临时测试程序（`ui.cpp` + 假数据 + `PrintWindow`，不进库）逐个截图看过：主界面三种状态（正常 / 缺驱动 + 缺电源助手 + 防火墙未放行 / 长状态换行）、配对窗口三种状态（等待 / 过期 / 已配对）、已配对窗口；**别在用户的 Padreen 运行时再起一个真实实例**（单实例互斥体 `Local\PadreenSingleton` 会让它直接退出并只弹出已运行实例的主界面）。平板主页的新界面也在平板上看过（用户同意后覆盖安装；安装会杀掉平板 App，电脑端不会自己重连，要 `python host\poc\phctl.py reconnect`）。
+  - **已发布为 v1.1.3**（2026-11-10）：电脑端 `PD_VER_STRING` / `Padreen.iss` 的 `AppVersion` = 1.1.3；平板 `versionCode` / `Receiver.APP_BUILD` = **18**（versionName 仍是 1.1.3，build 17 的包里也叫 1.1.3）；电脑端 `requiredAppBuild` = 18（`PROTOCOL.md` 里写的 appBuild 也改成 18）——旧界面的 build 17 平板在下次插 USB 时会被自动升级（平板上点一次「继续安装」，同一把密钥，配对记录保留）。安装包 `Padreen-Setup-1.1.3.exe`：5,759,051 字节，SHA-256 `7BE049C1A8C4116D8A63746E94CA0F3E88492C73810F6B2DC27345A5CF796B12`；没有代码签名；只在开发机上编译、核对内容，没有在干净系统上做过完整的安装/卸载测试。
 - **仓库速查（原 README 的目录表、构建段和设计要点，2026-11-10 起只放这里）**：
   - 目录：`host/padreen`（电脑端 C++：托盘、控制面板、配对窗口、DXGI 抓屏、编解码、VDD、触控注入、电源助手）· `host/poc`（早期 Python 原型与延迟测量，不参与产品构建）· `android/app`（平板 App `com.padreen.app`）· `android/app/test`（手势 / 方向 / 音量键的 JVM 单元测试）· `android/probe`（墨水屏驱动探测 APK）· `protocol/PROTOCOL.md`（线协议 v2.0）· `docs/probe-report.md`（实测与结论）· `PLAN.md`（方案与变更历史）· `tools`（环境准备、打包、探测脚本）· `installer/Padreen.iss`（Inno Setup 脚本）· `third_party/lz4`（BSD-2-Clause）。
   - 构建（都用 `powershell -ExecutionPolicy Bypass -File`）：电脑端 `host\padreen\build.ps1`（→ `host\padreen\build\padreen.exe`）；平板 APK `android\app\build.ps1 [-Install] [-Start]`（不用 Gradle：aapt2 + javac + d8 + apksigner；需要签名密钥）；平板端单元测试 `android\app\test\run-tests.ps1`；绿色版目录 `tools\make-dist.ps1 [-Build] [-SkipDriverCheck]`，安装包 `tools\make-installer.ps1 [-Build] [-SkipDriverCheck]`（`-SkipDriverCheck` 只给离线构建用，发布不要用）。各脚本经 `tools\toolchain.ps1` 找工具：环境变量（`PADREEN_TOOLS` / `PADREEN_JDK` / `PADREEN_ISCC` / `PADREEN_GH` / `ANDROID_HOME`）→ `D:\Tools` → 常见安装位置 → 原开发机的目录布局。`tools\fetch-vdd.ps1` 是开发辅助（把驱动包取到 `tools\vdd\pkg`，需要 7-Zip），不属于发布。

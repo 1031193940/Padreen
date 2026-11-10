@@ -52,7 +52,7 @@ final class Receiver implements Runnable {
             T_BYE = 0x7F;
     static final int CAP_ZLIB = 1, CAP_MONO1 = 2, CAP_LZ4 = 4, CAP_LZ4_MONO = 8, CAP_TOUCH = 16, CAP_RESUME = 32, CAP_ORIENT = 64, CAP_MEDIAKEYS = 128;
     /** Bumped whenever the PC host needs a newer tablet app; reported in HELLO byte 9 (the host installs the bundled APK if lower). Keep in sync with versionCode in AndroidManifest.xml. */
-    static final int APP_BUILD = 17;
+    static final int APP_BUILD = 18;
 
     private final Context ctx;
     private final DisplayHub hub;

@@ -15,7 +15,7 @@
 ; %LOCALAPPDATA%\PaperDisplay) and are taken over by Padreen on its first start.  The virtual display driver is never removed by that step.
 
 #define AppName "Padreen"
-#define AppVersion "1.1.2"
+#define AppVersion "1.1.3"
 #define Src "..\dist\Padreen"
 
 [Setup]

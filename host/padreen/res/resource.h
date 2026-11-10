@@ -8,5 +8,5 @@
 
 #define PD_VER_MAJOR 1
 #define PD_VER_MINOR 1
-#define PD_VER_PATCH 2
-#define PD_VER_STRING "1.1.2"
+#define PD_VER_PATCH 3
+#define PD_VER_STRING "1.1.3"

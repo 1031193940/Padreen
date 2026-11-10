@@ -11,7 +11,7 @@ u8 type | u8 flags | u16 reserved | u32 length | payload[length]
 
 | type | 方向 | 内容 |
 |---|---|---|
-| `0x01` HELLO | 平板→电脑 | 36 字节（旧版 16 字节）：`u16 proto(=1), u16 w, u16 h, u16 dpi, u8 orientation, u8 appBuild, u16 rsv, u32 caps`（caps: bit0 zlib，bit1 mono1，bit2 LZ4，bit3 LZ4(mono1)，bit4 触控反馈，bit6 ORIENT = 平板随设备方向通知电脑（`T_ORIENT` / `T_GEOM`，见下面「平板转方向与音量键」），bit7 MEDIAKEYS = 显示桌面时平板的音量键以 `T_MEDIAKEY` 发给电脑，bit5 RESUME = 平板屏幕上还留着上一次会话的画面（只在断线重连时置位：显示在前台且有内容）；电脑据此决定重连后的第一帧只补发变化的部分（不整屏刷新），否则重新发一整屏 GC16）；`u8[16] deviceId`（本次安装的随机标识）+ `u8[4] keyId`（平板所存配对密钥的 SHA-256 前 4 字节，全 0 = 未配对）追加在 16 字节之后。`appBuild`（现为 16）：低于 Padreen 要求值时，Padreen 会 `adb install -r` 自带的 APK |
+| `0x01` HELLO | 平板→电脑 | 36 字节（旧版 16 字节）：`u16 proto(=1), u16 w, u16 h, u16 dpi, u8 orientation, u8 appBuild, u16 rsv, u32 caps`（caps: bit0 zlib，bit1 mono1，bit2 LZ4，bit3 LZ4(mono1)，bit4 触控反馈，bit6 ORIENT = 平板随设备方向通知电脑（`T_ORIENT` / `T_GEOM`，见下面「平板转方向与音量键」），bit7 MEDIAKEYS = 显示桌面时平板的音量键以 `T_MEDIAKEY` 发给电脑，bit5 RESUME = 平板屏幕上还留着上一次会话的画面（只在断线重连时置位：显示在前台且有内容）；电脑据此决定重连后的第一帧只补发变化的部分（不整屏刷新），否则重新发一整屏 GC16）；`u8[16] deviceId`（本次安装的随机标识）+ `u8[4] keyId`（平板所存配对密钥的 SHA-256 前 4 字节，全 0 = 未配对）追加在 16 字节之后。`appBuild`（现为 18）：低于 Padreen 要求值时，Padreen 会 `adb install -r` 自带的 APK |
 | `0x10` UPDATE | 电脑→平板 | `u32 seq, u8 mode, u8 codec, u16 x, u16 y, u16 w, u16 h, u32 dataLen, data` |
 | `0x11` GEOM | 电脑→平板 | `u16 w, u16 h, u8 seq, u8 flags(bit0 = 拒绝，bit1 = NO_ROTATE 电脑不跟随方向), u16 rsv`：电脑现在交付的桌面尺寸（回答 `T_ORIENT`；seq 0 = 通告：会话开始、重连后、电脑上的「自动旋转」开关被切换时），见「平板转方向与音量键」 |
 | `0x12` ACK | 平板→电脑 | `u32 seq, u64 tHeader, u64 tBody, u64 tDecoded, u64 tDrawn, u64 tPosted`（平板 `nanoTime`，仅测量用；**由渲染线程在对应像素被提交给系统之后发送，合并的每个 UPDATE 各发一条**） |
