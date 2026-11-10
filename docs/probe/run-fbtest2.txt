@@ -1,0 +1,50 @@
+﻿11-01 00:25:21.843 23577 25358 I PaperProbe: >> use v=hw
+11-01 00:25:21.845 23577 23577 I PaperProbe: surfaceDestroyed
+11-01 00:25:21.855 23577 23577 I PaperProbe: HwPath.create: HWSurfaceView=OK fbSurface=pen: gangbi 5.000000 #ff000000 tag:0 line-mode:disable 
+11-01 00:25:21.855 23577 23577 I PaperProbe: toolType: TOOL_TYPE_STYLUS 
+11-01 00:25:21.855 23577 23577 I PaperProbe: isAutoWrite: true
+11-01 00:25:21.855 23577 23577 I PaperProbe: DisableList empty autoHandWrite=true
+11-01 00:25:21.875 23577 23577 I PaperProbe: surfaceCreated
+11-01 00:25:21.876 23577 23577 I PaperProbe: surfaceChanged 1404x1872 fmt=1
+11-01 00:25:21.876 23577 25358 I PaperProbe: useSurface hw ready=true
+11-01 00:25:21.876 23577 25358 I PaperProbe: << use 33.6ms
+11-01 00:25:21.876 23577 25358 I PaperProbe: >> sleep ms=800
+11-01 00:25:22.678 23577 25358 I PaperProbe: << sleep 801.4ms
+11-01 00:25:22.678 23577 25358 I PaperProbe: >> ori v=land
+11-01 00:25:22.920 23577 23577 I PaperProbe: surfaceChanged 1872x1404 fmt=1
+11-01 00:25:24.479 23577 25358 I PaperProbe: setOri land ready=true surface=1872x1404
+11-01 00:25:24.479 23577 25358 I PaperProbe: << ori 1801.2ms
+11-01 00:25:24.480 23577 25358 I PaperProbe: >> fbtest2
+11-01 00:25:24.481 23577 25358 I PaperProbe: createDrawApi: drawApi=OK
+11-01 00:25:24.547 23577 25358 I PaperProbe: variant drawGraphic(x,y): luma before=255.0 after=0.0
+11-01 00:25:24.588 23577 25358 I PaperProbe: variant drawGraphic(rect): luma before=255.0 after=0.0
+11-01 00:25:24.625 23577 25358 I PaperProbe: variant drawPath: luma before=255.0 after=0.0
+11-01 00:25:24.640 23577 25358 I PaperProbe: gradient readback (src->fb) : 0->0 16->16 32->32 48->48 64->64 80->80 96->96 112->112 128->128 144->144 160->160 176->176 192->192 208->208 224->224 240->240  distinct levels across 256 steps=256
+11-01 00:25:24.669 23577 25358 I PaperProbe: drawGraphic 100x100 : 0.94 ms per call
+11-01 00:25:24.712 23577 25358 I PaperProbe: drawGraphic 400x400 : 1.42 ms per call
+11-01 00:25:24.812 23577 25358 I PaperProbe: drawGraphic 800x800 : 3.29 ms per call
+11-01 00:25:25.007 23577 25358 I PaperProbe: drawGraphic 1404x1404 : 6.40 ms per call
+11-01 00:25:25.009 23577 25358 I PaperProbe: --- fbtest2 done
+11-01 00:25:25.009 23577 25358 I PaperProbe: << fbtest2 529.4ms
+11-01 00:25:25.009 23577 25358 I PaperProbe: >> api c=android.eink.view.FBPaint
+11-01 00:25:25.009 23577 25358 I PaperProbe: API ALLOW FBPaint.finalize[] -> void [nonpublic]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getColor[] -> int [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getDrawTarget[] -> int [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getHandle[] -> long [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getStrokeWidth[] -> float [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getStyle[] -> int [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.getXfermode[] -> int [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.isAntiAlias[] -> boolean [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.isDither[] -> boolean [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.isFloatClip[] -> boolean [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setAntiAlias[boolean] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setColor[int] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setDashPathEffect[class [F, float] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setDither[boolean] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setDrawTarget[int] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setFloatClip[boolean] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setStrokeWidth[float] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setStyle[class android.graphics.Paint$Style] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API ALLOW FBPaint.setXfermode[class android.graphics.PorterDuff$Mode] -> void [public]
+11-01 00:25:25.010 23577 25358 I PaperProbe: API summary android.eink.view.FBPaint: allowed=19 denied=0
+11-01 00:25:25.010 23577 25358 I PaperProbe: << api 0.8ms

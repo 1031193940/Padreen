@@ -1,0 +1,29 @@
+﻿11-01 00:23:34.254 22792 24981 I PaperProbe: >> use v=hw
+11-01 00:23:34.256 22792 22792 I PaperProbe: surfaceDestroyed
+11-01 00:23:34.264 22792 22792 I PaperProbe: HwPath.create: HWSurfaceView=OK fbSurface=pen: gangbi 5.000000 #ff000000 tag:0 line-mode:disable 
+11-01 00:23:34.264 22792 22792 I PaperProbe: toolType: TOOL_TYPE_STYLUS 
+11-01 00:23:34.264 22792 22792 I PaperProbe: isAutoWrite: true
+11-01 00:23:34.264 22792 22792 I PaperProbe: DisableList empty autoHandWrite=true
+11-01 00:23:34.288 22792 22792 I PaperProbe: surfaceCreated
+11-01 00:23:34.288 22792 22792 I PaperProbe: surfaceChanged 1404x1872 fmt=1
+11-01 00:23:34.305 22792 24981 I PaperProbe: useSurface hw ready=true
+11-01 00:23:34.305 22792 24981 I PaperProbe: << use 51.3ms
+11-01 00:23:34.305 22792 24981 I PaperProbe: >> sleep ms=800
+11-01 00:23:35.106 22792 24981 I PaperProbe: << sleep 800.3ms
+11-01 00:23:35.106 22792 24981 I PaperProbe: >> ori v=land
+11-01 00:23:35.341 22792 22792 I PaperProbe: surfaceChanged 1872x1404 fmt=1
+11-01 00:23:36.908 22792 24981 I PaperProbe: setOri land ready=true surface=1872x1404
+11-01 00:23:36.908 22792 24981 I PaperProbe: << ori 1801.3ms
+11-01 00:23:36.908 22792 24981 I PaperProbe: >> fbtest
+11-01 00:23:36.910 22792 24981 I PaperProbe: createDrawApi: drawApi=OK
+11-01 00:23:36.912 22792 24981 E PaperProbe: FBPaint.setDitherMode failed: java.lang.NoSuchMethodException: android.eink.view.FBPaint.setDitherMode [int] cause=null
+11-01 00:23:36.961 22792 24981 I PaperProbe: capture baseline: 1872x1404 luma(r)=0.0 luma(corner)=0.0
+11-01 00:23:36.987 22792 24981 I PaperProbe: T1 drawColor WHITE      -> luma(r)=255.0
+11-01 00:23:37.010 22792 24981 I PaperProbe: T2 drawColor BLACK      -> luma(r)=0.0
+11-01 00:23:37.037 22792 24981 I PaperProbe: T3 drawGraphic(x,y)     -> luma(r)=0.0
+11-01 00:23:37.067 22792 24981 I PaperProbe: T4 drawGraphic(rect)    -> luma(r)=0.0
+11-01 00:23:37.083 22792 24981 I PaperProbe: T5 drawGraphic(rect)+eraser-paint -> luma(r)=0.0
+11-01 00:23:37.101 22792 24981 I PaperProbe: T6 drawPath(rect, FILL) -> luma(r)=0.0
+11-01 00:23:37.117 22792 24981 I PaperProbe: T7 drawPoints(200 dots, w=6) -> luma(r)=173.4
+11-01 00:23:37.117 22792 24981 I PaperProbe: --- fbtest done
+11-01 00:23:37.117 22792 24981 I PaperProbe: << fbtest 209.0ms

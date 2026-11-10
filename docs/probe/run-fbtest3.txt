@@ -1,0 +1,33 @@
+﻿11-01 00:41:18.754 25847 27649 I PaperProbe: >> use v=hw
+11-01 00:41:18.757 25847 25847 I PaperProbe: surfaceDestroyed
+11-01 00:41:18.767 25847 25847 I PaperProbe: HwPath.create: HWSurfaceView=OK fbSurface=pen: gangbi 5.000000 #ff000000 tag:0 line-mode:disable 
+11-01 00:41:18.767 25847 25847 I PaperProbe: toolType: TOOL_TYPE_STYLUS 
+11-01 00:41:18.767 25847 25847 I PaperProbe: isAutoWrite: true
+11-01 00:41:18.767 25847 25847 I PaperProbe: DisableList empty autoHandWrite=true
+11-01 00:41:18.780 25847 25847 I PaperProbe: surfaceCreated
+11-01 00:41:18.781 25847 25847 I PaperProbe: surfaceChanged 1404x1872 fmt=1
+11-01 00:41:18.788 25847 27649 I PaperProbe: useSurface hw ready=true
+11-01 00:41:18.788 25847 27649 I PaperProbe: << use 33.7ms
+11-01 00:41:18.789 25847 27649 I PaperProbe: >> sleep ms=800
+11-01 00:41:19.590 25847 27649 I PaperProbe: << sleep 800.4ms
+11-01 00:41:19.590 25847 27649 I PaperProbe: >> ori v=land
+11-01 00:41:19.852 25847 25847 I PaperProbe: surfaceChanged 1872x1404 fmt=1
+11-01 00:41:21.391 25847 27649 I PaperProbe: setOri land ready=true surface=1872x1404
+11-01 00:41:21.392 25847 27649 I PaperProbe: << ori 1801.3ms
+11-01 00:41:21.392 25847 27649 I PaperProbe: >> fbtest3
+11-01 00:41:21.452 25847 27649 I PaperProbe: size  200x200  gb=200x200 fmt=1  draw=4.1ms  R@x=16 64 128  G@y=16 64 128  last=(199,199) exp=(199,199)   => EXACT
+11-01 00:41:21.485 25847 27649 I PaperProbe: size  256x256  gb=256x256 fmt=1  draw=2.7ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(255,255) exp=(255,255)   => EXACT
+11-01 00:41:21.518 25847 27649 I PaperProbe: size  400x400  gb=400x400 fmt=1  draw=2.7ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(143,143) exp=(143,143)   => EXACT
+11-01 00:41:21.558 25847 27649 I PaperProbe: size  512x512  gb=512x512 fmt=1  draw=3.0ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(255,255) exp=(255,255)   => EXACT
+11-01 00:41:21.585 25847 27649 I PaperProbe: size  640x480  gb=640x480 fmt=1  draw=2.1ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(127,223) exp=(127,223)   => EXACT
+11-01 00:41:21.612 25847 27649 I PaperProbe: size  800x600  gb=800x600 fmt=1  draw=2.6ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(31,87) exp=(31,87)   => EXACT
+11-01 00:41:21.648 25847 27649 I PaperProbe: size 1000x700  gb=1000x700 fmt=1  draw=4.8ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(231,187) exp=(231,187)   => EXACT
+11-01 00:41:21.677 25847 27649 I PaperProbe: size 1024x1024 gb=1024x1024 fmt=1  draw=3.9ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(255,255) exp=(255,255)   => EXACT
+11-01 00:41:21.708 25847 27649 I PaperProbe: size 1200x900  gb=1200x900 fmt=1  draw=3.5ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(175,131) exp=(175,131)   => EXACT
+11-01 00:41:21.746 25847 27649 I PaperProbe: size 1404x1404 gb=1404x1404 fmt=1  draw=4.0ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(123,123) exp=(123,123)   => EXACT
+11-01 00:41:21.760 25847 27649 I PaperProbe: size 1872x100  gb=1872x100 fmt=1  draw=1.2ms  R@x=16 64 128 200  G@y=16 64  last=(79,99) exp=(79,99)   => EXACT
+11-01 00:41:21.775 25847 27649 I PaperProbe: size  100x1404 gb=100x1404 fmt=1  draw=1.6ms  R@x=16 64  G@y=16 64 128 200  last=(99,123) exp=(99,123)   => EXACT
+11-01 00:41:21.805 25847 27649 I PaperProbe: size  936x702  gb=936x702 fmt=1  draw=2.8ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(167,189) exp=(167,189)   => EXACT
+11-01 00:41:21.876 25847 27649 I PaperProbe: size 1872x1404 gb=1872x1404 fmt=1  draw=6.8ms  R@x=16 64 128 200  G@y=16 64 128 200  last=(79,123) exp=(79,123)   => EXACT
+11-01 00:41:21.879 25847 27649 I PaperProbe: --- fbtest3 done
+11-01 00:41:21.879 25847 27649 I PaperProbe: << fbtest3 486.8ms

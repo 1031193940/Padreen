@@ -1,0 +1,158 @@
+﻿11-01 00:05:32.277 21060 22456 I PaperProbe: >> rect c=255 m=98 force=1
+11-01 00:05:32.287   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :1872, height: 1404, left:0,top:0, right:1872, bottom:1404 
+11-01 00:05:32.287   643  1428 I EinkSfpatchData_T1000: current epdcMode is 98, hex value:0x62
+11-01 00:05:32.287   643  1428 I EinkSfpatchData_T1000: waveform mode 2 check, change to 3, current epdcMode is 99, hex value:0x63
+11-01 00:05:32.287   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh is checked with mLastEpdcMode=1 epdcMode=99
+11-01 00:05:32.287   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh change epdcMode=67
+11-01 00:05:32.289   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x43,waveform_mode = 3,update_mode = 0
+11-01 00:05:32.291   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:32.291   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34054
+11-01 00:05:32.291   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:32.292 21060 22456 I PaperProbe: hw rect=[0,0][1872,1404] gray=255 mode=0x62 via=addepdc lockBuf=0.05ms draw=8.37ms post=5.97ms unlock=0.05ms
+11-01 00:05:32.292 21060 22456 I PaperProbe: << rect 15.1ms
+11-01 00:05:32.292 21060 22456 I PaperProbe: >> sleep ms=6000
+11-01 00:05:32.294   643  1006 W hwtconepdcdisplay: copy buffer ok
+11-01 00:05:32.302   643  1006 I DISPLAY_DITHER_V201_ALGO: [IsModeRight.253 ] Start adjust mode right, nowRunMode = 0, modeT1000 = 3, lastRunMode = 0
+11-01 00:05:32.302   643  1006 I hwtconepdcdisplay:  invoke  IsModeRigh, mode = 3  result = 1
+11-01 00:05:32.302   643  1006 I t1000_lib: mutex setdisplaymode
+11-01 00:05:32.355   643  1006 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 4,submode 0 to mainmode 3,submode 0
+11-01 00:05:38.293 21060 22456 I PaperProbe: << sleep 6000.7ms
+11-01 00:05:38.294 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:05:38.300   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:38.300   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:38.302   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:38.304   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:38.304   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34055
+11-01 00:05:38.304   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:38.305 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.05ms draw=3.11ms post=7.49ms unlock=0.05ms
+11-01 00:05:38.305 21060 22456 I PaperProbe: << rect 11.4ms
+11-01 00:05:38.306 21060 22456 I PaperProbe: >> sleep ms=300
+11-01 00:05:38.606 21060 22456 I PaperProbe: << sleep 300.3ms
+11-01 00:05:38.607 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=5 force=1
+11-01 00:05:38.611   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:38.612   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:38.613   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:38.615   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:38.615   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34056
+11-01 00:05:38.615   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:38.616 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x5 via=addepdc lockBuf=0.04ms draw=3.05ms post=5.86ms unlock=0.04ms
+11-01 00:05:38.616 21060 22456 I PaperProbe: << rect 9.6ms
+11-01 00:05:38.617 21060 22456 I PaperProbe: >> sleep ms=1000
+11-01 00:05:39.617 21060 22456 I PaperProbe: << sleep 1000.4ms
+11-01 00:05:39.618 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:05:39.622   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:39.623   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:39.624   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:39.626   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:39.626   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34057
+11-01 00:05:39.627   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:39.627 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.05ms draw=3.14ms post=5.71ms unlock=0.05ms
+11-01 00:05:39.627 21060 22456 I PaperProbe: << rect 9.5ms
+11-01 00:05:39.628 21060 22456 I PaperProbe: >> sleep ms=2000
+11-01 00:05:41.423   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:41.423   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:05:41.628 21060 22456 I PaperProbe: << sleep 2000.3ms
+11-01 00:05:41.629 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=5 force=1
+11-01 00:05:41.633   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:41.634   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:41.635   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:41.638   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:41.638   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34058
+11-01 00:05:41.638   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:41.638 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x5 via=addepdc lockBuf=0.05ms draw=3.06ms post=5.81ms unlock=0.04ms
+11-01 00:05:41.638 21060 22456 I PaperProbe: << rect 9.6ms
+11-01 00:05:41.639 21060 22456 I PaperProbe: >> sleep ms=3000
+11-01 00:05:44.539   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:44.539   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:05:44.639 21060 22456 I PaperProbe: << sleep 3000.3ms
+11-01 00:05:44.640 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:05:44.644   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:44.645   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:44.646   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:44.648   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:44.648   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34059
+11-01 00:05:44.648   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:44.649 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.05ms draw=3.09ms post=5.55ms unlock=0.04ms
+11-01 00:05:44.649 21060 22456 I PaperProbe: << rect 9.5ms
+11-01 00:05:44.650 21060 22456 I PaperProbe: >> sleep ms=4000
+11-01 00:05:47.662   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:47.662   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:05:48.650 21060 22456 I PaperProbe: << sleep 4000.3ms
+11-01 00:05:48.651 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=5 force=1
+11-01 00:05:48.655   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:48.656   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:48.657   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:48.660   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:48.660   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34060
+11-01 00:05:48.660   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:48.660 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.20ms post=6.00ms unlock=0.04ms
+11-01 00:05:48.661 21060 22456 I PaperProbe: << rect 9.9ms
+11-01 00:05:48.661 21060 22456 I PaperProbe: >> sleep ms=6000
+11-01 00:05:50.786   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:50.786   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:05:53.929   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:53.929   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:05:54.661 21060 22456 I PaperProbe: << sleep 6000.3ms
+11-01 00:05:54.662 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:05:54.667   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:05:54.667   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:05:54.669   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:05:54.671   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:05:54.671   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34061
+11-01 00:05:54.671   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:05:54.672 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.09ms post=5.94ms unlock=0.04ms
+11-01 00:05:54.672 21060 22456 I PaperProbe: << rect 9.6ms
+11-01 00:05:54.672 21060 22456 I PaperProbe: >> sleep ms=9000
+11-01 00:05:57.804   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:05:57.804   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:06:03.673 21060 22456 I PaperProbe: << sleep 9000.7ms
+11-01 00:06:03.674 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=5 force=1
+11-01 00:06:03.678   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:06:03.678   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:06:03.680   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:06:03.682   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:06:03.682   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34062
+11-01 00:06:03.682   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:06:03.682 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.14ms post=5.30ms unlock=0.04ms
+11-01 00:06:03.682 21060 22456 I PaperProbe: << rect 8.9ms
+11-01 00:06:03.683 21060 22456 I PaperProbe: >> sleep ms=12000
+11-01 00:06:06.819   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:06:06.819   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:06:15.684 21060 22456 I PaperProbe: << sleep 12000.7ms
+11-01 00:06:15.684 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:06:15.689   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:06:15.690   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:06:15.691   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:06:15.694   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:06:15.694   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34063
+11-01 00:06:15.694   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:06:15.694 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.18ms post=6.54ms unlock=0.05ms
+11-01 00:06:15.694 21060 22456 I PaperProbe: << rect 10.3ms
+11-01 00:06:15.695 21060 22456 I PaperProbe: >> sleep ms=16000
+11-01 00:06:18.815   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:06:18.815   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:06:31.695 21060 22456 I PaperProbe: << sleep 16000.3ms
+11-01 00:06:31.696 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=5 force=1
+11-01 00:06:31.700   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:06:31.701   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:06:31.702   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:06:31.705   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:06:31.705   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34064
+11-01 00:06:31.705   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:06:31.706 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.06ms post=6.26ms unlock=0.04ms
+11-01 00:06:31.706 21060 22456 I PaperProbe: << rect 9.8ms
+11-01 00:06:31.706 21060 22456 I PaperProbe: >> sleep ms=20000
+11-01 00:06:34.829   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:06:34.829   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:06:51.708 21060 22456 I PaperProbe: << sleep 20001.5ms
+11-01 00:06:51.709 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=5 force=1
+11-01 00:06:51.713   643  1428 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+11-01 00:06:51.714   643  1428 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:06:51.715   643  1428 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:06:51.718   643  1428 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:06:51.718   643  1428 E EinkSfpatchData_T1000: add_updatelist updatemarker 34065
+11-01 00:06:51.718   643  1428 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:06:51.718 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x5 via=addepdc lockBuf=0.07ms draw=3.08ms post=6.20ms unlock=0.04ms
+11-01 00:06:51.719 21060 22456 I PaperProbe: << rect 10.1ms
+11-01 00:06:54.839   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:06:54.839   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly

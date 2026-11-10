@@ -1,0 +1,247 @@
+﻿11-01 00:27:19.875 23585 25727 I PaperProbe: >> sleep ms=1500
+11-01 00:27:21.375 23585 25727 I PaperProbe: << sleep 1500.5ms
+11-01 00:27:21.376 23585 25727 I PaperProbe: >> rows2 m1=5 m2=7 m3=3 m4=1 gap=40 rowgap=3500
+11-01 00:27:21.380 23585 25727 I PaperProbe: --- row 0 mode=5
+11-01 00:27:21.385   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.385   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.387   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.387   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34502
+11-01 00:27:21.387   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.387 23585 25727 I PaperProbe: row 0 #0 draw=3.07ms post=3.49ms (+0ms)
+11-01 00:27:21.433   643   970 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.433   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.434   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.434   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34503
+11-01 00:27:21.434   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.435 23585 25727 I PaperProbe: row 0 #1 draw=4.55ms post=2.56ms (+47ms)
+11-01 00:27:21.478   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.479   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.480   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.480   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34504
+11-01 00:27:21.480   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.480 23585 25727 I PaperProbe: row 0 #2 draw=2.97ms post=2.14ms (+94ms)
+11-01 00:27:21.523   643   970 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.524   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.525   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.525   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34505
+11-01 00:27:21.525   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.525 23585 25727 I PaperProbe: row 0 #3 draw=2.48ms post=2.38ms (+140ms)
+11-01 00:27:21.570   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.571   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.572   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.572   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34506
+11-01 00:27:21.572   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.572 23585 25727 I PaperProbe: row 0 #4 draw=4.02ms post=2.41ms (+185ms)
+11-01 00:27:21.615   643   970 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.616   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.616   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.617   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34507
+11-01 00:27:21.617   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.617 23585 25727 I PaperProbe: row 0 #5 draw=2.46ms post=2.03ms (+232ms)
+11-01 00:27:21.660   643   970 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.661   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.662   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.662   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34508
+11-01 00:27:21.662   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.662 23585 25727 I PaperProbe: row 0 #6 draw=2.55ms post=2.35ms (+277ms)
+11-01 00:27:21.705   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.706   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.707   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.707   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34509
+11-01 00:27:21.707   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.707 23585 25727 I PaperProbe: row 0 #7 draw=1.73ms post=3.19ms (+322ms)
+11-01 00:27:21.751   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.752   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.753   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.753   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34510
+11-01 00:27:21.753   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.753 23585 25727 I PaperProbe: row 0 #8 draw=2.79ms post=2.25ms (+367ms)
+11-01 00:27:21.797   643  1366 I EinkSfpatchData_T1000: current epdcMode is 5, hex value:0x5
+11-01 00:27:21.797   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x5,waveform_mode = 5,update_mode = 0
+11-01 00:27:21.798   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:21.798   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34511
+11-01 00:27:21.798   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:21.799 23585 25727 I PaperProbe: row 0 #9 draw=2.83ms post=2.66ms (+413ms)
+11-01 00:27:24.438   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:27:24.438   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:27:25.339 23585 25727 I PaperProbe: --- row 1 mode=7
+11-01 00:27:25.348   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.350   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.352   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.352   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34512
+11-01 00:27:25.352   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.353 23585 25727 I PaperProbe: row 1 #0 draw=7.25ms post=5.48ms (+0ms)
+11-01 00:27:25.401   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.403   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.405   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.405   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34513
+11-01 00:27:25.405   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.406 23585 25727 I PaperProbe: row 1 #1 draw=6.51ms post=5.93ms (+53ms)
+11-01 00:27:25.455   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.456   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.458   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.458   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34514
+11-01 00:27:25.458   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.459 23585 25727 I PaperProbe: row 1 #2 draw=6.59ms post=5.55ms (+107ms)
+11-01 00:27:25.507   643  1366 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.509   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.511   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.511   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34515
+11-01 00:27:25.511   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.511 23585 25727 I PaperProbe: row 1 #3 draw=6.42ms post=5.33ms (+160ms)
+11-01 00:27:25.560   643  1366 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.561   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.563   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.563   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34516
+11-01 00:27:25.563   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.564 23585 25727 I PaperProbe: row 1 #4 draw=6.45ms post=5.62ms (+212ms)
+11-01 00:27:25.613   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.614   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.616   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.616   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34517
+11-01 00:27:25.616   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.617 23585 25727 I PaperProbe: row 1 #5 draw=6.48ms post=5.20ms (+265ms)
+11-01 00:27:25.665   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.667   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.669   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.669   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34518
+11-01 00:27:25.669   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.669 23585 25727 I PaperProbe: row 1 #6 draw=6.30ms post=5.71ms (+318ms)
+11-01 00:27:25.719   643  1366 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.720   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.723   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.723   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34519
+11-01 00:27:25.723   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.723 23585 25727 I PaperProbe: row 1 #7 draw=7.01ms post=6.50ms (+370ms)
+11-01 00:27:25.773   643   970 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.775   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.777   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.777   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34520
+11-01 00:27:25.777   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.777 23585 25727 I PaperProbe: row 1 #8 draw=7.04ms post=5.89ms (+425ms)
+11-01 00:27:25.826   643  1366 I EinkSfpatchData_T1000: current epdcMode is 7, hex value:0x7
+11-01 00:27:25.828   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x7,waveform_mode = 7,update_mode = 0
+11-01 00:27:25.830   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:25.830   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34521
+11-01 00:27:25.830   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:25.830 23585 25727 I PaperProbe: row 1 #9 draw=6.57ms post=5.46ms (+479ms)
+11-01 00:27:27.464   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:27:27.464   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:27:29.371 23585 25727 I PaperProbe: --- row 2 mode=3
+11-01 00:27:29.380   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.381   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.384   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.384   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34522
+11-01 00:27:29.384   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.385 23585 25727 I PaperProbe: row 2 #0 draw=6.74ms post=6.00ms (+0ms)
+11-01 00:27:29.434   643  1366 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.435   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.437   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.437   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34523
+11-01 00:27:29.437   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.438 23585 25727 I PaperProbe: row 2 #1 draw=6.74ms post=5.85ms (+53ms)
+11-01 00:27:29.487   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.488   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.490   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.490   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34524
+11-01 00:27:29.490   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.491 23585 25727 I PaperProbe: row 2 #2 draw=6.79ms post=5.71ms (+107ms)
+11-01 00:27:29.540   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.541   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.543   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.543   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34525
+11-01 00:27:29.543   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.544 23585 25727 I PaperProbe: row 2 #3 draw=6.47ms post=5.68ms (+160ms)
+11-01 00:27:29.592   643  1366 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.594   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.596   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.596   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34526
+11-01 00:27:29.596   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.596 23585 25727 I PaperProbe: row 2 #4 draw=6.63ms post=5.19ms (+213ms)
+11-01 00:27:29.645   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.646   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.648   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.648   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34527
+11-01 00:27:29.648   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.649 23585 25727 I PaperProbe: row 2 #5 draw=6.38ms post=5.34ms (+265ms)
+11-01 00:27:29.698   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.699   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.701   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.701   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34528
+11-01 00:27:29.701   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.702 23585 25727 I PaperProbe: row 2 #6 draw=6.33ms post=5.53ms (+318ms)
+11-01 00:27:29.750   643  1366 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.752   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.754   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.754   643  1366 E EinkSfpatchData_T1000: add_updatelist updatemarker 34529
+11-01 00:27:29.754   643  1366 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.754 23585 25727 I PaperProbe: row 2 #7 draw=6.42ms post=5.25ms (+371ms)
+11-01 00:27:29.803   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.804   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.806   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.806   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34530
+11-01 00:27:29.806   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.807 23585 25727 I PaperProbe: row 2 #8 draw=6.48ms post=5.10ms (+423ms)
+11-01 00:27:29.855   643   970 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:27:29.857   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:27:29.859   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:29.859   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34531
+11-01 00:27:29.859   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:27:29.859 23585 25727 I PaperProbe: row 2 #9 draw=6.48ms post=5.43ms (+476ms)
+11-01 00:27:30.505   643  1006 E hwtconepdcdisplay: t1000 FBPostHwtcon::threadLoop wait display ready error,updatemode 0
+11-01 00:27:30.505   643  1006 E hwtconepdcdisplay: t1000 is in sleep or poweroff 8,return directly
+11-01 00:27:33.401 23585 25727 I PaperProbe: --- row 3 mode=1
+11-01 00:27:33.409   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.411   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.413   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.414   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.414   643  1366 I t1000_lib: t1000_i2c_set_mipi_mode t1000 isn't in active mode,wakeup first
+11-01 00:27:33.414   643  1366 I t1000_lib: [t1000_sysfs_set_sleepwakeup] 0
+11-01 00:27:33.515 23585 25727 I PaperProbe: row 3 #0 draw=6.75ms post=107.04ms (+0ms)
+11-01 00:27:33.564   643   970 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.565   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.568   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.568   643   970 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.568 23585 25727 I PaperProbe: row 3 #1 draw=6.83ms post=5.32ms (+155ms)
+11-01 00:27:33.617   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.618   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.620   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.620   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.621 23585 25727 I PaperProbe: row 3 #2 draw=6.54ms post=5.42ms (+207ms)
+11-01 00:27:33.669   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.671   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.673   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.673   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.673 23585 25727 I PaperProbe: row 3 #3 draw=6.39ms post=5.49ms (+260ms)
+11-01 00:27:33.722   643   970 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.723   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.725   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.725   643   970 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.726 23585 25727 I PaperProbe: row 3 #4 draw=6.30ms post=5.11ms (+313ms)
+11-01 00:27:33.774   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.775   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.777   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.777   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.778 23585 25727 I PaperProbe: row 3 #5 draw=6.36ms post=5.28ms (+365ms)
+11-01 00:27:33.827   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.828   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.830   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.830   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.830 23585 25727 I PaperProbe: row 3 #6 draw=6.39ms post=5.46ms (+418ms)
+11-01 00:27:33.878   643   970 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.880   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.882   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.882   643   970 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.882 23585 25727 I PaperProbe: row 3 #7 draw=6.32ms post=5.05ms (+470ms)
+11-01 00:27:33.931   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.933   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.934   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.935   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.935 23585 25727 I PaperProbe: row 3 #8 draw=6.41ms post=5.12ms (+522ms)
+11-01 00:27:33.984   643  1366 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:27:33.985   643  1366 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:27:33.987   643  1366 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:27:33.988   643  1366 I t1000_lib: mutex setdisplaymode
+11-01 00:27:33.988 23585 25727 I PaperProbe: row 3 #9 draw=6.45ms post=5.48ms (+575ms)
+11-01 00:27:37.529 23585 25727 I PaperProbe: --- rows2 done
+11-01 00:27:37.529 23585 25727 I PaperProbe: << rows2 16152.9ms

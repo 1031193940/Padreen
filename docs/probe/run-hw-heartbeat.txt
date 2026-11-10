@@ -1,0 +1,680 @@
+﻿10-31 23:54:40.677 21060 22456 I PaperProbe: >> use v=hw
+10-31 23:54:40.678 21060 21060 I PaperProbe: surfaceDestroyed
+10-31 23:54:40.685   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:40.687   643   969 I FBHandSurfaceClient: huaweidload no predict lib in /system/lib64/libestimate.so
+10-31 23:54:40.687   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:40.687   643   643 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+10-31 23:54:40.688   643   969 I FBHandSurfaceClient: huaweidload have predict lib
+10-31 23:54:40.688   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+10-31 23:54:40.688   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=3, sceneMode=0
+10-31 23:54:40.688   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:3,mSceneMode:0)
+10-31 23:54:40.690 21060 21060 I PaperProbe: HwPath.create: HWSurfaceView=OK fbSurface=pen: gangbi 5.000000 #ff000000 tag:0 line-mode:disable 
+10-31 23:54:40.690 21060 21060 I PaperProbe: toolType: TOOL_TYPE_STYLUS 
+10-31 23:54:40.690 21060 21060 I PaperProbe: isAutoWrite: true
+10-31 23:54:40.690 21060 21060 I PaperProbe: DisableList empty autoHandWrite=true
+10-31 23:54:40.723 21060 21060 I PaperProbe: surfaceCreated
+10-31 23:54:40.724 21060 21060 I PaperProbe: surfaceChanged 1404x1872 fmt=1
+10-31 23:54:40.727   643   969 I FBHandContext: FBHandSurfaceClient setRotation:3 fmWidth=1872 fmHeight=1404
+10-31 23:54:40.731 21060 22456 I PaperProbe: useSurface hw ready=true
+10-31 23:54:40.731 21060 22456 I PaperProbe: << use 54.4ms
+10-31 23:54:40.731 21060 22456 I PaperProbe: >> sleep ms=800
+10-31 23:54:40.761   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.189 ] Mode is not picture type, No Dither
+10-31 23:54:40.770   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:40.770   643   643 E EinkSfpatchData_T1000: add_updatelist updatemarker 33931
+10-31 23:54:40.770   643   643 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+10-31 23:54:40.772   643  1006 W hwtconepdcdisplay: copy buffer ok
+10-31 23:54:40.773   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:40.777   643  1006 I DISPLAY_DITHER_V201_ALGO: [IsModeRight.253 ] Start adjust mode right, nowRunMode = 3, modeT1000 = 3, lastRunMode = 3
+10-31 23:54:40.777   643  1006 I hwtconepdcdisplay:  invoke  IsModeRigh, mode = 3  result = 1
+10-31 23:54:40.777   643  1006 I t1000_lib: mutex setdisplaymode
+10-31 23:54:40.780   643  1006 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 3,submode 0
+10-31 23:54:40.787   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:40.787   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:40.788   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:40.788   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:40.788   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:40.830   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:40.863   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:40.884   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:40.884   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.469   643   643 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 4,submode 0
+10-31 23:54:41.533 21060 22456 I PaperProbe: << sleep 800.9ms
+10-31 23:54:41.533 21060 22456 I PaperProbe: >> ori v=land
+10-31 23:54:41.559   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.572   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.572   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:41.572   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.573   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.573   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.573   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.639   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.678   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.687   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.687   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.710   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.720   643   643 I MD_DEBUG: layer not set mode ,use last
+10-31 23:54:41.724   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.724   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.724   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.724   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.724   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.739   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.759   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.764   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.764   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.784   643   643 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+10-31 23:54:41.784   643   643 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+10-31 23:54:41.784   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.786   643   643 I MD_DEBUG: layer not set mode ,use last
+10-31 23:54:41.790   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.790   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.790   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.791   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.791   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.798 21060 21060 I PaperProbe: surfaceChanged 1872x1404 fmt=1
+10-31 23:54:41.803   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.804   643  1381 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+10-31 23:54:41.822   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.833   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.833   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.836   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.837   643   643 I MD_DEBUG: layer not set mode ,use last
+10-31 23:54:41.841   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.841   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.841   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.841   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.841   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.854   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.873   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.883   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.883   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.885   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.887   643   643 I MD_DEBUG: layer not set mode ,use last
+10-31 23:54:41.890   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.890   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.890   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.890   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.890   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.902   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.921   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.933   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.933   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.935   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.937   643   643 I MD_DEBUG: layer not set mode ,use last
+10-31 23:54:41.942   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.942   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.942   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.942   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.942   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:41.954   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:41.973   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:41.983   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:41.983   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:41.983   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:41.991   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:41.991   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:41.991   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:41.992   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:41.992   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:41.992   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:42.004   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:42.024   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:42.033   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:42.033   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:42.034   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:42.040   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+10-31 23:54:42.040   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:42.040   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:42.040   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:42.040   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:42.040   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:42.053   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:42.072   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:42.083   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:42.083   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:43.334 21060 22456 I PaperProbe: setOri land ready=true surface=1872x1404
+10-31 23:54:43.334 21060 22456 I PaperProbe: << ori 1801.1ms
+10-31 23:54:43.335 21060 22456 I PaperProbe: >> rect c=255 m=98 force=1
+10-31 23:54:43.346   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :1872, height: 1404, left:0,top:0, right:1872, bottom:1404 
+10-31 23:54:43.346   643  1381 I EinkSfpatchData_T1000: current epdcMode is 98, hex value:0x62
+10-31 23:54:43.346   643  1381 I EinkSfpatchData_T1000: waveform mode 2 check, change to 3, current epdcMode is 99, hex value:0x63
+10-31 23:54:43.346   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh is checked with mLastEpdcMode=1 epdcMode=99
+10-31 23:54:43.346   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh change epdcMode=67
+10-31 23:54:43.348   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x43,waveform_mode = 3,update_mode = 0
+10-31 23:54:43.350   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:43.350   643  1381 E EinkSfpatchData_T1000: add_updatelist updatemarker 33941
+10-31 23:54:43.350   643  1381 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+10-31 23:54:43.351 21060 22456 I PaperProbe: hw rect=[0,0][1872,1404] gray=255 mode=0x62 via=addepdc lockBuf=0.06ms draw=8.01ms post=7.36ms unlock=0.04ms
+10-31 23:54:43.351 21060 22456 I PaperProbe: << rect 16.5ms
+10-31 23:54:43.352 21060 22456 I PaperProbe: >> sleep ms=5000
+10-31 23:54:43.356   643  1006 W hwtconepdcdisplay: copy buffer ok
+10-31 23:54:43.366   643  1006 I DISPLAY_DITHER_V201_ALGO: [IsModeRight.253 ] Start adjust mode right, nowRunMode = 0, modeT1000 = 3, lastRunMode = 0
+10-31 23:54:43.366   643  1006 I hwtconepdcdisplay:  invoke  IsModeRigh, mode = 3  result = 1
+10-31 23:54:43.366   643  1006 I t1000_lib: mutex setdisplaymode
+10-31 23:54:43.367   643  1006 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 4,submode 0 to mainmode 3,submode 0
+10-31 23:54:44.159   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+10-31 23:54:44.167   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+10-31 23:54:44.167   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+10-31 23:54:44.167   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+10-31 23:54:44.167   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+10-31 23:54:44.167   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+10-31 23:54:44.179   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+10-31 23:54:44.199   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+10-31 23:54:44.208   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:44.208   643   643 I t1000_lib: mutex setdisplaymode
+10-31 23:54:44.322   643   643 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 4,submode 0
+10-31 23:54:48.352 21060 22456 I PaperProbe: << sleep 5000.3ms
+10-31 23:54:48.353 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=0 m=6 force=1
+10-31 23:54:48.357   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+10-31 23:54:48.358   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:48.359   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:48.362   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:48.362   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:48.362   643  1381 I t1000_lib: t1000_i2c_set_mipi_mode t1000 isn't in active mode,wakeup first
+10-31 23:54:48.362   643  1381 I t1000_lib: [t1000_sysfs_set_sleepwakeup] 0
+10-31 23:54:51.563   643  1381 E t1000_lib: t1000_sysfs_get_displayready 4
+10-31 23:54:51.563   643  1381 E t1000_lib: t1000_sysfs_get_displayready wait readypin timeout,reset t1000
+10-31 23:54:51.563   643  1381 I t1000_lib: t1000_sysfs_do_reset
+10-31 23:54:51.563   643  1381 I t1000_lib: [t1000_sysfs_gpio_ctrl] gpio:41 = value:0
+10-31 23:54:51.563   643  1381 I t1000_lib: [t1000_sysfs_gpio_ctrl] gpio:224 = value:1
+10-31 23:54:51.563   643  1381 I t1000_lib: [t1000_sysfs_gpio_ctrl] gpio:29 = value:0
+10-31 23:54:51.568   643  1381 I t1000_lib: [t1000_sysfs_gpio_ctrl] gpio:41 = value:1
+10-31 23:54:51.569   643  1381 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 4,submode 0 to mainmode 1,submode 0
+10-31 23:54:51.569   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:51.569 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=0 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.12ms post=3212.71ms unlock=0.06ms
+10-31 23:54:51.570 21060 22456 I PaperProbe: << rect 3216.8ms
+10-31 23:54:51.570 21060 22456 I PaperProbe: >> sleep ms=400
+10-31 23:54:51.971 21060 22456 I PaperProbe: << sleep 400.8ms
+10-31 23:54:51.972 21060 22456 I PaperProbe: >> burst n=10 gap=60 m=6 force=1 size=60
+10-31 23:54:51.972 21060 22456 I PaperProbe: burst #0 start +0.0ms
+10-31 23:54:51.977   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:50,top:300, right:110, bottom:360 
+10-31 23:54:51.977   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:51.979   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:51.981   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:51.981   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:51.981   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:51.982 21060 22456 I PaperProbe: hw rect=[50,300][110,360] gray=0 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.04ms post=6.22ms unlock=0.04ms
+10-31 23:54:52.043 21060 22456 I PaperProbe: burst #1 start +70.6ms
+10-31 23:54:52.047   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:120,top:300, right:180, bottom:360 
+10-31 23:54:52.047   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.049   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.051   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.051   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.051   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.051 21060 22456 I PaperProbe: hw rect=[120,300][180,360] gray=0 mode=0x6 via=addepdc lockBuf=0.04ms draw=3.00ms post=5.38ms unlock=0.03ms
+10-31 23:54:52.112 21060 22456 I PaperProbe: burst #2 start +140.2ms
+10-31 23:54:52.117   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:190,top:300, right:250, bottom:360 
+10-31 23:54:52.117   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.118   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.120   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.121   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.121   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.121 21060 22456 I PaperProbe: hw rect=[190,300][250,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=3.02ms post=5.35ms unlock=0.03ms
+10-31 23:54:52.182 21060 22456 I PaperProbe: burst #3 start +209.4ms
+10-31 23:54:52.185   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:260,top:300, right:320, bottom:360 
+10-31 23:54:52.186   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.187   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.190   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.190   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.190   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.190 21060 22456 I PaperProbe: hw rect=[260,300][320,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=2.95ms post=5.40ms unlock=0.03ms
+10-31 23:54:52.251 21060 22456 I PaperProbe: burst #4 start +279.1ms
+10-31 23:54:52.255   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:330,top:300, right:390, bottom:360 
+10-31 23:54:52.256   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.257   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.259   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.260   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.260   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.260 21060 22456 I PaperProbe: hw rect=[330,300][390,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=3.08ms post=5.41ms unlock=0.03ms
+10-31 23:54:52.321 21060 22456 I PaperProbe: burst #5 start +348.6ms
+10-31 23:54:52.325   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:400,top:300, right:460, bottom:360 
+10-31 23:54:52.325   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.327   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.329   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.329   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.329   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.330 21060 22456 I PaperProbe: hw rect=[400,300][460,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=2.86ms post=5.61ms unlock=0.03ms
+10-31 23:54:52.390 21060 22456 I PaperProbe: burst #6 start +418.3ms
+10-31 23:54:52.395   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:470,top:300, right:530, bottom:360 
+10-31 23:54:52.395   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.397   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.399   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.399   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.399   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.399 21060 22456 I PaperProbe: hw rect=[470,300][530,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=3.20ms post=5.31ms unlock=0.03ms
+10-31 23:54:52.460 21060 22456 I PaperProbe: burst #7 start +488.1ms
+10-31 23:54:52.464   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:540,top:300, right:600, bottom:360 
+10-31 23:54:52.465   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.466   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.468   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.468   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.468   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.469 21060 22456 I PaperProbe: hw rect=[540,300][600,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=2.92ms post=5.10ms unlock=0.03ms
+10-31 23:54:52.529 21060 22456 I PaperProbe: burst #8 start +557.4ms
+10-31 23:54:52.534   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:610,top:300, right:670, bottom:360 
+10-31 23:54:52.534   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.535   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.537   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.538   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.538   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.538 21060 22456 I PaperProbe: hw rect=[610,300][670,360] gray=0 mode=0x6 via=addepdc lockBuf=0.03ms draw=2.93ms post=5.28ms unlock=0.03ms
+10-31 23:54:52.599 21060 22456 I PaperProbe: burst #9 start +626.8ms
+10-31 23:54:52.603   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :60, height: 60, left:680,top:300, right:740, bottom:360 
+10-31 23:54:52.604   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:52.605   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:52.607   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:52.607   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:52.607   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:52.608 21060 22456 I PaperProbe: hw rect=[680,300][740,360] gray=0 mode=0x6 via=addepdc lockBuf=0.04ms draw=2.95ms post=5.39ms unlock=0.03ms
+10-31 23:54:52.669 21060 22456 I PaperProbe: burst total 696.4ms for 10 posts
+10-31 23:54:52.669 21060 22456 I PaperProbe: << burst 697.0ms
+10-31 23:54:52.669 21060 22456 I PaperProbe: >> sleep ms=500
+10-31 23:54:53.170 21060 22456 I PaperProbe: << sleep 500.3ms
+10-31 23:54:53.170 21060 22456 I PaperProbe: >> hb ms=30000 gap=500 m=6 force=1
+10-31 23:54:53.175   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:53.175   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:53.177   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:53.179   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:53.179   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:53.179   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:53.180 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.07ms post=5.62ms unlock=0.04ms
+10-31 23:54:53.684   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:53.685   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:53.687   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:53.689   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:53.689   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:53.689   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:53.689 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=6.01ms unlock=0.04ms
+10-31 23:54:54.195   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:54.195   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:54.197   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:54.199   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:54.199   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:54.199   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:54.200 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.04ms post=5.96ms unlock=0.04ms
+10-31 23:54:54.704   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:54.705   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:54.706   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:54.709   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:54.709   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:56.280   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:56.281 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=1577.24ms unlock=0.06ms
+10-31 23:54:56.786   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:56.786   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:56.788   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:56.790   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:56.790   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:56.790   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:56.791 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=5.72ms unlock=0.04ms
+10-31 23:54:57.296   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:57.297   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:57.298   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:57.300   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:57.300   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:57.301   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:57.301 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.08ms post=6.16ms unlock=0.03ms
+10-31 23:54:57.806   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:57.807   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:57.808   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:57.810   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:57.811   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:57.811   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:57.811 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.04ms post=5.83ms unlock=0.04ms
+10-31 23:54:58.316   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:58.317   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:58.318   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:58.320   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:58.320   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:58.320   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:58.321 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.05ms post=5.51ms unlock=0.04ms
+10-31 23:54:58.826   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:58.826   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:58.828   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:58.830   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:58.830   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:58.830   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:58.831 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.97ms post=5.97ms unlock=0.04ms
+10-31 23:54:59.336   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:59.337   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:59.338   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:59.341   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:59.341   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:59.341   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:59.342 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.35ms post=6.22ms unlock=0.03ms
+10-31 23:54:59.846   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:54:59.847   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:54:59.849   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:54:59.852   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:54:59.853   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:54:59.853   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:54:59.854 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.05ms post=8.12ms unlock=0.04ms
+10-31 23:55:00.359   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:00.359   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:00.361   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:00.363   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:00.363   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:00.363   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:00.364 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.13ms post=6.11ms unlock=0.04ms
+10-31 23:55:00.867   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:00.868   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:00.869   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:00.870   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:00.871   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:00.871   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:00.871 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.08ms post=4.35ms unlock=0.03ms
+10-31 23:55:01.376   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:01.377   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:01.378   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:01.380   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:01.380   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:01.381   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:01.381 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.01ms post=5.97ms unlock=0.04ms
+10-31 23:55:01.886   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:01.887   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:01.888   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:01.890   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:01.890   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:01.890   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:01.891 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.19ms post=5.67ms unlock=0.04ms
+10-31 23:55:02.396   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:02.396   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:02.398   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:02.400   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:02.400   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:02.400   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:02.401 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.04ms draw=3.00ms post=5.64ms unlock=0.03ms
+10-31 23:55:02.906   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:02.906   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:02.908   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:02.910   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:02.910   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:02.910   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:02.911 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.96ms post=5.83ms unlock=0.04ms
+10-31 23:55:03.415   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:03.416   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:03.417   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:03.419   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:03.419   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:03.419   643  1381 I t1000_lib: t1000_i2c_set_mipi_mode t1000 isn't in active mode,wakeup first
+10-31 23:55:03.419   643  1381 I t1000_lib: [t1000_sysfs_set_sleepwakeup] 0
+10-31 23:55:03.521   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:03.522 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.04ms draw=3.00ms post=107.34ms unlock=0.06ms
+10-31 23:55:04.027   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:04.027   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:04.029   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:04.031   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:04.031   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:04.031   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:04.031 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=5.75ms unlock=0.04ms
+10-31 23:55:04.537   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:04.537   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:04.538   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:04.541   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:04.541   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:04.541   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:04.542 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.06ms post=5.91ms unlock=0.04ms
+10-31 23:55:05.046   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:05.047   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:05.048   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:05.050   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:05.051   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:05.051   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:05.051 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.05ms post=5.74ms unlock=0.04ms
+10-31 23:55:05.557   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:05.557   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:05.559   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:05.561   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:05.561   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:05.561   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:05.562 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.29ms post=5.97ms unlock=0.04ms
+10-31 23:55:06.066   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:06.067   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:06.068   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:06.071   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:06.071   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:06.071   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:06.071 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.18ms post=5.74ms unlock=0.04ms
+10-31 23:55:06.576   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:06.577   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:06.578   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:06.580   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:06.580   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:06.580   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:06.581 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.00ms post=5.65ms unlock=0.11ms
+10-31 23:55:07.086   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:07.086   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:07.088   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:07.090   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:07.090   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:07.090   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:07.091 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.09ms post=5.56ms unlock=0.04ms
+10-31 23:55:07.596   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:07.596   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:07.598   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:07.600   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:07.600   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:07.600   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:07.601 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.04ms draw=2.99ms post=5.63ms unlock=0.04ms
+10-31 23:55:08.105   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:08.106   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:08.107   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:08.110   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:08.110   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:08.110   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:08.110 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.96ms post=5.63ms unlock=0.04ms
+10-31 23:55:08.616   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:08.616   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:08.618   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:08.620   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:08.620   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:08.620   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:08.621 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.12ms post=5.88ms unlock=0.04ms
+10-31 23:55:09.126   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:09.126   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:09.128   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:09.130   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:09.130   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:09.130   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:09.131 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=2.95ms post=5.92ms unlock=0.04ms
+10-31 23:55:09.635   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:09.636   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:09.638   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:09.640   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:09.640   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:09.640   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:09.641 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.14ms post=5.60ms unlock=0.04ms
+10-31 23:55:10.146   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:10.146   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:10.148   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:10.150   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:10.150   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:10.150   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:10.151 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.03ms post=5.52ms unlock=0.04ms
+10-31 23:55:10.657   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:10.657   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:10.659   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:10.661   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:10.661   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:10.661   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:10.662 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.19ms post=5.81ms unlock=0.04ms
+10-31 23:55:11.166   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:11.167   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:11.168   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:11.171   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:11.171   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:11.171   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:11.171 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.05ms post=5.74ms unlock=0.04ms
+10-31 23:55:11.677   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:11.677   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:11.679   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:11.681   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:11.681   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:11.681   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:11.682 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.14ms post=6.18ms unlock=0.04ms
+10-31 23:55:12.187   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:12.188   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:12.189   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:12.191   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:12.191   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:12.191   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:12.192 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.05ms post=5.87ms unlock=0.04ms
+10-31 23:55:12.697   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:12.698   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:12.699   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:12.701   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:12.701   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:12.701   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:12.702 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=2.97ms post=5.86ms unlock=0.04ms
+10-31 23:55:13.207   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:13.207   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:13.209   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:13.211   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:13.211   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:13.211   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:13.212 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.09ms post=5.40ms unlock=0.04ms
+10-31 23:55:13.715   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:13.716   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:13.717   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:13.718   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:13.718   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:13.718   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:13.719 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.03ms post=3.87ms unlock=0.03ms
+10-31 23:55:14.223   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:14.224   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:14.225   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:14.228   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:14.228   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:14.228   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:14.228 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=5.82ms unlock=0.04ms
+10-31 23:55:14.733   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:14.734   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:14.735   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:14.738   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:14.738   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:14.738   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:14.738 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=2.98ms post=5.90ms unlock=0.05ms
+10-31 23:55:15.243   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:15.244   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:15.245   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:15.248   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:15.248   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:15.248   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:15.248 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.04ms post=5.79ms unlock=0.04ms
+10-31 23:55:15.754   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:15.754   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:15.756   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:15.758   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:15.758   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:15.758   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:15.759 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=2.97ms post=6.01ms unlock=0.04ms
+10-31 23:55:16.264   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:16.264   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:16.266   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:16.268   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:16.268   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:16.268   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:16.269 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.12ms post=5.49ms unlock=0.04ms
+10-31 23:55:16.774   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:16.774   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:16.776   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:16.778   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:16.778   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:16.778   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:16.779 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.04ms post=5.92ms unlock=0.04ms
+10-31 23:55:17.284   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:17.285   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:17.286   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:17.288   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:17.288   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:17.288   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:17.289 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.14ms post=5.79ms unlock=0.04ms
+10-31 23:55:17.794   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:17.795   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:17.796   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:17.798   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:17.798   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:17.798   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:17.799 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.05ms post=5.76ms unlock=0.04ms
+10-31 23:55:18.304   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:18.304   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:18.306   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:18.308   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:18.308   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:18.308   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:18.309 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.13ms post=5.77ms unlock=0.04ms
+10-31 23:55:18.813   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:18.814   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:18.815   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:18.818   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:18.818   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:18.818   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:18.818 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.97ms post=5.80ms unlock=0.04ms
+10-31 23:55:19.323   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:19.324   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:19.326   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:19.328   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:19.328   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:19.328   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:19.329 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.03ms post=5.97ms unlock=0.04ms
+10-31 23:55:19.834   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:19.835   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:19.836   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:19.838   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:19.838   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:19.838   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:19.839 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.05ms post=5.73ms unlock=0.04ms
+10-31 23:55:20.344   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:20.345   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:20.346   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:20.349   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:20.349   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:20.349   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:20.350 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=3.16ms post=6.36ms unlock=0.06ms
+10-31 23:55:20.855   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:20.856   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:20.857   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:20.859   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:20.859   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:20.859   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:20.860 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.13ms post=5.93ms unlock=0.05ms
+10-31 23:55:21.365   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:21.365   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:21.367   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:21.369   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:21.369   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:21.369   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:21.369 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=2.95ms post=5.48ms unlock=0.04ms
+10-31 23:55:21.874   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:21.875   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:21.876   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:21.878   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:21.879   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:21.879   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:21.879 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.08ms post=5.75ms unlock=0.05ms
+10-31 23:55:22.384   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:22.385   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:22.386   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:22.388   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:22.388   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:22.388   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:22.389 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.05ms draw=3.02ms post=5.84ms unlock=0.04ms
+10-31 23:55:22.894   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :2, height: 2, left:0,top:0, right:2, bottom:2 
+10-31 23:55:22.895   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:22.896   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:22.898   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:22.898   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:22.899   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:22.899 21060 22456 I PaperProbe: hw rect=[0,0][2,2] gray=255 mode=0x6 via=addepdc lockBuf=0.07ms draw=3.06ms post=5.70ms unlock=0.05ms
+10-31 23:55:23.400 21060 22456 I PaperProbe: heartbeat posts=56
+10-31 23:55:23.400 21060 22456 I PaperProbe: << hb 30229.8ms
+10-31 23:55:23.401 21060 22456 I PaperProbe: >> rect l=800 t=600 r=900 b=700 c=255 m=6 force=1
+10-31 23:55:23.405   643  1381 I FBHandSurfaceClient: huawei predict real dirtyRect.width :100, height: 100, left:800,top:600, right:900, bottom:700 
+10-31 23:55:23.406   643  1381 I EinkSfpatchData_T1000: current epdcMode is 6, hex value:0x6
+10-31 23:55:23.407   643  1381 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x6,waveform_mode = 6,update_mode = 0
+10-31 23:55:23.410   643  1381 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+10-31 23:55:23.410   643  1381 I t1000_lib: mutex setdisplaymode
+10-31 23:55:23.410   643  1381 I EinkSfpatchData_T1000: postRefreshMode T1000_MIX_MODE
+10-31 23:55:23.410 21060 22456 I PaperProbe: hw rect=[800,600][900,700] gray=255 mode=0x6 via=addepdc lockBuf=0.06ms draw=2.99ms post=5.90ms unlock=0.04ms
+10-31 23:55:23.411 21060 22456 I PaperProbe: << rect 9.6ms
+10-31 23:55:23.411 21060 22456 I PaperProbe: >> sleep ms=500
+10-31 23:55:23.912 21060 22456 I PaperProbe: << sleep 500.7ms

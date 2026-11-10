@@ -1,0 +1,120 @@
+23:42:47 accepting Android SDK licenses (needed to install the NDK)
+23:42:49 installing ndk;27.3.13750724 into D:\Android\android-sdk\ndk
+23:42:50   sdkmanager: Loading package information...                                                  
+23:42:50   sdkmanager: Loading local repository...                                                     
+23:42:50   sdkmanager: [                                       ] 3% Loading local repository...        
+23:42:50   sdkmanager: [                                       ] 3% Fetch remote repository...         
+23:42:50   sdkmanager: [=                                      ] 3% Fetch remote repository...         
+23:42:50   sdkmanager: [=                                      ] 4% Fetch remote repository...         
+23:42:50   sdkmanager: [=                                      ] 5% Fetch remote repository...         
+23:42:50   sdkmanager: [==                                     ] 5% Fetch remote repository...         
+23:42:50   sdkmanager: [==                                     ] 6% Fetch remote repository...         
+23:42:50   sdkmanager: [==                                     ] 7% Fetch remote repository...         
+23:42:50   sdkmanager: [==                                     ] 7% Computing updates...               
+23:42:50   sdkmanager: [===                                    ] 8% Computing updates...               
+23:42:50   sdkmanager: [===                                    ] 10% Computing updates...              
+23:42:52   sdkmanager: [===                                    ] 10% Installing NDK (Side by side) 27.3
+23:42:56   sdkmanager: [===                                    ] 10% Downloading android-ndk-r27d-windo
+23:43:04   sdkmanager: [====                                   ] 10% Downloading android-ndk-r27d-windo
+23:43:15   sdkmanager: [====                                   ] 11% Downloading android-ndk-r27d-windo
+23:43:27   sdkmanager: [====                                   ] 12% Downloading android-ndk-r27d-windo
+23:43:40   sdkmanager: [=====                                  ] 13% Downloading android-ndk-r27d-windo
+23:43:51   sdkmanager: [=====                                  ] 14% Downloading android-ndk-r27d-windo
+23:43:59   sdkmanager: [=====                                  ] 15% Downloading android-ndk-r27d-windo
+23:44:05   sdkmanager: [======                                 ] 15% Downloading android-ndk-r27d-windo
+23:44:16   sdkmanager: [======                                 ] 16% Downloading android-ndk-r27d-windo
+23:44:31   sdkmanager: [======                                 ] 17% Downloading android-ndk-r27d-windo
+23:44:43   sdkmanager: [=======                                ] 18% Downloading android-ndk-r27d-windo
+23:45:05   sdkmanager: [=======                                ] 19% Downloading android-ndk-r27d-windo
+23:45:11   sdkmanager: [=======                                ] 20% Downloading android-ndk-r27d-windo
+23:45:16   sdkmanager: [========                               ] 20% Downloading android-ndk-r27d-windo
+23:45:29   sdkmanager: [========                               ] 21% Downloading android-ndk-r27d-windo
+23:45:41   sdkmanager: [========                               ] 22% Downloading android-ndk-r27d-windo
+23:45:51   sdkmanager: [=========                              ] 23% Downloading android-ndk-r27d-windo
+23:46:05   sdkmanager: [=========                              ] 24% Downloading android-ndk-r27d-windo
+23:46:10   sdkmanager: [=========                              ] 25% Downloading android-ndk-r27d-windo
+23:46:15   sdkmanager: [==========                             ] 25% Downloading android-ndk-r27d-windo
+23:46:31   sdkmanager: [==========                             ] 26% Downloading android-ndk-r27d-windo
+23:46:42   sdkmanager: [==========                             ] 27% Downloading android-ndk-r27d-windo
+23:46:55   sdkmanager: [===========                            ] 28% Downloading android-ndk-r27d-windo
+23:47:05   sdkmanager: [===========                            ] 29% Downloading android-ndk-r27d-windo
+23:47:11   sdkmanager: [===========                            ] 30% Downloading android-ndk-r27d-windo
+23:47:20   sdkmanager: [============                           ] 30% Downloading android-ndk-r27d-windo
+23:47:32   sdkmanager: [============                           ] 31% Downloading android-ndk-r27d-windo
+23:47:44   sdkmanager: [============                           ] 32% Downloading android-ndk-r27d-windo
+23:47:44   sdkmanager: [============                           ] 33% Downloading android-ndk-r27d-windo
+23:47:47   sdkmanager: [============                           ] 33% Unzipping...                      
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/    
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/buil
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/meta
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/preb
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/pyth
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/shad
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/simp
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/sour
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/tool
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/wrap
+23:47:47   sdkmanager: [============                           ] 33% Unzipping... android-ndk-r27d/CHAN
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/CHAN
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/ndk-
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/NOTI
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/READ
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/sour
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/buil
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/meta
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/preb
+23:47:47   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/pyth
+23:47:48   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/shad
+23:47:49   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/simp
+23:47:53   sdkmanager: [=============                          ] 33% Unzipping... android-ndk-r27d/sour
+23:47:54   sdkmanager: [=============                          ] 34% Unzipping... android-ndk-r27d/sour
+23:47:58   sdkmanager: [=============                          ] 34% Unzipping... android-ndk-r27d/tool
+23:48:01   sdkmanager: [=============                          ] 35% Unzipping... android-ndk-r27d/tool
+23:48:03   sdkmanager: [==============                         ] 35% Unzipping... android-ndk-r27d/tool
+23:48:07   sdkmanager: [==============                         ] 36% Unzipping... android-ndk-r27d/tool
+23:48:12   sdkmanager: [==============                         ] 37% Unzipping... android-ndk-r27d/tool
+23:48:15   sdkmanager: [===============                        ] 38% Unzipping... android-ndk-r27d/tool
+23:48:20   sdkmanager: [===============                        ] 39% Unzipping... android-ndk-r27d/tool
+23:48:21   sdkmanager: [===============                        ] 40% Unzipping... android-ndk-r27d/tool
+23:48:24   sdkmanager: [================                       ] 40% Unzipping... android-ndk-r27d/tool
+23:48:28   sdkmanager: [================                       ] 41% Unzipping... android-ndk-r27d/tool
+23:48:31   sdkmanager: [================                       ] 42% Unzipping... android-ndk-r27d/tool
+23:48:34   sdkmanager: [=================                      ] 43% Unzipping... android-ndk-r27d/tool
+23:48:37   sdkmanager: [=================                      ] 44% Unzipping... android-ndk-r27d/tool
+23:48:39   sdkmanager: [=================                      ] 45% Unzipping... android-ndk-r27d/tool
+23:48:40   sdkmanager: [==================                     ] 45% Unzipping... android-ndk-r27d/tool
+23:48:43   sdkmanager: [==================                     ] 46% Unzipping... android-ndk-r27d/tool
+23:48:46   sdkmanager: [==================                     ] 47% Unzipping... android-ndk-r27d/tool
+23:48:55   sdkmanager: [===================                    ] 48% Unzipping... android-ndk-r27d/tool
+23:48:58   sdkmanager: [===================                    ] 49% Unzipping... android-ndk-r27d/tool
+23:49:00   sdkmanager: [===================                    ] 50% Unzipping... android-ndk-r27d/tool
+23:49:01   sdkmanager: [====================                   ] 50% Unzipping... android-ndk-r27d/tool
+23:49:04   sdkmanager: [====================                   ] 51% Unzipping... android-ndk-r27d/tool
+23:49:08   sdkmanager: [====================                   ] 52% Unzipping... android-ndk-r27d/tool
+23:49:11   sdkmanager: [=====================                  ] 53% Unzipping... android-ndk-r27d/tool
+23:49:24   sdkmanager: [=====================                  ] 54% Unzipping... android-ndk-r27d/tool
+23:49:27   sdkmanager: [=====================                  ] 55% Unzipping... android-ndk-r27d/tool
+23:49:27   sdkmanager: [=====================                  ] 55% Unzipping... android-ndk-r27d/wrap
+23:49:27   sdkmanager: [=======================================] 100% Unzipping... android-ndk-r27d/wra
+23:49:27   sdkmanager: 
+23:49:28 NDK present: True
+23:49:28 download https://api.nuget.org/v3-flatcontainer/microsoft.windows.sdk.cpp/10.0.26100.9457/microsoft.windows.sdk.cpp.10.0.26100.9457.nupkg
+23:50:25   -> D:\Workspace\MatePadPaper\third_party\nupkg\Microsoft.Windows.SDK.CPP.10.0.26100.9457.nupkg (160,635,998 bytes) sha256=1C8B332ABBA402808880DDBA4D70E663F834DED44CF4771A2C191E9485E7CDCD
+23:50:25 extract Microsoft.Windows.SDK.CPP -> D:\Workspace\MatePadPaper\third_party\winsdk\Microsoft.Windows.SDK.CPP
+23:51:10 download https://api.nuget.org/v3-flatcontainer/microsoft.windows.sdk.cpp.x64/10.0.26100.9457/microsoft.windows.sdk.cpp.x64.10.0.26100.9457.nupkg
+23:51:28   -> D:\Workspace\MatePadPaper\third_party\nupkg\Microsoft.Windows.SDK.CPP.x64.10.0.26100.9457.nupkg (52,996,057 bytes) sha256=52BD17C63D3B6D268F385C358F34D0EB595B9C1DEB3273855ABD2EC5C095D132
+23:51:28 extract Microsoft.Windows.SDK.CPP.x64 -> D:\Workspace\MatePadPaper\third_party\winsdk\Microsoft.Windows.SDK.CPP.x64
+23:51:33 Windows SDK packages ready
+23:51:34 download https://raw.githubusercontent.com/lz4/lz4/v1.10.0/lib/lz4.c
+23:51:34   -> D:\Workspace\MatePadPaper\third_party\lz4\lz4.c (118,145 bytes) sha256=9396F7DE527BC8435DE9C7569FB7998E56545A84B4F3C2D808C0235C01774539
+23:51:34 download https://raw.githubusercontent.com/lz4/lz4/v1.10.0/lib/lz4.h
+23:51:35   -> D:\Workspace\MatePadPaper\third_party\lz4\lz4.h (46,014 bytes) sha256=26B82EFC53D1570F3B54EEF02E9C4764C1AD374FF03CAC04E2CED5EA4D4C552F
+23:51:35 download https://raw.githubusercontent.com/lz4/lz4/v1.10.0/lib/LICENSE
+23:51:35   -> D:\Workspace\MatePadPaper\third_party\lz4\LICENSE (1,311 bytes) sha256=8B58C446121A109CCF32EDC094BBA3010A3D85E4EE3702950DB55E4D3E87736C
+23:51:35 LZ4 v1.10.0 ready
+23:51:35 download https://builds.parsec.app/vdd/parsec-vdd-0.41.0.0.exe
+23:51:36   -> D:\Workspace\MatePadPaper\tools\vdd\parsec-vdd-0.41.0.0.exe (224,552 bytes) sha256=317977C5ABD58F1C3F7B27EF7F96947EFD07E6D35B27E415CEA5DAA6007629B1
+23:51:36 download https://builds.parsec.app/vdd/parsec-vdd-0.45.0.0.exe
+23:51:36   -> D:\Workspace\MatePadPaper\tools\vdd\parsec-vdd-0.45.0.0.exe (517,256 bytes) sha256=E23332448FDAF5AA017CB308DB5EF6855FAC526A7DED05D80C039404126D5362
+23:51:36 Parsec VDD installers downloaded (NOT executed)
+23:51:36 setup-env done

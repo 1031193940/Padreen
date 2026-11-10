@@ -1,0 +1,28 @@
+# 大体积 / 生成物 / 含隐私或厂商二进制的内容
+.tmp/
+.cache/
+.pydeps/
+third_party/winsdk/
+third_party/nupkg/
+docs/probe/files/
+docs/probe/dex/
+docs/probe/dump/
+android/*/build/
+tools/keys/
+tools/vdd/*.exe
+*.apk
+docs/probe/getprop.txt
+# VDD packages (binaries downloaded from Parsec) and install logs
+tools/vdd/vdd-*/
+tools/vdd/extracted-*/
+tools/vdd/pkg/*.exe
+tools/vdd/pkg/driver/
+tools/vdd/pkg/*-log.txt
+# measurement videos
+docs/video/
+# build outputs and the assembled distribution folder (contains Android platform-tools and the signed driver binaries)
+host/padreen/build/
+dist/
+# Python caches from the prototype / analysis scripts
+__pycache__/
+*.pyc

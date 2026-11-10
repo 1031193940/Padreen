@@ -1,0 +1,38 @@
+﻿#include <winres.h>
+#include "resource.h"
+
+IDI_APP        ICON "..\\..\\..\\assets\\icon\\app.ico"
+IDI_TRAY_GRAY  ICON "..\\..\\..\\assets\\icon\\tray-gray.ico"
+IDI_TRAY_AMBER ICON "..\\..\\..\\assets\\icon\\tray-amber.ico"
+IDI_TRAY_GREEN ICON "..\\..\\..\\assets\\icon\\tray-green.ico"
+IDI_TRAY_RED   ICON "..\\..\\..\\assets\\icon\\tray-red.ico"
+
+1 RT_MANIFEST "padreen.manifest"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION     PD_VER_MAJOR,PD_VER_MINOR,PD_VER_PATCH,0
+ PRODUCTVERSION  PD_VER_MAJOR,PD_VER_MINOR,PD_VER_PATCH,0
+ FILEFLAGSMASK   0x3fL
+ FILEFLAGS       0x0L
+ FILEOS          VOS_NT_WINDOWS32
+ FILETYPE        VFT_APP
+ FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName",      "Padreen\0"
+            VALUE "FileDescription",  "Padreen - e-ink second screen for the PC\0"
+            VALUE "FileVersion",      PD_VER_STRING "\0"
+            VALUE "InternalName",     "padreen\0"
+            VALUE "OriginalFilename", "padreen.exe\0"
+            VALUE "ProductName",      "Padreen\0"
+            VALUE "ProductVersion",   PD_VER_STRING "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END

@@ -1,0 +1,189 @@
+﻿11-01 00:08:31.835 22359 23605 I PaperProbe: >> use v=hw
+11-01 00:08:31.837 22359 22359 I PaperProbe: surfaceDestroyed
+11-01 00:08:31.842   643  1366 I FBHandSurfaceClient: huaweidload no predict lib in /system/lib64/libestimate.so
+11-01 00:08:31.844   643  1366 I FBHandSurfaceClient: huaweidload have predict lib
+11-01 00:08:31.846 22359 22359 I PaperProbe: HwPath.create: HWSurfaceView=OK fbSurface=pen: gangbi 5.000000 #ff000000 tag:0 line-mode:disable 
+11-01 00:08:31.846 22359 22359 I PaperProbe: toolType: TOOL_TYPE_STYLUS 
+11-01 00:08:31.846 22359 22359 I PaperProbe: isAutoWrite: true
+11-01 00:08:31.846 22359 22359 I PaperProbe: DisableList empty autoHandWrite=true
+11-01 00:08:31.856   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:31.858   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:31.858   643   643 I EinkSfpatchData_T1000: current epdcMode is 3, hex value:0x3
+11-01 00:08:31.859   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x3,waveform_mode = 3,update_mode = 0
+11-01 00:08:31.859   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=3, sceneMode=0
+11-01 00:08:31.859   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:3,mSceneMode:0)
+11-01 00:08:31.871 22359 22359 I PaperProbe: surfaceCreated
+11-01 00:08:31.871 22359 22359 I PaperProbe: surfaceChanged 1404x1872 fmt=1
+11-01 00:08:31.877   643  1366 I FBHandContext: FBHandSurfaceClient setRotation:3 fmWidth=1872 fmHeight=1404
+11-01 00:08:31.880   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.189 ] Mode is not picture type, No Dither
+11-01 00:08:31.887 22359 23605 I PaperProbe: useSurface hw ready=true
+11-01 00:08:31.888 22359 23605 I PaperProbe: << use 52.5ms
+11-01 00:08:31.888   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:31.888   643   643 E EinkSfpatchData_T1000: add_updatelist updatemarker 34137
+11-01 00:08:31.888   643   643 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:08:31.888 22359 23605 I PaperProbe: >> sleep ms=800
+11-01 00:08:31.889   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:31.890   643  1006 W hwtconepdcdisplay: copy buffer ok
+11-01 00:08:31.898   643  1006 I DISPLAY_DITHER_V201_ALGO: [IsModeRight.253 ] Start adjust mode right, nowRunMode = 3, modeT1000 = 3, lastRunMode = 3
+11-01 00:08:31.899   643  1006 I hwtconepdcdisplay:  invoke  IsModeRigh, mode = 3  result = 1
+11-01 00:08:31.899   643  1006 I t1000_lib: mutex setdisplaymode
+11-01 00:08:31.901   643  1006 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 3,submode 0
+11-01 00:08:31.902   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:31.902   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:31.902   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:31.902   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:31.902   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:31.921   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:31.948   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:31.956   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:31.956   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.537   643   643 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 4,submode 0
+11-01 00:08:32.539   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.553   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.553   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:32.553   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.554   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.554   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.554   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.621   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.674   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:32.681   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:32.681   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.689 22359 23605 I PaperProbe: << sleep 800.8ms
+11-01 00:08:32.690 22359 23605 I PaperProbe: >> ori v=land
+11-01 00:08:32.706   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.718   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.718   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:32.718   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.718   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.718   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.718   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.741   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.771   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:32.779   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:32.779   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.806   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.813   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:32.816   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.816   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.817   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.817   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.817   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.831   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.850   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:32.855   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:32.855   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.856   643   643 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+11-01 00:08:32.856   643   643 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+11-01 00:08:32.856   643   643 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+11-01 00:08:32.856   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.859   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:32.863   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.863   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.863   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.863   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.863   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.876   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.892 22359 22359 I PaperProbe: surfaceChanged 1872x1404 fmt=1
+11-01 00:08:32.893   643   970 I FBHandContext: FBHandSurfaceClient setRotation:0 fmWidth=1872 fmHeight=1404
+11-01 00:08:32.895   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:32.905   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:32.905   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.906   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.910   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:32.914   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.914   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.914   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.914   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.914   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.927   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.945   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:32.955   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:32.955   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:32.957   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:32.959   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:32.962   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:32.962   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:32.963   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:32.963   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:32.963   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:32.976   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:32.994   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:33.005   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:33.005   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:33.008   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:33.009   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:33.012   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:33.012   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:33.013   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:33.013   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:33.013   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:33.025   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:33.043   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:33.055   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:33.055   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:33.057   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:33.059   643   643 I MD_DEBUG: layer not set mode ,use last
+11-01 00:08:33.063   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:33.063   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:33.063   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:33.063   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:33.063   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:33.075   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:33.093   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:33.105   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:33.105   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:33.106   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:33.112   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:33.112   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:33.112   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:33.113   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:33.113   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:33.113   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e92a3b000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:33.125   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:33.145   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:33.155   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:33.155   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:33.156   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:33.162   643   643 I EinkSfpatchData_T1000: no need check partial refresh
+11-01 00:08:33.162   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:33.162   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:33.162   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:33.162   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:33.162   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93484000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:33.175   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:33.194   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:33.205   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:33.205   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:34.491 22359 23605 I PaperProbe: setOri land ready=true surface=1872x1404
+11-01 00:08:34.491 22359 23605 I PaperProbe: << ori 1801.3ms
+11-01 00:08:34.492 22359 23605 I PaperProbe: >> rect c=255 m=98 force=1
+11-01 00:08:34.502   643   970 I FBHandSurfaceClient: huawei predict real dirtyRect.width :1872, height: 1404, left:0,top:0, right:1872, bottom:1404 
+11-01 00:08:34.503   643   970 I EinkSfpatchData_T1000: current epdcMode is 98, hex value:0x62
+11-01 00:08:34.503   643   970 I EinkSfpatchData_T1000: waveform mode 2 check, change to 3, current epdcMode is 99, hex value:0x63
+11-01 00:08:34.503   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh is checked with mLastEpdcMode=1 epdcMode=99
+11-01 00:08:34.503   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither 2 gray force 16 gray refresh change epdcMode=67
+11-01 00:08:34.504   643   970 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x43,waveform_mode = 3,update_mode = 0
+11-01 00:08:34.507   643   970 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:34.507   643   970 E EinkSfpatchData_T1000: add_updatelist updatemarker 34149
+11-01 00:08:34.507   643   970 I T1000EPDCDevice: t1000_sysfs_read_poweron_timing result is  3
+11-01 00:08:34.507 22359 23605 I PaperProbe: hw rect=[0,0][1872,1404] gray=255 mode=0x62 via=addepdc lockBuf=0.07ms draw=8.05ms post=6.87ms unlock=0.04ms
+11-01 00:08:34.508 22359 23605 I PaperProbe: << rect 16.0ms
+11-01 00:08:34.508 22359 23605 I PaperProbe: >> sleep ms=1500
+11-01 00:08:34.510   643  1006 W hwtconepdcdisplay: copy buffer ok
+11-01 00:08:34.518   643  1006 I DISPLAY_DITHER_V201_ALGO: [IsModeRight.253 ] Start adjust mode right, nowRunMode = 0, modeT1000 = 3, lastRunMode = 0
+11-01 00:08:34.518   643  1006 I hwtconepdcdisplay:  invoke  IsModeRigh, mode = 3  result = 1
+11-01 00:08:34.518   643  1006 I t1000_lib: mutex setdisplaymode
+11-01 00:08:34.520   643  1006 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 4,submode 0 to mainmode 3,submode 0
+11-01 00:08:35.281   643   643 I EinkSfpatchData_T1000: handleRefresh enter
+11-01 00:08:35.290   643   643 I MD_DEBUG: MD_REFRESH mergeEpdcMode mEpdcList empty
+11-01 00:08:35.290   643   643 I EinkSfpatchData_T1000: current epdcMode is 1, hex value:0x1
+11-01 00:08:35.291   643   643 E EinkSfpatchData_T1000: generateRefreshModeAndDither epdcMode 0x1,waveform_mode = 1,update_mode = 0
+11-01 00:08:35.291   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_is_enable.78  ] waveformMode=1, sceneMode=0
+11-01 00:08:35.291   643   643 I EinkSfpatchData_T1000: use huawei dither huawei_eink_rgba8888_dither(data:0x7e93ecd000,width:1872,height:1404,stride:1920,epdcMode:1,mSceneMode:0)
+11-01 00:08:35.314   643   643 I DISPLAY_DITHER_V201_ALGO: [HistSierraDitherA2.92  ] Start HistSierraDitherA2
+11-01 00:08:35.348   643   643 I DISPLAY_DITHER_V201_ALGO: [huawei_eink_rgba8888_dither.222 ] HW Dither Done, nowRunMode = 0, lastRunMode = 0
+11-01 00:08:35.356   643   643 E EinkSfpatchData_T1000: EinkSFPatchData::postRefreshMode enter ....
+11-01 00:08:35.356   643   643 I t1000_lib: mutex setdisplaymode
+11-01 00:08:35.471   643   643 I t1000_lib: t1000_i2c_set_mipi_mode success from mainmode 3,submode 0 to mainmode 4,submode 0
+11-01 00:08:36.009 22359 23605 I PaperProbe: << sleep 1500.3ms
