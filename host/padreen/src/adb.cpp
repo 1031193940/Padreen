@@ -141,17 +141,15 @@ bool Adb::install(const std::string& serial, const std::wstring& apk, std::strin
 
 std::wstring explainInstallFailure(const std::string& out) {
     auto has = [&](const char* s) { return out.find(s) != std::string::npos; };
-    if (has("INSTALL_FAILED_UPDATE_INCOMPATIBLE") || has("signatures do not match"))
-        return L"平板上已装的 Padreen 用的是另一把签名密钥，无法直接覆盖。请先在平板上卸载「Padreen」，再重新插线（卸载会清掉旧的配对，插线后自动重新配对）";
-    if (has("INSTALL_FAILED_VERSION_DOWNGRADE"))
-        return L"平板上的 Padreen 比这台电脑自带的更新，不能降级。请先升级这台电脑上的 Padreen";
-    if (has("INSUFFICIENT_STORAGE")) return L"平板存储空间不足，请清理空间后重新插线";
-    if (has("INSTALL_FAILED_OLDER_SDK")) return L"平板系统版本太旧，装不了这个 App";
+    if (has("INSTALL_FAILED_UPDATE_INCOMPATIBLE") || has("signatures do not match")) return L"平板上的 Padreen 签名不同，请先在平板上卸载它";
+    if (has("INSTALL_FAILED_VERSION_DOWNGRADE")) return L"平板上的 Padreen 更新，无法降级";
+    if (has("INSUFFICIENT_STORAGE")) return L"平板存储空间不足";
+    if (has("INSTALL_FAILED_OLDER_SDK")) return L"平板系统版本太低";
     if (has("USER_RESTRICTED") || has("INSTALL_FAILED_ABORTED") || has("INSTALL_CANCELED_BY_USER") || has("canceled by user") || has("User rejected"))
-        return L"平板上没有确认安装（点了取消，或系统禁止通过 USB 安装）。请重新插线，并在平板上点「继续安装」";
-    if (has("device unauthorized")) return L"平板还没有允许这台电脑调试：请在平板上点「允许 USB 调试」";
-    if (has("device offline")) return L"平板的 USB 连接处于离线状态：请重新插拔数据线";
-    if (has("no devices/emulators") || has("error: device '")) return L"平板已断开，请重新插线";
+        return L"平板上没有确认安装，请重新插线并点「继续安装」";
+    if (has("device unauthorized")) return L"请在平板上点「允许 USB 调试」";
+    if (has("device offline")) return L"USB 离线，请重新插拔数据线";
+    if (has("no devices/emulators") || has("error: device '")) return L"平板已断开";
     // anything else: the last line adb printed is the one that names the problem
     std::string last;
     size_t pos = 0;
@@ -162,9 +160,9 @@ std::wstring explainInstallFailure(const std::string& out) {
         while (!line.empty() && (line.back() == '\r' || line.back() == ' ')) line.pop_back();
         if (!line.empty()) last = line;
     }
-    if (last.empty()) return L"没有收到安装结果（平板上可能一直没有点「继续安装」），请重新插线再试";
+    if (last.empty()) return L"没有收到安装结果，请重新插线";
     if (last.size() > 200) last.resize(200);
-    return L"adb 返回：" + widen(last);
+    return L"adb：" + widen(last);
 }
 
 bool Adb::uninstall(const std::string& serial, const std::string& pkg, std::string& log) {

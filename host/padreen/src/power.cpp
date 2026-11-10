@@ -269,7 +269,7 @@ int installPowerService() {
         CloseServiceHandle(scm);
         return 3;
     }
-    wchar_t desc[] = L"在 Padreen 使用墨水屏期间，临时让「合上盖子」不使电脑睡眠；断开、退出或崩溃后自动还原原来的设置。";
+    wchar_t desc[] = L"Padreen 连接平板期间合盖不休眠，结束后自动还原。";
     SERVICE_DESCRIPTIONW d = {desc};
     ChangeServiceConfig2W(sv, SERVICE_CONFIG_DESCRIPTION, &d);
     SC_ACTION acts[1] = {{SC_ACTION_RESTART, 5000}};

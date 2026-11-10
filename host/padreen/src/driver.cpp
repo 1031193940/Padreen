@@ -332,7 +332,7 @@ int preparePackage(const std::wstring& cacheDir, const DriverStatusFn& status, c
                 detail = L"已取消";
                 return DRV_DOWNLOAD_FAILED;
             }
-            if (status) status(L"正在从 Parsec 官方地址下载虚拟显示器驱动…");
+            if (status) status(L"正在下载驱动…");
             logf("driver: downloading %s", narrow(src.url).c_str());
             if (!httpGet(src.url, 4u << 20, inst, detail, cancel)) {
                 logf("driver: download failed: %s", narrow(detail).c_str());
@@ -346,7 +346,7 @@ int preparePackage(const std::wstring& cacheDir, const DriverStatusFn& status, c
             logf("driver: %s downloaded (%zu bytes, checksum ok)", narrow(src.file).c_str(), inst.size());
             if (!writeFile(kept, inst)) logf("driver: cannot keep a copy in %s (error %lu)", narrow(kept).c_str(), GetLastError());      // a copy for the next time, nothing more
         }
-        if (status) status(L"正在核对并解出驱动文件…");
+        if (status) status(L"正在解包驱动…");
         std::vector<size_t> idx;
         std::vector<std::string> wanted;
         for (size_t i = 0; i < kPinCount; ++i)
@@ -406,15 +406,15 @@ void runPumped(F&& work) {
 std::wstring driverExitText(int code) {
     switch (code) {
         case DRV_SUCCESS: return L"成功";
-        case DRV_NOT_ELEVATED: return L"没有获得管理员权限";
+        case DRV_NOT_ELEVATED: return L"没有管理员权限";
         case DRV_NO_PACKAGE: return L"缺少驱动文件";
-        case DRV_BAD_PACKAGE: return L"驱动文件与这个版本的 Padreen 预期的不一致（文件被改动过，或版本不匹配）";
-        case DRV_STAGE_FAILED: return L"无法在系统临时目录里准备安装文件";
-        case DRV_INSTALL_FAILED: return L"Windows 没有接受驱动的安装（可能被安全软件或系统策略拦截）";
-        case DRV_NOT_RUNNING: return L"驱动装上了，但虚拟显示器没有启动（重启一次电脑通常能解决）";
-        case DRV_DOWNLOAD_FAILED: return L"无法从 Parsec 官方地址下载驱动";
-        case DRV_UNEXPECTED_FILE: return L"下载到的文件不是这个版本的 Padreen 预期的那一份（Parsec 可能更新了驱动包），为安全起见没有使用";
-        case DRV_EXTRACT_FAILED: return L"无法从 Parsec 的安装包里取出驱动文件";
+        case DRV_BAD_PACKAGE: return L"驱动文件与预期不符";
+        case DRV_STAGE_FAILED: return L"无法准备安装文件";
+        case DRV_INSTALL_FAILED: return L"Windows 拒绝安装（可能被安全软件拦截）";
+        case DRV_NOT_RUNNING: return L"驱动未启动，请重启电脑";
+        case DRV_DOWNLOAD_FAILED: return L"无法下载驱动";
+        case DRV_UNEXPECTED_FILE: return L"下载的文件与预期不符，已放弃";
+        case DRV_EXTRACT_FAILED: return L"无法解出驱动文件";
     }
     return L"未知错误（代码 " + std::to_wstring(code) + L"）";
 }
@@ -485,20 +485,15 @@ int runInstallDriver(const std::wstring& log, const std::wstring& dir) {
 
 DriverAsk installDriverInteractive(HWND parent, const std::wstring& logPath, bool repair, const std::wstring& cacheDir, const DriverStatusFn& status,
                                    const std::atomic<bool>* cancel) {
-    const wchar_t* title = L"Padreen - 虚拟显示器驱动";
+    const wchar_t* title = L"虚拟显示器驱动";
     const UINT flags = MB_TOPMOST | MB_SETFOREGROUND;
     std::vector<Bytes> probe;
     const bool haveFiles = loadPackage(L"", probe, true) == DRV_SUCCESS || loadPackage(cacheDir + L"\\pkg", probe, true) == DRV_SUCCESS;
+    // Short on purpose, but it says what matters: whose software it is, where it comes from, that it needs administrator rights.
     const std::wstring ask =
-        repair ? L"虚拟显示器驱动已经安装。\n\n要重新安装一次（修复）吗？只有平板连上了却没有出现虚拟屏、或驱动出了问题时才需要；重装期间请不要使用平板屏。\n\n"
-                 L"需要管理员授权：点「是」后会弹出 Windows 的授权窗口。"
-               : std::wstring(L"要把平板当作电脑的第二块显示器，Windows 里需要有一个「虚拟显示器」驱动。\n\n"
-                              L"这个驱动是 Parsec（Unity 旗下）出品的 Parsec Virtual Display Driver 0.41（微软签名的用户态驱动），版权属于 Parsec，不包含在 Padreen 里。点「是」之后：\n") +
-                   (haveFiles ? L"    · 驱动文件已经在这台电脑上，不需要再下载；\n"
-                              : L"    · Padreen 从 Parsec 官方地址（builds.parsec.app）下载它的两个安装包（共约 0.7 MB），逐个核对校验值，对不上就不使用；\n") +
-                   L"    · 再请你在 Windows 的授权窗口里允许（需要管理员），然后添加一个没有物理硬件的「Parsec Virtual Display Adapter」设备"
-                   L"（它自己不产生任何显示器，只有 Padreen 连着平板时才会多出一块屏），并在注册表 HKLM\\SOFTWARE\\Parsec\\vdd 里登记平板的分辨率（1872×1404 和 1404×1872）。\n"
-                   L"随时可以在设备管理器里卸载这个设备（勾选「删除此设备的驱动程序」）。";
+        repair ? std::wstring(L"重新安装虚拟显示器驱动？\n需要管理员授权；重装期间请不要使用平板屏。")
+               : std::wstring(L"需要安装「虚拟显示器」驱动（Parsec 出品）。\n") +
+                     (haveFiles ? L"需要管理员授权。" : L"将从 Parsec 官网下载（约 0.7 MB）并安装，需要管理员授权。") + L"\n\n现在安装？";
     if (MessageBoxW(parent, ask.c_str(), title, MB_YESNO | MB_ICONQUESTION | flags) != IDYES) return DriverAsk::Declined;
 
     // the package: next to the program, unpacked earlier, or downloaded now (the message loop keeps running meanwhile)
@@ -508,16 +503,15 @@ DriverAsk installDriverInteractive(HWND parent, const std::wstring& logPath, boo
     if (prep != DRV_SUCCESS) {
         logf("driver: no package (%d)", prep);
         if (cancel && *cancel) return DriverAsk::Failed;               // the program is quitting
-        std::wstring msg = L"虚拟显示器驱动没有安装：" + driverExitText(prep) + L"。\n";
+        std::wstring msg = driverExitText(prep);
         if (prep == DRV_DOWNLOAD_FAILED) {
-            msg += L"（" + detail + L"）\n\n请检查网络（代理、防火墙）后再试：托盘右键 →「安装虚拟显示器驱动」。\n\n也可以用浏览器下载下面两个文件，放进这个文件夹，再点一次：\n" + cacheDir + L"\n";
+            msg += L"：" + detail + L"\n\n请检查网络后重试。也可以手动下载下面两个文件，放进\n" + cacheDir + L"\n后再试：\n";
             for (const Source& s : kSources) msg += std::wstring(L"    ") + s.url + L"\n";
         } else if (prep == DRV_UNEXPECTED_FILE) {
-            msg += L"\n请到 https://github.com/1031193940/Padreen/releases 看看有没有新版本的 Padreen。";
+            msg += L"\n请更新 Padreen：https://github.com/1031193940/Padreen/releases";
         } else if (prep == DRV_EXTRACT_FAILED && !detail.empty()) {
-            msg += L"（" + detail + L"）\n";
+            msg += L"：" + detail;
         }
-        msg += L"\n详细记录在日志里（托盘右键 →「打开日志」）：\n" + logPath;
         MessageBoxW(parent, msg.c_str(), title, MB_OK | MB_ICONWARNING | flags);
         return DriverAsk::Failed;
     }
@@ -543,8 +537,7 @@ DriverAsk installDriverInteractive(HWND parent, const std::wstring& logPath, boo
     if (comReady) CoUninitialize();
     if (!started) {
         logf("driver: elevation refused or failed (%lu)", (unsigned long)startError);
-        MessageBoxW(parent, startError == ERROR_CANCELLED ? L"没有获得管理员授权，驱动没有安装。\n\n需要时可以在托盘右键菜单里再装一次。" : L"无法以管理员身份启动安装程序，驱动没有安装。",
-                    title, MB_OK | MB_ICONWARNING | flags);
+        MessageBoxW(parent, startError == ERROR_CANCELLED ? L"未获得管理员授权，驱动没有安装。" : L"无法提权，驱动没有安装。", title, MB_OK | MB_ICONWARNING | flags);
         return DriverAsk::Failed;
     }
     DWORD code = DRV_INSTALL_FAILED;
@@ -560,11 +553,11 @@ DriverAsk installDriverInteractive(HWND parent, const std::wstring& logPath, boo
     for (int i = 0; i < 20 && !Vdd::installed(); ++i) Sleep(500);   // the adapter may need a moment after the installer has returned
     if (Vdd::installed()) {
         logf("driver: the virtual display driver is installed and running");
-        MessageBoxW(parent, L"虚拟显示器驱动已安装好。\n\n现在用 USB 线连接平板，或在平板上打开 Padreen 就可以了。", title, MB_OK | MB_ICONINFORMATION | flags);
+        MessageBoxW(parent, L"驱动已安装。", title, MB_OK | MB_ICONINFORMATION | flags);
         return DriverAsk::Installed;
     }
     logf("driver: installation failed (%lu)", (unsigned long)code);
-    const std::wstring msg = L"虚拟显示器驱动没有安装成功：" + driverExitText((int)code) + L"\n\n详细记录在日志里（托盘右键 →「打开日志」）：\n" + logPath;
+    const std::wstring msg = L"驱动安装失败：" + driverExitText((int)code);
     MessageBoxW(parent, msg.c_str(), title, MB_OK | MB_ICONERROR | flags);
     return DriverAsk::Failed;
 }

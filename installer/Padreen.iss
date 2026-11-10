@@ -47,18 +47,18 @@ RestartApplications=no
 Name: "chs"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [Types]
-Name: "full"; Description: "完整安装（推荐）"
+Name: "full"; Description: "完整安装"
 Name: "custom"; Description: "自定义"; Flags: iscustom
 
 [Components]
-Name: "main"; Description: "Padreen 主程序 + 平板 App 安装包"; Types: full custom; Flags: fixed
-Name: "usb"; Description: "USB 连接支持（adb：插线自动安装平板 App、自动连接）"; Types: full custom
-Name: "power"; Description: "电源助手（合盖不休眠：只在连接平板期间临时让「合上盖子」不使电脑睡眠，断开/退出/崩溃后自动还原；一个很小的 Windows 服务，卸载时一并移除）"; Types: full custom
+Name: "main"; Description: "Padreen"; Types: full custom; Flags: fixed
+Name: "usb"; Description: "USB 连接"; Types: full custom
+Name: "power"; Description: "合盖不休眠（电源助手）"; Types: full custom
 
 [Tasks]
-Name: "firewall"; Description: "允许平板通过局域网（Wi-Fi）连接：添加两条只限本地网络、只对本程序的 Windows 防火墙入站规则"; GroupDescription: "网络："
-Name: "autostart"; Description: "开机自动启动 Padreen（只为当前用户）"; GroupDescription: "启动："; Flags: unchecked
-Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "快捷方式："; Flags: unchecked
+Name: "firewall"; Description: "Wi-Fi 连接（防火墙规则）"; GroupDescription: "网络："
+Name: "autostart"; Description: "开机启动"; GroupDescription: "启动："; Flags: unchecked
+Name: "desktopicon"; Description: "桌面快捷方式"; GroupDescription: "快捷方式："; Flags: unchecked
 
 [Files]
 Source: "{#Src}\padreen.exe"; DestDir: "{app}"; Flags: ignoreversion; Components: main
@@ -70,23 +70,23 @@ Source: "{#Src}\adb\*"; DestDir: "{app}\adb"; Flags: ignoreversion recursesubdir
 
 [Icons]
 Name: "{autoprograms}\{#AppName}\Padreen"; Filename: "{app}\padreen.exe"
-Name: "{autoprograms}\{#AppName}\平板 App 安装包（padreen.apk）"; Filename: "{win}\explorer.exe"; Parameters: "/select,""{app}\padreen.apk"""
+Name: "{autoprograms}\{#AppName}\平板 App"; Filename: "{win}\explorer.exe"; Parameters: "/select,""{app}\padreen.apk"""
 Name: "{autoprograms}\{#AppName}\使用说明"; Filename: "{app}\使用说明.txt"
 Name: "{autoprograms}\{#AppName}\卸载 Padreen"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\Padreen"; Filename: "{app}\padreen.exe"; Tasks: desktopicon
 
 [Run]
 ; the power helper runs as SYSTEM from this folder: only administrators may modify it (users: read / execute)
-Filename: "{sys}\icacls.exe"; Parameters: """{app}"" /inheritance:r /grant:r *S-1-5-18:(OI)(CI)F *S-1-5-32-544:(OI)(CI)F *S-1-5-32-545:(OI)(CI)RX /C /Q"; Flags: runhidden; StatusMsg: "正在设置程序目录权限（电源助手以系统权限运行，程序目录只允许管理员修改）…"; Components: power
+Filename: "{sys}\icacls.exe"; Parameters: """{app}"" /inheritance:r /grant:r *S-1-5-18:(OI)(CI)F *S-1-5-32-544:(OI)(CI)F *S-1-5-32-545:(OI)(CI)RX /C /Q"; Flags: runhidden; StatusMsg: "正在设置权限…"; Components: power
 ; the files inside re-inherit the folder permissions (applying /inheritance:r with /T would leave them without any permission)
 Filename: "{sys}\icacls.exe"; Parameters: """{app}\*"" /reset /T /C /Q"; Flags: runhidden; Components: power
-Filename: "{app}\padreen.exe"; Parameters: "--install-power-service"; Flags: runhidden waituntilterminated; StatusMsg: "正在安装电源助手服务…"; Components: power
+Filename: "{app}\padreen.exe"; Parameters: "--install-power-service"; Flags: runhidden waituntilterminated; StatusMsg: "正在安装电源助手…"; Components: power
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Padreen LAN TCP ({app}\padreen.exe)"""; Flags: runhidden; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Padreen LAN UDP ({app}\padreen.exe)"""; Flags: runhidden; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Padreen LAN TCP ({app}\padreen.exe)"" dir=in action=allow protocol=TCP localport=38702 program=""{app}\padreen.exe"" profile=any remoteip=localsubnet enable=yes"; Flags: runhidden; StatusMsg: "正在添加防火墙规则…"; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Padreen LAN UDP ({app}\padreen.exe)"" dir=in action=allow protocol=UDP localport=38703 program=""{app}\padreen.exe"" profile=any remoteip=localsubnet enable=yes"; Flags: runhidden; StatusMsg: "正在添加防火墙规则…"; Tasks: firewall
 Filename: "{app}\padreen.exe"; Parameters: "--autostart-on"; Flags: runasoriginaluser runhidden; Tasks: autostart
-Filename: "{app}\padreen.exe"; Description: "现在运行 Padreen"; Flags: nowait postinstall skipifsilent runasoriginaluser
+Filename: "{app}\padreen.exe"; Description: "运行 Padreen"; Flags: nowait postinstall skipifsilent runasoriginaluser
 
 [UninstallRun]
 Filename: "{app}\padreen.exe"; Parameters: "--autostart-off"; Flags: runhidden; RunOnceId: "AutostartOff"
@@ -218,7 +218,7 @@ begin
   LegacyAutostart := RegValueExists(HKCU, RunKey, 'PaperDisplay');
   LegacyVddFlag := RegValueExists(HKLM, 'Software\PaperDisplay', 'VddInstalledByUs');
   if LegacyDir <> '' then
-    MsgBox('检测到旧版 PaperDisplay（现已更名为 Padreen）。安装前会先把旧版卸载掉：设置和平板配对记录会保留，Padreen 第一次运行时自动接手。', mbInformation, MB_OK);
+    MsgBox('将先卸载旧版 PaperDisplay（已更名为 Padreen），设置和配对记录会保留。', mbInformation, MB_OK);
 end;
 
 procedure InitializeWizard;
@@ -251,6 +251,6 @@ procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if CurUninstallStep = usPostUninstall then
     if DirExists(ExpandConstant('{localappdata}\Padreen')) then
-      if MsgBox('要同时删除保存在 AppData 里的设置和配对记录吗？', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      if MsgBox('同时删除设置和配对记录？', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
         DelTree(ExpandConstant('{localappdata}\Padreen'), True, True, True);
 end;

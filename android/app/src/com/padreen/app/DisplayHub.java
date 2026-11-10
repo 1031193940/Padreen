@@ -153,7 +153,7 @@ final class DisplayHub {
     }
 
     static String idleMessage() {
-        return "Padreen\n等待电脑连接…\nWaiting for the PC";
+        return "Padreen\n等待电脑…";
     }
 
     // ------------------------------------------------------------------------------------------------------------ state

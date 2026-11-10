@@ -43,7 +43,7 @@ public class SessionService extends Service {
         nm.createNotificationChannel(ch);
         PendingIntent open = PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder b = new Notification.Builder(this, CHANNEL)
-                .setContentTitle("Padreen 正在把平板用作第二块显示器")
+                .setContentTitle("Padreen 已连接")
                 .setContentText(label == null ? "点按返回" : label + " · 点按返回")
                 .setContentIntent(open)
                 .setOngoing(true);

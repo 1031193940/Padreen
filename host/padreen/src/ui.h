@@ -24,7 +24,9 @@ struct UiHost {
     std::function<void(int)> setWave, setSettle;
     std::function<void()> fullRefresh, openLog, enableLan;  // enableLan: (re)start the LAN listener incl. the firewall question
     std::function<bool()> lanBlocked;
-    std::function<std::wstring()> lidInfo;                  // one line: what closing the lid does now, and whether the power helper covers it
+    std::function<bool()> lidAvailable;                     // the power helper is installed (without it the "closing the lid" switch does nothing)
+    std::function<bool()> driverMissing;                    // the virtual display driver is not installed: the panel shows an install button
+    std::function<void()> installDriver;
     LanServer* lan = nullptr;
     Devices* devices = nullptr;
     int pairMinutes = 5;

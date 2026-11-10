@@ -105,7 +105,7 @@ public class HomeActivity extends Activity {
         lastSignature = "";
         ui.removeCallbacks(tick);
         ui.post(tick);
-        setStatus(store.list().isEmpty() ? "正在搜索电脑…" : "正在搜索已配对的电脑…");
+        setStatus("搜索中…");
     }
 
     @Override
@@ -180,7 +180,7 @@ public class HomeActivity extends Activity {
             bannerBack.setVisibility(View.VISIBLE);
             banner.setVisibility(View.VISIBLE);
         } else if (hub.reconnecting()) {
-            bannerText.setText("○ 连接中断，正在自动重连…");
+            bannerText.setText("○ 重连中…");
             bannerBack.setVisibility(View.GONE);
             banner.setVisibility(View.VISIBLE);
         } else {
@@ -212,7 +212,7 @@ public class HomeActivity extends Activity {
             startActivity(new Intent(Intent.ACTION_DELETE, Uri.parse("package:" + LEGACY_PACKAGE)));
         } catch (Exception e) {
             android.util.Log.w(TAG, "cannot open the uninstall dialog: " + e);
-            setStatus("无法打开卸载界面，请在系统「设置 → 应用」里手动卸载「" + LEGACY_LABEL + "」。");
+            setStatus("无法打开卸载界面");
         }
     }
 
@@ -300,7 +300,7 @@ public class HomeActivity extends Activity {
         lastSignature = sig.toString();
         list.removeAllViews();
         if (rows.isEmpty()) {
-            TextView t = text("没有找到电脑。\n\n请确认：电脑上已启动 Padreen（托盘里有图标）、电脑和平板在同一个 Wi-Fi、Windows 防火墙已允许 Padreen。\n也可以点下面的「手动输入电脑地址」。", 22, false, GRAY);
+            TextView t = text("没有找到电脑", 24, false, GRAY);
             t.setPadding(dp(8), dp(24), dp(8), dp(8));
             list.addView(t);
             return;
@@ -322,9 +322,9 @@ public class HomeActivity extends Activity {
         left.setOrientation(LinearLayout.VERTICAL);
         left.addView(text(r.name, 28, true, FG));
         String sub;
-        if (r.online == null) sub = "不在线（已配对）" + (r.saved != null && r.saved.ip != null && !r.saved.ip.isEmpty() ? "  ·  上次 " + r.saved.ip : "");
-        else if (r.online.busy) sub = r.online.ip + "  ·  正在被使用";
-        else sub = r.online.ip + (r.saved != null ? "  ·  已配对" : r.online.pairing ? "  ·  正在等待配对" : "  ·  未配对");
+        if (r.online == null) sub = "离线";
+        else if (r.online.busy) sub = r.online.ip + "  ·  使用中";
+        else sub = r.online.ip + (r.saved != null ? "  ·  已配对" : r.online.pairing ? "  ·  等待配对" : "  ·  未配对");
         left.addView(text(sub, 19, false, GRAY));
         row.addView(left, new LinearLayout.LayoutParams(0, -2, 1f));
 
@@ -375,12 +375,12 @@ public class HomeActivity extends Activity {
         titles.addView(text("Padreen", 34, true, FG));
         String ver = "";
         try {
-            ver = "  ·  v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            ver = "v" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (Exception ignored) {
         }
-        titles.addView(text("把这块墨水屏当作电脑的第二块显示器" + ver, 19, false, GRAY));
+        titles.addView(text(ver, 19, false, GRAY));
         head.addView(titles, new LinearLayout.LayoutParams(0, -2, 1f));
-        Button refresh = button("重新搜索", 22, dp(170), dp(60));
+        Button refresh = button("搜索", 22, dp(130), dp(60));
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -388,10 +388,10 @@ public class HomeActivity extends Activity {
                 Handoff.clearUserEnded();
                 nextAutoAt = 0;
                 rebuildList(true);
-                setStatus("正在搜索电脑…");
+                setStatus("搜索中…");
             }
         });
-        head.addView(refresh, new LinearLayout.LayoutParams(dp(170), dp(60)));
+        head.addView(refresh, new LinearLayout.LayoutParams(dp(130), dp(60)));
         col.addView(head);
 
         View line = new View(this);
@@ -406,15 +406,15 @@ public class HomeActivity extends Activity {
         legacyRow.setGravity(Gravity.CENTER_VERTICAL);
         legacyRow.setPadding(dp(16), dp(8), dp(12), dp(8));
         legacyRow.setBackground(box(BG, GRAY, dp(2), dp(10)));
-        legacyRow.addView(text("平板上还装着旧版 App「" + LEGACY_LABEL + "」（本 App 已更名为 Padreen），建议卸载。", 20, false, GRAY), new LinearLayout.LayoutParams(0, -2, 1f));
-        Button removeOld = button("卸载旧版", 22, dp(170), dp(54));
+        legacyRow.addView(text("旧版「" + LEGACY_LABEL + "」", 20, false, GRAY), new LinearLayout.LayoutParams(0, -2, 1f));
+        Button removeOld = button("卸载", 22, dp(130), dp(54));
         removeOld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 uninstallLegacy();
             }
         });
-        LinearLayout.LayoutParams rolp = new LinearLayout.LayoutParams(dp(170), dp(54));
+        LinearLayout.LayoutParams rolp = new LinearLayout.LayoutParams(dp(130), dp(54));
         rolp.leftMargin = dp(12);
         legacyRow.addView(removeOld, rolp);
         LinearLayout.LayoutParams lrlp = new LinearLayout.LayoutParams(-1, -2);
@@ -443,7 +443,7 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View v) {
                 hub.disconnect();
-                setStatus("已断开。");
+                setStatus("已断开");
             }
         });
         banner.addView(bannerStop, new LinearLayout.LayoutParams(dp(130), dp(58)));
@@ -452,7 +452,7 @@ public class HomeActivity extends Activity {
         col.addView(banner, bnlp);
         banner.setVisibility(View.GONE);
 
-        col.addView(text("局域网里的电脑", 24, true, FG));
+        col.addView(text("电脑", 24, true, FG));
         ScrollView sv = new ScrollView(this);
         sv.setVerticalScrollBarEnabled(false);
         list = new LinearLayout(this);
@@ -462,26 +462,16 @@ public class HomeActivity extends Activity {
 
         LinearLayout bar = new LinearLayout(this);
         bar.setGravity(Gravity.CENTER_VERTICAL);
-        Button manual = button("手动输入电脑地址", 22, dp(300), dp(60));
+        Button manual = button("输入 IP", 22, dp(170), dp(60));
         manual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showManualAddress();
             }
         });
-        bar.addView(manual, new LinearLayout.LayoutParams(dp(300), dp(60)));
-        Button help = button("使用说明", 22, dp(200), dp(60));
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
-        LinearLayout.LayoutParams hlp = new LinearLayout.LayoutParams(dp(200), dp(60));
-        hlp.leftMargin = dp(16);
-        bar.addView(help, hlp);
+        bar.addView(manual, new LinearLayout.LayoutParams(dp(170), dp(60)));
         CheckBox auto = new CheckBox(this);
-        auto.setText("自动连接上次使用的电脑");
+        auto.setText("自动连接");
         auto.setTextSize(22);
         auto.setTextColor(FG);
         auto.setChecked(store.autoConnect());
@@ -499,8 +489,8 @@ public class HomeActivity extends Activity {
         col.addView(bar);
 
         CheckBox gest = new CheckBox(this);
-        gest.setText("启用三指手势：轻点 = 整屏刷新，上滑 = 多桌面，下滑 = 窗口切换（开启后单指点按会晚约 0.06 秒）");
-        gest.setTextSize(20);
+        gest.setText("三指手势");
+        gest.setTextSize(22);
         gest.setTextColor(FG);
         gest.setChecked(store.gestures());
         gest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -514,8 +504,8 @@ public class HomeActivity extends Activity {
         col.addView(gest, glp);
 
         CheckBox rot = new CheckBox(this);
-        rot.setText("自动旋转：跟着平板的拿法转，竖着拿电脑上这块屏幕也变成竖屏（转回横屏再变回来）。平板要立起来或斜着拿（倾斜约 10 度以上）才会转；平放在桌上时保持当前显示的方向");
-        rot.setTextSize(20);
+        rot.setText("自动旋转");
+        rot.setTextSize(22);
         rot.setTextColor(FG);
         rot.setChecked(store.autoRotate());
         rot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -529,8 +519,8 @@ public class HomeActivity extends Activity {
         col.addView(rot, rlp);
 
         CheckBox vol = new CheckBox(this);
-        vol.setText("Padreen 在最前面且已连接电脑时，音量键调节电脑的音量，不调平板的音量");
-        vol.setTextSize(20);
+        vol.setText("音量键控制电脑");
+        vol.setTextSize(22);
         vol.setTextColor(FG);
         vol.setChecked(store.volumeToPc());
         vol.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -557,7 +547,7 @@ public class HomeActivity extends Activity {
     private void connectTo(final PcStore.Pc pc, final String ip, final int port, final boolean auto) {
         if (connecting) return;
         connecting = true;
-        setStatus("正在连接 " + pc.name + " …");
+        setStatus("连接 " + pc.name + "…");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -574,7 +564,7 @@ public class HomeActivity extends Activity {
                 } catch (final PcClient.Failure f) {
                     fail(failureText(f), f.reason == PcClient.FAIL_UNPAIRED || f.reason == PcClient.FAIL_AUTH ? pc : null);
                 } catch (final IOException e) {
-                    fail("连接失败：" + (e.getMessage() == null ? e.toString() : e.getMessage()) + "\n请确认电脑上的 Padreen 在运行，并且 Windows 防火墙已放行。", null);
+                    fail("连接失败：" + (e.getMessage() == null ? e.toString() : e.getMessage()), null);
                 }
             }
         }, "pd-connect").start();
@@ -594,25 +584,25 @@ public class HomeActivity extends Activity {
     private static String failureText(PcClient.Failure f) {
         switch (f.reason) {
             case PcClient.FAIL_UNPAIRED:
-                return "这台电脑没有这台平板的配对记录（可能在电脑上被删除了），请重新配对。";
+                return "未配对，请重新配对";
             case PcClient.FAIL_AUTH:
-                return "配对密钥对不上，请「忘记」后重新配对。";
+                return "配对失效，请忘记后重新配对";
             case PcClient.FAIL_BUSY:
-                return "这台电脑正在被另一台平板或 USB 使用。";
+                return "电脑正在被使用";
             case PcClient.FAIL_NOT_PAIRING:
-                return "电脑上没有打开配对窗口：托盘图标右键 →「配对新平板」。";
+                return "电脑没有开启配对";
             case PcClient.FAIL_CODE:
-                return "配对码不对（或试错次数用完了）：请看电脑上的新配对码再试。";
+                return "配对码错误";
             case PcClient.FAIL_DISABLED:
-                return "电脑上关闭了局域网连接：托盘图标右键 →「允许平板通过局域网连接」。";
+                return "电脑关闭了 Wi-Fi 连接";
             default:
-                return "电脑拒绝了连接（" + f.reason + "）。";
+                return "连接被拒绝（" + f.reason + "）";
         }
     }
 
     private void offerRepair(final PcStore.Pc pc) {
-        showDialog(new AlertDialog.Builder(this).setTitle("需要重新配对").setMessage(pc.name + " 与这台平板的配对记录不一致。忘记它并重新配对吗？")
-                .setPositiveButton("忘记并重新配对", new DialogInterface.OnClickListener() {
+        showDialog(new AlertDialog.Builder(this).setTitle("配对失效").setMessage("忘记 " + pc.name + " 并重新配对？")
+                .setPositiveButton("重新配对", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface d, int w) {
                         store.remove(pc.id);
@@ -624,7 +614,7 @@ public class HomeActivity extends Activity {
     }
 
     private void confirmForget(final PcStore.Pc pc) {
-        showDialog(new AlertDialog.Builder(this).setTitle("忘记 " + pc.name + "？").setMessage("忘记后，这台平板要重新配对才能连接它（电脑上的记录需要在电脑托盘「已配对的平板」里另外删除）。")
+        showDialog(new AlertDialog.Builder(this).setTitle("忘记 " + pc.name + "？")
                 .setPositiveButton("忘记", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface d, int w) {
@@ -640,10 +630,10 @@ public class HomeActivity extends Activity {
     private boolean submitting;                    // a code is being checked: further key presses are ignored
 
     private void showPairing(final Discovery.PcInfo pc) {
-        openKeypad("配对：" + pc.name, "在电脑上右键托盘图标 →「配对新平板」，把屏幕上显示的 9 位配对码输入这里。", 9, false, new KeypadDone() {
+        openKeypad("配对：" + pc.name, "输入电脑上显示的配对码", 9, false, new KeypadDone() {
             @Override
             public void done(final String code) {
-                overlayMsg.setText("正在配对…（需要几秒钟）");
+                overlayMsg.setText("配对中…");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -686,12 +676,12 @@ public class HomeActivity extends Activity {
     }
 
     private void showManualAddress() {
-        openKeypad("手动输入电脑地址", "在电脑上看到的局域网 IP，例如 192.168.1.20（电脑和平板需要能互相访问）。", 15, true, new KeypadDone() {
+        openKeypad("输入电脑 IP", "例如 192.168.1.20", 15, true, new KeypadDone() {
             @Override
             public void done(String ip) {
                 discovery.addHost(ip);
                 closeOverlay();
-                setStatus("正在向 " + ip + " 查询…");
+                setStatus("查询 " + ip + "…");
             }
         });
     }
@@ -775,7 +765,7 @@ public class HomeActivity extends Activity {
                 public void onClick(View v) {
                     String s = entry.toString();
                     if (s.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")) done.done(s);
-                    else overlayMsg.setText("地址格式不对，应像 192.168.1.20");
+                    else overlayMsg.setText("格式不对");
                 }
             });
             LinearLayout.LayoutParams a = new LinearLayout.LayoutParams(dp(200), dp(64));
@@ -809,22 +799,6 @@ public class HomeActivity extends Activity {
             root.removeView(overlay);
             overlay = null;
         }
-    }
-
-    private void showHelp() {
-        String msg = "第一次使用：\n"
-                + "1. 在电脑上运行 Padreen（托盘里出现图标）。\n"
-                + "2. 电脑托盘图标右键 →「配对新平板」，屏幕上会显示 9 位配对码。\n"
-                + "3. 在这里点电脑名称旁的「配对…」，输入配对码。\n"
-                + "4. 配对成功会自动连接；以后只要打开本应用，就会自动连上上次的电脑。\n\n"
-                + "也可以用 USB 线：插上数据线，电脑端会自动配对并连接。\n\n"
-                + "三根手指同时轻点一下 = 整屏刷新（清残影）；三指上滑 = 多桌面（电脑上的 Win+Tab）；三指下滑 = 窗口切换（Alt+Tab）。这些手势不会把任何点击传给电脑。\n\n"
-                + "自动旋转跟着平板的拿法走：把平板转到竖屏，电脑上这块屏幕会自动变成竖屏（转回横屏再变回来，约需两三秒）。平板要立起来或斜着拿（倾斜约 10 度以上）才会转；平放在桌上时，保持当前显示的方向不变。如果电脑端关闭了自动旋转，平板就保持电脑当前的方向，不再跟着转。\n\n"
-                + "Padreen 在最前面并连着电脑时，音量键调节的是电脑的音量（平板自己的音量不变，也不会弹出音量条）；没有连接时，音量键照常调平板的音量。自动旋转和音量键这两项都可以在下面关掉。\n\n"
-                + "返回手势只是离开画面，连接还在（上面的横幅里点「返回显示」）；点「断开」才会真正断开。";
-        TextView t = text(msg, 22, false, FG);
-        t.setPadding(dp(24), dp(16), dp(24), dp(8));
-        showDialog(new AlertDialog.Builder(this).setTitle("使用说明").setView(t).setPositiveButton("知道了", null));
     }
 
     // ------------------------------------------------------------------------------------------------------------ view helpers

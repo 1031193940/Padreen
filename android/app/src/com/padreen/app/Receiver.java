@@ -355,7 +355,7 @@ final class Receiver implements Runnable {
             server.bind(new InetSocketAddress(InetAddress.getByName("127.0.0.1"), PORT));
         } catch (IOException e) {
             Log.e(TAG, "cannot listen on " + PORT, e);
-            hub.showMessage("Padreen\n无法监听端口 " + PORT + "\n" + e.getMessage());
+            hub.showMessage("Padreen\n端口 " + PORT + " 被占用\n" + e.getMessage());
             return;
         }
         Log.i(TAG, "listening on 127.0.0.1:" + PORT);
@@ -476,7 +476,7 @@ final class Receiver implements Runnable {
                 if (started) hub.sessionEnded(byeSeen, false);
             }
         }
-        if (running) showWaiting("连接已断开，等待电脑重新连接…\nDisconnected, waiting for the PC");
+        if (running) showWaiting("已断开，等待重连…");
     }
     /**
      * The data-plane HELLO (first record of every session): u16 proto, u16 w, u16 h, u16 dpi, u8 orientation, u8 appBuild, u16 rsv, u32 caps,

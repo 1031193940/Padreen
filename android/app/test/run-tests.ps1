@@ -3,7 +3,11 @@
 #   powershell -ExecutionPolicy Bypass -File android\app\test\run-tests.ps1
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$jdk = 'C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin'
+$proj = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $here))      # the repository
+Invoke-Expression (Get-Content "$proj\tools\toolchain.ps1" -Raw)
+$jdkHome = Find-Jdk $PadreenJdkMajor
+if (-not $jdkHome) { throw "JDK $PadreenJdkMajor not found (tools\setup-build-env.ps1 installs it; or set PADREEN_JDK)" }
+$jdk = "$jdkHome\bin"
 $out = Join-Path $here '..\build\test-classes'
 Remove-Item $out -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force $out | Out-Null

@@ -36,13 +36,13 @@ struct SettleChoice {
     const wchar_t* key;
     const wchar_t* label;
 };
-const SettleChoice kSettle[] = {{L"off", L"关闭（默认：不自动局部刷新，灰阶只在整屏刷新时出现）"}, {L"light", L"少量（停手 3 秒后补 2 小块文字）"}, {L"full", L"完整（停手后逐块补满全屏灰阶）"}};
+const SettleChoice kSettle[] = {{L"off", L"关闭"}, {L"light", L"少量"}, {L"full", L"完整"}};
 struct WaveChoice {
     int mode;
     const wchar_t* key;
     const wchar_t* label;
 };
-const WaveChoice kWaves[] = {{1, L"du", L"DU（稳妥，残影少）"}, {6, L"a2f6", L"A2 6 帧（默认，更跟手）"}, {7, L"a2f7", L"A2 7 帧"}, {8, L"a2f8", L"A2 8 帧"}, {9, L"a2f9", L"A2 9 帧"}, {5, L"a2", L"A2 / MIX"}};
+const WaveChoice kWaves[] = {{1, L"du", L"DU"}, {6, L"a2f6", L"A2 6 帧"}, {7, L"a2f7", L"A2 7 帧"}, {8, L"a2f8", L"A2 8 帧"}, {9, L"a2f9", L"A2 9 帧"}, {5, L"a2", L"A2 / MIX"}};
 
 struct Config {
     std::wstring adbPath;                     // resolved at start: ini "adb" > adb\adb.exe next to the program > the developer SDK; empty = no USB support
@@ -230,8 +230,8 @@ void updateTray(bool balloon = false) {
                 g->lastUpdates = u;
                 g->lastStatsNs = now;
             }
-            wchar_t extra[96];
-            swprintf(extra, 96, L" · %.0f 次/秒 · 处理 %.0f ms · 往返 %.0f ms", g->fps, g->session->stats.procMs.load(), g->session->stats.rttMs.load());
+            wchar_t extra[32];
+            swprintf(extra, 32, L" · %.0f 次/秒", g->fps);
             s += extra;
         } else {
             g->lastStatsNs = 0;
@@ -295,32 +295,32 @@ void showMenu(HWND h) {
     }
     bw = g->cfg.bw;
     AppendMenuW(m, MF_STRING | MF_GRAYED, IDM_STATUS, st.c_str());
-    AppendMenuW(m, MF_STRING, IDM_OPEN, L"打开 Padreen 主界面");
+    AppendMenuW(m, MF_STRING, IDM_OPEN, L"主界面");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(m, MF_STRING | (bw ? MF_CHECKED : 0), IDM_FAST, L"极速模式（纯黑白，约 0.1 秒一次）");
-    AppendMenuW(m, MF_STRING | (!bw ? MF_CHECKED : 0), IDM_GRAY, L"画质模式（4 级灰度，约 0.6 秒一次）");
+    AppendMenuW(m, MF_STRING | (bw ? MF_CHECKED : 0), IDM_FAST, L"极速模式");
+    AppendMenuW(m, MF_STRING | (!bw ? MF_CHECKED : 0), IDM_GRAY, L"画质模式");
     HMENU waves = CreatePopupMenu();
     for (const WaveChoice& c : kWaves) AppendMenuW(waves, MF_STRING | (g->cfg.fastMode == c.mode ? MF_CHECKED : 0), IDM_WAVE_BASE + c.mode, c.label);
-    AppendMenuW(m, MF_POPUP, (UINT_PTR)waves, L"极速模式的刷新方式");
+    AppendMenuW(m, MF_POPUP, (UINT_PTR)waves, L"刷新方式");
     HMENU settle = CreatePopupMenu();
     for (int i = 0; i < 3; ++i) AppendMenuW(settle, MF_STRING | (g->cfg.settleLevel == i ? MF_CHECKED : 0), IDM_SETTLE_BASE + i, kSettle[i].label);
-    AppendMenuW(m, MF_POPUP, (UINT_PTR)settle, L"自动补灰阶（会局部刷新）");
+    AppendMenuW(m, MF_POPUP, (UINT_PTR)settle, L"补灰阶");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(m, MF_STRING, IDM_FULL, L"立即全屏刷新（清除残影）");
-    AppendMenuW(m, MF_STRING | (g->cfg.plainWallpaper ? MF_CHECKED : 0), IDM_WALLPAPER, L"平板屏使用纯白壁纸（下次连接生效）");
-    AppendMenuW(m, MF_STRING | (g->cfg.touch ? MF_CHECKED : 0), IDM_TOUCH, L"触控输入（在平板上用手指点按、拖动）");
-    AppendMenuW(m, MF_STRING | (g->cfg.rotate ? MF_CHECKED : 0), IDM_ROTATE, L"自动旋转（平板横屏 / 竖屏切换时，电脑里的平板屏同步旋转）");
+    AppendMenuW(m, MF_STRING, IDM_FULL, L"全屏刷新");
+    AppendMenuW(m, MF_STRING | (g->cfg.plainWallpaper ? MF_CHECKED : 0), IDM_WALLPAPER, L"纯白壁纸");
+    AppendMenuW(m, MF_STRING | (g->cfg.touch ? MF_CHECKED : 0), IDM_TOUCH, L"触控");
+    AppendMenuW(m, MF_STRING | (g->cfg.rotate ? MF_CHECKED : 0), IDM_ROTATE, L"自动旋转");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(m, MF_STRING, IDM_PAIR, L"配对新平板…（显示配对码）");
-    AppendMenuW(m, MF_STRING, IDM_DEVICES, L"已配对的平板…");
-    AppendMenuW(m, MF_STRING | (g->cfg.lan ? MF_CHECKED : 0), IDM_LAN, L"允许平板通过局域网连接");
-    AppendMenuW(m, MF_STRING | (g->cfg.usb ? MF_CHECKED : 0), IDM_USB, L"插着 USB 线时用 USB 连接（取消 = 始终走 Wi-Fi）");
-    if (g->lanBlocked) AppendMenuW(m, MF_STRING, IDM_FIREWALL, L"启用局域网连接（需要允许防火墙）…");
-    AppendMenuW(m, MF_STRING, IDM_DRIVER, Vdd::installed() ? L"重新安装虚拟显示器驱动（修复）…" : L"安装虚拟显示器驱动（从 Parsec 官方下载，需要管理员授权）…");
+    AppendMenuW(m, MF_STRING, IDM_PAIR, L"配对…");
+    AppendMenuW(m, MF_STRING, IDM_DEVICES, L"已配对…");
+    AppendMenuW(m, MF_STRING | (g->cfg.lan ? MF_CHECKED : 0), IDM_LAN, L"Wi-Fi 连接");
+    AppendMenuW(m, MF_STRING | (g->cfg.usb ? MF_CHECKED : 0), IDM_USB, L"优先 USB");
+    if (g->lanBlocked) AppendMenuW(m, MF_STRING, IDM_FIREWALL, L"启用 Wi-Fi 连接…");
+    AppendMenuW(m, MF_STRING, IDM_DRIVER, L"虚拟显示器驱动…");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(m, MF_STRING | (autostartEnabled() ? MF_CHECKED : 0), IDM_AUTOSTART, L"开机自动启动（只为当前用户）");
+    AppendMenuW(m, MF_STRING | (autostartEnabled() ? MF_CHECKED : 0), IDM_AUTOSTART, L"开机启动");
     AppendMenuW(m, MF_STRING, IDM_RECONNECT, L"重新连接");
-    AppendMenuW(m, MF_STRING, IDM_LOG, L"打开日志");
+    AppendMenuW(m, MF_STRING, IDM_LOG, L"日志");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
     AppendMenuW(m, MF_STRING, IDM_QUIT, L"退出");
     POINT p;
@@ -459,23 +459,23 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
     // puts the bundled APK on the tablet; false (with the reason in `err`) when that does not work
     auto installApk = [&](const wchar_t* what) {
         if (GetFileAttributesW(cfg.apkPath.c_str()) == INVALID_FILE_ATTRIBUTES) {
-            err = L"找不到平板 App 的安装包 padreen.apk（要和 padreen.exe 放在同一个文件夹）";
+            err = L"找不到 padreen.apk";
             return false;
         }
         if (adb->install(serial, cfg.apkPath, log)) return true;
         logf("tablet: apk install failed: %s", log.c_str());
-        err = quit ? L"Padreen 正在退出" : std::wstring(what) + explainInstallFailure(log);
+        err = quit ? L"正在退出" : std::wstring(what) + explainInstallFailure(log);
         return false;
     };
     if (!adb->packageInstalled(serial, pkg)) {
-        setStatus(L"正在安装到平板：请在平板上点「继续安装」（系统安全确认，只需这一次）", 1);
-        if (!installApk(L"安装平板 App 失败：")) return false;
+        setStatus(L"请在平板上点「继续安装」", 1);
+        if (!installApk(L"安装失败：")) return false;
         logf("tablet: app installed");
     }
     // the tablet app was called PaperDisplay (package com.paperdisplay.app) before it became Padreen: keep a single app on the tablet
     static const char* const kLegacyPkg = "com.paperdisplay.app";
     if (adb->packageInstalled(serial, kLegacyPkg)) {
-        setStatus(L"正在移除平板上旧版的「PaperDisplay」App…", 1);
+        setStatus(L"移除旧版 App…", 1);
         std::string ulog;
         bool removed = adb->uninstall(serial, kLegacyPkg, ulog);
         logf("tablet: the old PaperDisplay app %s (%s)", removed ? "was removed" : "could not be removed", ulog.c_str());
@@ -483,7 +483,7 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
     adb->forward(serial, cfg.port);
     for (int attempt = 0; attempt < 2 && !quit; ++attempt) {
         adb->startActivity(serial, comp);
-        setStatus(L"正在连接平板 App…", 1);
+        setStatus(L"连接中…", 1);
         int64_t deadline = nowNs() + 12LL * 1000000000LL;
         std::string e;
         bool ok = false;
@@ -495,7 +495,8 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
             Sleep(300);
         }
         if (!ok) {
-            err = L"连不上平板 App：" + widen(e);
+            logf("tablet: cannot reach the app: %s", e.c_str());
+            err = L"连不上平板 App";
             return false;
         }
         if (link.appBuild() >= cfg.requiredAppBuild) {
@@ -504,8 +505,8 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
         }
         logf("tablet app build %d < required %d: updating", link.appBuild(), cfg.requiredAppBuild);
         link.close();
-        setStatus(L"正在更新平板上的 App：请在平板上点「继续安装」（系统安全确认）", 1);
-        if (!installApk(L"更新平板 App 失败：")) return false;
+        setStatus(L"请在平板上点「继续安装」", 1);
+        if (!installApk(L"更新失败：")) return false;
         adb->forceStop(serial, pkg);
         adb->forward(serial, cfg.port);
     }
@@ -515,7 +516,7 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
 
 bool App::createVirtualDisplay(Vdd& vdd, int w, int h, std::wstring& gdi, std::wstring& err) {
     if (!vdd.open()) {
-        err = L"没有安装虚拟显示器驱动（托盘右键 →「安装虚拟显示器驱动」，只需管理员授权一次）";
+        err = L"未安装虚拟显示器驱动";
         return false;
     }
     int idx = vdd.addDisplay();
@@ -564,7 +565,7 @@ void App::pairAndRemember(const std::string& serial, Link& link) {
     }
     Bytes k(32);
     randomBytes(k.data(), 32);
-    setStatus(L"正在与平板配对（以后可通过局域网连接）…", 1);
+    setStatus(L"配对中…", 1);
     if (!link.pair(k, store.pcId(), store.pcName(), 3000)) {
         logf("lan: pairing over USB failed");
         return;
@@ -622,10 +623,9 @@ bool App::firewallReady() { return fwRuleExists(fwTcpName()) && fwRuleExists(fwU
 // Asks the user (once, or when they choose the tray item) and adds the two rules through an elevated netsh.
 bool App::askFirewall(bool manual) {
     const std::wstring exe = exePath();
-    std::wstring msg = L"要让平板在局域网里找到并连接这台电脑，Padreen 需要在 Windows 防火墙里添加两条入站规则：\n\n"
-                       L"    TCP " + std::to_wstring(cfg.lanPort) + L"（平板连接）\n    UDP " + std::to_wstring(cfg.lanDiscoveryPort) +
-                       L"（平板搜索电脑）\n\n只对本程序、只允许本地网络内的设备。需要管理员授权：点「是」后会弹出 Windows 的授权窗口。\n（只用 USB 线的话可以点「否」。）";
-    if (MessageBoxW(hwnd, msg.c_str(), L"Padreen - 局域网连接", MB_YESNO | MB_ICONQUESTION | MB_TOPMOST | MB_SETFOREGROUND) != IDYES) return false;
+    const std::wstring msg = L"通过 Wi-Fi 连接需要添加 Windows 防火墙规则（TCP " + std::to_wstring(cfg.lanPort) + L"、UDP " + std::to_wstring(cfg.lanDiscoveryPort) +
+                             L"，仅限本地网络）。\n需要管理员授权。只用 USB 线可点「否」。";
+    if (MessageBoxW(hwnd, msg.c_str(), L"Wi-Fi 连接", MB_YESNO | MB_ICONQUESTION | MB_TOPMOST | MB_SETFOREGROUND) != IDYES) return false;
     std::wstring tcp = L"netsh advfirewall firewall add rule name=\"" + fwTcpName() + L"\" dir=in action=allow protocol=TCP localport=" + std::to_wstring(cfg.lanPort) +
                        L" program=\"" + exe + L"\" profile=any remoteip=localsubnet enable=yes";
     std::wstring udp = L"netsh advfirewall firewall add rule name=\"" + fwUdpName() + L"\" dir=in action=allow protocol=UDP localport=" + std::to_wstring(cfg.lanDiscoveryPort) +
@@ -656,20 +656,20 @@ void App::startLan() {
         cv.notify_all();
         if (hwnd) PostMessageW(hwnd, WM_TIMER, 1, 0);
     };
-    lan.onPaired = [this](const PairedPad& p) { setStatus(L"已与平板配对：" + widen(p.name), 2); };
+    lan.onPaired = [this](const PairedPad& p) { setStatus(L"已配对：" + widen(p.name), 2); };
     if (!cfg.lan || lan.running()) return;
     if (!firewallReady()) {
         wchar_t asked[8] = {};
         GetPrivateProfileStringW(L"padreen", L"firewall_asked", L"0", asked, 8, iniPath.c_str());
         if (asked[0] == L'1' && !manualFirewall) {
             lanBlocked = true;
-            setStatus(L"局域网连接未启用：需要防火墙规则（托盘右键 →「启用局域网连接（防火墙）」）", 3);
+            setStatus(L"Wi-Fi 连接未启用", 3);
             return;
         }
         WritePrivateProfileStringW(L"padreen", L"firewall_asked", L"1", iniPath.c_str());
         if (!askFirewall(false)) {
             lanBlocked = true;
-            setStatus(L"局域网连接未启用：需要防火墙规则（托盘右键 →「启用局域网连接（防火墙）」）", 3);
+            setStatus(L"Wi-Fi 连接未启用", 3);
             return;
         }
     }
@@ -677,7 +677,7 @@ void App::startLan() {
     std::string err;
     if (!lan.start(&store, (uint16_t)cfg.lanPort, (uint16_t)cfg.lanDiscoveryPort, err)) {
         logf("lan: %s", err.c_str());
-        setStatus(L"局域网连接不可用：" + widen(err) + L"（端口被占用？）", 3);
+        setStatus(L"Wi-Fi 连接不可用：" + widen(err), 3);
     }
 }
 // The virtual display driver is Parsec's software and is not part of Padreen's download.  At the first start without it the user is asked once;
@@ -691,7 +691,7 @@ void App::offerDriver(bool atStart) {
         explicit Busy(bool& x) : b(x) { b = true; }
         ~Busy() { b = false; }
     } busy(driverBusy);
-    const wchar_t* title = L"Padreen - 虚拟显示器驱动";
+    const wchar_t* title = L"虚拟显示器驱动";
     const bool repair = Vdd::installed();
     if (atStart) {
         if (repair) return;
@@ -702,14 +702,14 @@ void App::offerDriver(bool atStart) {
             return;
         }
     } else if (repair && inSession) {
-        MessageBoxW(hwnd, L"平板正在使用中。请先断开平板（或退出平板上的 Padreen），再重新安装驱动。", title, MB_OK | MB_ICONINFORMATION | MB_TOPMOST | MB_SETFOREGROUND);
+        MessageBoxW(hwnd, L"平板使用中，请先断开平板再重装驱动。", title, MB_OK | MB_ICONINFORMATION | MB_TOPMOST | MB_SETFOREGROUND);
         return;
     }
     const std::wstring cacheDir = iniPath.substr(0, iniPath.find_last_of(L"\\/")) + L"\\driver-cache";      // next to the settings and the log
     switch (installDriverInteractive(hwnd, logPath, repair, cacheDir, [this](const std::wstring& s) { setStatus(s, 1); }, &quit)) {
         case DriverAsk::Installed:
             WritePrivateProfileStringW(L"padreen", L"driver_declined", L"0", iniPath.c_str());
-            setStatus(L"虚拟显示器驱动已安装", 0);
+            setStatus(L"驱动已安装", 0);
             driverRetry = true;
             cv.notify_all();
             break;
@@ -822,7 +822,7 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
         RECT vr{};
         if (displayRect(gdi, vr)) wallpaper.apply(vr, exeDir() + L"\\padreen-white.png", dataDir() + L"\\wallpaper-original.txt");
     }
-    setStatus(link.secure() ? L"已连接（无线）：平板是第 3 块显示器" : L"已连接：平板是第 3 块显示器", 2);
+    setStatus(link.secure() ? L"已连接（无线）" : L"已连接", 2);
     std::atomic<bool> stop{false};
     bool onlyScreen = false;                      // guard thread only
     // current size and rectangle of the virtual monitor (false = Windows does not report it)
@@ -981,7 +981,7 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
         }
         if (!(serial.empty() && cfg.lanGraceSeconds > 0 && !padId.empty() && !link.tabletLeft() && (reason == "tablet link closed" || reason == "send failed"))) break;
         logf("session: link lost (%s) - keeping the virtual monitor for %d s, waiting for the tablet to reconnect", reason.c_str(), cfg.lanGraceSeconds);
-        setStatus(L"平板连接中断：等待它自动重连…（虚拟屏暂时保留，窗口不会被移走）", 1);
+        setStatus(L"连接中断，等待重连…", 1);
         {
             std::lock_guard<std::mutex> lk(mu);
             this->session = nullptr;
@@ -1040,7 +1040,7 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
             std::lock_guard<std::mutex> lk(mu);
             this->session = sess.get();
         }
-        setStatus(L"已连接（无线）：平板是第 3 块显示器", 2);
+        setStatus(L"已连接（无线）", 2);
         reason = sess->run(stop);
     }
     stop = true;
@@ -1070,10 +1070,10 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
 static const wchar_t* usbWaitingHint(const std::vector<AdbPending>& pending) {
     bool offline = false;
     for (const AdbPending& p : pending) {
-        if (p.state == "unauthorized") return L"平板已连上 USB，但还没允许这台电脑调试：请在平板屏幕上的「允许 USB 调试」提示里点「允许／确定」（可勾选「始终允许」），之后会自动安装并连接";
+        if (p.state == "unauthorized") return L"请在平板上点「允许 USB 调试」";
         if (p.state == "offline") offline = true;
     }
-    return offline ? L"平板的 USB 连接处于离线状态：请重新插拔数据线（还不行，就在平板上关掉再打开「USB 调试」）" : nullptr;
+    return offline ? L"USB 离线，请重新插拔数据线" : nullptr;
 }
 
 void App::superviseLoop() {
@@ -1123,7 +1123,7 @@ void App::superviseLoop() {
                     bool vdFailed = false;
                     std::string reason = runSession(link, "", err, vdFailed);
                     if (vdFailed) setStatus(err, 3);
-                    else if (!quit) setStatus(L"平板已断开（" + widen(reason) + L"）；在平板上重新打开 Padreen 即可再连", 0);
+                    else if (!quit) setStatus(L"平板已断开", 0);
                 } else {
                     logf("lan: adopt failed: %s", e.c_str());
                 }
@@ -1135,11 +1135,8 @@ void App::superviseLoop() {
                 usbHint = usbWaitingHint(pendingDevices);
             }
             if (usbHint) setStatus(usbHint, 1);
-            else if (!Vdd::installed()) setStatus(L"还没有安装虚拟显示器驱动：托盘右键 →「安装虚拟显示器驱动」（从 Parsec 官方地址下载），装好后才能把平板当显示器", 3);
-            else if (!cfg.lan) setStatus(L"等待平板（USB 线连接；局域网连接已关闭）", 0);
-            else if (!lan.running()) setStatus(L"等待平板（请用 USB 线连接）", 0);
-            else if (store.list().empty()) setStatus(L"等待平板：右键托盘 →「配对新平板」，在平板上打开 Padreen 输入配对码（或插 USB 线自动配对）", 0);
-            else setStatus(L"等待平板：在平板上打开 Padreen 即可连接（或插 USB 线）", 0);
+            else if (!Vdd::installed()) setStatus(L"未安装虚拟显示器驱动", 3);
+            else setStatus(L"等待平板", 0);
             continue;
         }        if (reconnect.exchange(false)) {
             pausedSerial.clear();
@@ -1159,13 +1156,13 @@ void App::superviseLoop() {
             }
         }
         // ---- prepare ----
-        setStatus(L"检测到平板，正在准备…", 1);
+        setStatus(L"准备中…", 1);
         Link link;
         std::wstring err;
         if (!prepareTablet(serial, link, err)) {
             logf("prepare failed: %s", narrow(err).c_str());
             setStatus(err, 3);
-            if (++failures >= 3) pauseOn(serial, err + L"。已暂停重试：托盘右键 → 重新连接，或重新插线", 3);
+            if (++failures >= 3) pauseOn(serial, err + L"（已暂停）", 3);
             for (int i = 0; i < 30 && !quit && !reconnect; ++i) Sleep(100);
             continue;
         }
@@ -1179,13 +1176,13 @@ void App::superviseLoop() {
         }
         bool unplugged = !deviceStillThere(serial);
         if (unplugged) {
-            setStatus(L"平板已拔出，虚拟显示器已移除", 0);
+            setStatus(L"平板已拔出", 0);
             failures = 0;
         } else if (reason == "tablet link closed") {
-            pauseOn(serial, L"平板上的 App 已关闭（右键托盘图标 → 重新连接）", 0);     // the app was closed on the tablet
+            pauseOn(serial, L"平板 App 已关闭", 0);     // the app was closed on the tablet
         } else if (!quit) {
             setStatus(L"连接中断：" + widen(reason), 3);
-            if (++failures >= 3) pauseOn(serial, L"连接中断：" + widen(reason) + L"。已暂停重试：托盘右键 → 重新连接，或重新插线", 3);
+            if (++failures >= 3) pauseOn(serial, L"连接中断：" + widen(reason) + L"（已暂停）", 3);
             for (int i = 0; i < 30 && !quit && !reconnect; ++i) Sleep(100);
         }
     }
@@ -1347,15 +1344,9 @@ void setupUiHost(App& app) {
         }
         return false;
     };
-    h.lidInfo = [&app]() -> std::wstring {
-        PowerHelper st = powerHelperState();
-        int a = lidActionNow();
-        std::wstring s = L"合上盖子时（当前电源）：" + lidActionName(a) + L"。";
-        if (!app.cfg.lidKeepAwake) return s + L"（此功能已关闭）";
-        if (st == PowerHelper::Running) return s + L"电源助手在运行：连接期间合盖不会睡眠，断开后自动还原。";
-        if (st == PowerHelper::Stopped) return s + L"电源助手已安装但没有运行（重启电脑或在服务里启动 PadreenPower）。";
-        return s + (a == 0 ? L"这样合盖本来就不会睡眠。" : L"没有电源助手，合盖会让电脑睡眠；用安装包安装即可启用。");
-    };
+    h.lidAvailable = [] { return powerHelperState() != PowerHelper::Missing; };
+    h.driverMissing = [] { return !Vdd::installed(); };
+    h.installDriver = [&app] { app.offerDriver(false); };
     h.setFlag = [](UiFlag f, bool v) { applyFlag(f, v); };
     for (const WaveChoice& c : kWaves) h.waves.push_back({c.mode, c.label});
     for (int i = 0; i < 3; ++i) h.settles.push_back({i, kSettle[i].label});
