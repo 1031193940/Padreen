@@ -1,0 +1,36 @@
+Padreen - virtual display driver package (third-party software)
+================================================================
+
+Padreen needs a "virtual monitor" driver so that Windows gets the monitor that shows the tablet.  That driver is Parsec's software, and it is NOT
+part of Padreen: no Padreen download (installer, folder, source archive) contains it, because no permission to redistribute it has been found.  Instead,
+when the user agrees (first start, or the tray menu), padreen.exe downloads Parsec's own installers from Parsec's server on that user's PC, checks
+them against the SHA-256 values below, takes the four files out of them, and installs them (once, with administrator approval).  The files are
+Parsec's, byte for byte as Parsec publishes them; Padreen does not modify them.  They stay under their owners' own terms (Parsec / Unity).
+
+This folder is for developers: tools\fetch-vdd.ps1 puts the same four files here (they are not kept in git) for the scripts next to this file.
+
+  nefconw.exe       nefcon 1.10.0 (Nefarius Software Solutions e.U.), the tool that creates the device and installs the driver.
+                    Signed by Parsec Cloud, Inc.  Taken from parsec-vdd-0.45.0.0.exe.
+  driver\mm.inf     Parsec Virtual Display Driver 0.41 (Parsec Cloud, Inc.): an IddCx user-mode driver, signed by Microsoft
+  driver\mm.dll     (Windows Hardware Compatibility Publisher).  Taken from parsec-vdd-0.41.0.0.exe.
+  driver\mm.cat
+
+Where they come from (Parsec's own downloads):
+  https://builds.parsec.app/vdd/parsec-vdd-0.41.0.0.exe   sha256 317977C5ABD58F1C3F7B27EF7F96947EFD07E6D35B27E415CEA5DAA6007629B1
+  https://builds.parsec.app/vdd/parsec-vdd-0.45.0.0.exe   sha256 E23332448FDAF5AA017CB308DB5EF6855FAC526A7DED05D80C039404126D5362
+
+SHA-256 of the files in this folder (padreen.exe checks them before it installs anything):
+  nefconw.exe       CF746D1B0BBB713993D4A90DCCD774C78D9FFF8C2BA5A054B6C8F56C77E1EEE1
+  driver\mm.inf     B003D2FE10C366FB454324149B46D6B14FB17ABB75F79FA8BC9E0043FC56C942
+  driver\mm.dll     7F2E8860D56461EA5EB2D2D54A63FC934F3694B32EDA72170E069797D846D6C7
+  driver\mm.cat     5852D0C23EC74A2F5594BC498525E7BEB29CE25BD7ADAC4906DDBDCBF539B1F9
+
+What the installation changes on the PC:
+  - one root-enumerated device "Parsec Virtual Display Adapter" (hardware id Root\Parsec\VDA, class Display); it creates no monitor by itself
+  - the driver package in the Windows driver store (oemNN.inf) and mm.dll in %SystemRoot%\System32\drivers\UMDF
+  - HKLM\SOFTWARE\Parsec\vdd\0 and \1: the tablet's modes 1872x1404@60 and 1404x1872@60
+
+Remove all of it: Device Manager > Display adapters > "Parsec Virtual Display Adapter" > Uninstall device (tick "Delete the driver software for
+this device"), and delete the registry key HKLM\SOFTWARE\Parsec\vdd\0 and \1 (and the keys above them when they are empty); or, for developers with
+the package in this folder, uninstall-vdd.ps1 from an administrator PowerShell does all of it:
+  powershell -NoProfile -ExecutionPolicy Bypass -File uninstall-vdd.ps1

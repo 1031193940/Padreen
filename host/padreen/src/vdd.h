@@ -3,12 +3,14 @@
 
 namespace ph {
 
-// Parsec Virtual Display Driver client (IddCx user-mode driver, installed once with tools/vdd/pkg/install-vdd.ps1).
+// Parsec Virtual Display Driver client (IddCx user-mode driver).  It is installed once: by the installer, by the program itself (driver.cpp: first
+// start / tray menu) or by hand with driver/install-vdd.ps1.
 // Displays vanish ~1 s after the last UPDATE ping, so a crash cannot leave one behind.
 class Vdd {
 public:
     ~Vdd() { close(); }
     bool open();                 // false when the driver is not installed
+    static bool installed();     // the driver is installed and its device runs (the device interface exists); opens nothing, starts nothing
     void close();                // removes every display this object added
     int addDisplay();            // index of the new virtual display, or -1
     void removeDisplay(int idx);

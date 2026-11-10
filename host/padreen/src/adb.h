@@ -6,6 +6,9 @@ namespace ph {
 class Adb {
 public:
     explicit Adb(std::wstring exe) : exe_(std::move(exe)) {}
+    // `run` gives up (the adb client is killed) as soon as *flag turns true: quitting must not wait for an `adb install` that still waits
+    // for the tablet's "continue" tap.
+    void abortWhen(const std::atomic<bool>* flag) { abort_ = flag; }
     // Make sure the adb server is running.  Started detached WITHOUT inheriting any handle: a server that inherits a pipe keeps
     // the pipe open and hangs whoever waits for its end of file.
     bool ensureServer(std::string& err);
@@ -25,19 +28,29 @@ public:
 
 private:
     std::wstring exe_;
+    const std::atomic<bool>* abort_ = nullptr;
 };
 
-// Streams `host:track-devices` from the adb server; `onChange` gets the serials currently in state "device".
+// A device that adb lists but cannot use yet: "unauthorized" (the tablet still waits for "Allow USB debugging"), "offline", ...
+struct AdbPending {
+    std::string serial, state;
+};
+
+// What `adb install` printed, as a sentence for the user (what went wrong and what to do); the raw output belongs in the log.
+std::wstring explainInstallFailure(const std::string& adbOutput);
+
+// Streams `host:track-devices` from the adb server; `onChange` gets the serials currently in state "device" and, separately, the others.
 class DeviceWatcher {
 public:
+    using Callback = std::function<void(const std::vector<std::string>& ready, const std::vector<AdbPending>& pending)>;
     ~DeviceWatcher() { stop(); }
-    void start(Adb* adb, std::function<void(const std::vector<std::string>&)> onChange);
+    void start(Adb* adb, Callback onChange);
     void stop();
 
 private:
     void loop();
     Adb* adb_ = nullptr;
-    std::function<void(const std::vector<std::string>&)> cb_;
+    Callback cb_;
     std::thread th_;
     std::atomic<bool> run_{false};
     std::atomic<SOCKET> sock_{INVALID_SOCKET};

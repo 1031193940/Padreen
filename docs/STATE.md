@@ -73,6 +73,16 @@
 - **会话中 Windows 的副作用（正常）**：只要平板虚拟屏的壁纸和真实屏幕不同，Windows 会把 `HKCU\Control Panel\Desktop\Wallpaper` 暂时改成 `...\Themes\TranscodedWallpaper`（同一张图的缓存副本）并多出 `TranscodedImageCache_001`；会话结束、虚拟屏被拔掉后恢复。真实屏幕的壁纸路径全程没变（`wp-query.ps1` 只读核对过）。
 - **只读检查脚本**（`.tmp\`）：`wp-query.ps1`（IDesktopWallpaper 全部显示器 + 注册表）、`vol-watch.ps1`（监视电脑主音量）。
 
+### 3.2 2026-11-10 换到新电脑（Dell Pro Max Tower）后的构建环境（以此为准）
+- **仓库在 `D:\GithubProject\Padreen`**（不再是 `D:\Workspace\MatePadPaper`；本文件里旧路径是历史，脚本已全部改成按脚本位置推导）。原开发机（Surface Pro 8）上的旧开发密钥 `dev.jks`（已作废，见下）、Windows SDK NuGet 包等**不在**这台电脑上。
+- **一条命令配环境**：`tools\setup-build-env.ps1`（`-CheckOnly` 只检查）。工具位置由 `tools\toolchain.ps1` 统一查找；本机实际是：MSVC 14.42 + Windows SDK 10.0.22621（VS 2022 Professional 在 C:，经 vswhere + vcvars64.bat）、JDK 11.0.33（微软构建，`D:\Tools\jdk-11.0.33`）、Android SDK `D:\Android\SDK`（`ANDROID_HOME`；本次用它自带的 sdkmanager 加了 build-tools 32.0.0，许可证早已接受过）、Inno Setup 7.1.1（`D:\Tools\InnoSetup`）、GitHub CLI 2.103.3（`D:\Tools\gh`）、7-Zip（choco 的 shim）。没有改 PATH、没有设任何环境变量。公司机器：执行策略 RemoteSigned，一律用 `-ExecutionPolicy Bypass -File` 跑脚本。
+- **复现验证**：本机构建的 APK（build 17 / v1.1.3，185,663 字节）与平板上装着的那个，14 个条目（`classes.dex`、`AndroidManifest.xml`、`resources.arsc`、全部资源）**逐字节相同**，只有签名证书不同——说明本机工具链能复现原来的构建，仓库当前源码就是平板上的 build 17。
+- **签名密钥（2026-11-10 起换成新的发布密钥，旧的作废）**：`tools\keys\release.jks`（别名 `release`，`CN=Padreen`，RSA 2048，2054-03 到期）+ 同目录 `release.jks.pass`（随机口令，不写进任何文档）。由 `android\app\build.ps1 -NewKey` 在本机生成，目录 ACL 只留当前用户和 SYSTEM，`.gitignore` 排除（`tools/keys/`）。证书 SHA-256 `e8fc0fe2666acc90f36a2cb4ed28ca20a12fbdabee7d24bc8f11aaba9d4c60c4`。**务必备份 `tools\keys`**（丢了就不能再升级已装的平板）。没有密钥时 `build.ps1` 拒绝构建（不再悄悄新建，也没有默认口令）。
+  - **私钥没有上传到 GitHub**：仓库是公开的，私钥一旦公开，任何人都能签出 Android 认可的"升级包"，而且无法吊销（用户曾要求一同上传，已说明并改为本机备份；要在 GitHub Actions 里出包，请自己把密钥 base64 后放进仓库的 Actions Secrets）。
+  - **旧开发密钥**（`CN=PaperDisplay Dev`，证书 SHA-256 `a1271d70e0d38c2628fa36b3761c9bcf32d3eefff9b279108536042e457193b9`，口令 `paperdisplay` 已在首个提交里公开）作废，文件也不在这台电脑上。2026-11-10 用户把平板上旧密钥签名的 App 卸载了，我用 `adb -s <平板序列号> install -r` 装上了新密钥签名的 build 17（v1.1.3，与 `dist\Padreen\padreen.apk` 逐字节相同，SHA-256 `938B36FC…1B85`；pm path 与签名证书都核对过）；配对记录随卸载清掉，插 USB 后 Padreen 自动重新配对。以后若有平板还装着旧密钥签名的版本：电脑端只有平板 appBuild < `requiredAppBuild`（16）时才去覆盖安装，所以它继续能用；将来 `requiredAppBuild` 升高，或想换成新密钥的 App 时，要先在平板上卸载 `com.padreen.app`（清掉配对），再插 USB——Padreen 自动装新版并自动重新配对（装不上时托盘提示里有这一步）。
+- **发布**：`tools\make-installer.ps1 -Build` 出安装包和绿色版目录（出包时会用刚做好的 exe 实测"能从 Parsec 取到并校验驱动"，并断言包里没有任何 Parsec 文件）；用 GitHub CLI 发布（仓库 `1031193940/Padreen`，登录账号需要写权限）。流程见 README「发布」。已发布的版本看 https://github.com/1031193940/Padreen/releases ；产物在 `dist\`（不进 git）。安装包本身还没有在干净电脑上真正安装试过（Inno 编译通过；驱动下载安装的端到端已在真机测过，见 §4 1b）。
+- **USB 自动安装（2026-11-10 补强）**：本来就有（`prepareTablet`：设备到达 → `pm path` 没有 App，或 appBuild 低于 `requiredAppBuild` → `adb install -r`，平板上点一次「继续安装」）。这次补的：①`DeviceWatcher` 也报告 adb 看得到、但还不能用的设备（`unauthorized` / `offline`），空闲状态显示橙色提示（"请在平板上点允许 USB 调试"等）；②安装失败不再显示 adb 的原始输出，`explainInstallFailure()`（`adb.cpp`）翻成原因和办法（签名密钥不同 → 先卸载、用户取消/系统禁止、空间不足、降级、系统太旧…），原文进日志；缺 `padreen.apk` 单独提示；③连续 3 次失败后的"已暂停重试"保留真正的原因（以前被改写成"平板上的 App 已关闭"）；④`Adb::abortWhen(&quit)`：退出时直接结束还在等平板确认的 `adb install`（以前最多卡 10 分钟）；⑤识别 `ANDROID_ADB_SERVER_PORT`（与 adb 自己一致，默认 5037）。测试：假 adb 服务器 + 假 `adb.exe` + 本程序副本（不碰真设备，未入库），5 个场景共 16 项检查全部通过：未授权提示、授权后自动安装（`install -r` 一次）、签名不同、用户取消、3 次后暂停并保留原因、安装等待中退出（264 ms）。
+
 **已装环境（D 盘；驱动除外）**
 
 | 内容 | 位置 |
@@ -82,15 +92,19 @@
 | Windows SDK 头文件/库（NuGet 10.0.26100，免安装） | `third_party\winsdk`（`third_party\nupkg` 可删） |
 | LZ4 v1.10.0 源码（`lz4.c/.h` 平铺在目录里） | `third_party\lz4` |
 | Python 3.8 + numpy/Pillow；`mss`、`imageio-ffmpeg`（自带 ffmpeg 4.2.2） | `D:\Python3.8`、`.pydeps` |
-| Parsec VDD 包、解包与**可交付安装包** | `tools\vdd\pkg`（0.41 驱动 + 已签名 nefconw + 安装/卸载/状态脚本） |
-| 7-Zip（Unity 自带） | `D:\Unity\2022.3.62f3c1\Editor\Data\Tools\7z.exe` |
-| 开发签名密钥（口令 `paperdisplay`） | `tools\keys\dev.jks` |
+| Parsec VDD 包（**开发用，不分发**） | `tools\vdd\pkg`（脚本 + `NOTICE.txt` 在 git 里；0.41 驱动 + 已签名 nefconw 由 `tools\fetch-vdd.ps1` 从官方地址取得并校验，二进制不进 git，任何发布包里都没有）；`padreen.exe` 内置安装包与驱动文件的 SHA-256（`host\padreen\src\driver.cpp`），首次运行/托盘菜单时**在用户电脑上**从 Parsec 官方地址下载、解包（`vddpack.cpp`，不需要 7-Zip）、安装 |
+| 7-Zip（Unity 自带） | `D:\Unity\2022.3.62f3c1\Editor\Data\Tools\7z.exe`（只有开发脚本 `fetch-vdd.ps1` 要用，可选） |
+| 发布签名密钥（口令在同目录 `release.jks.pass`；**不进 git，务必备份**） | `tools\keys\release.jks` |
 
 ## 4. 恢复清单（下次从这里开始）
 
 ```powershell
+# -1) 新电脑 / 环境坏了：先配构建环境（见 §3.2；缺什么装什么，-CheckOnly 只检查）。下面命令里的 D:\Workspace\MatePadPaper 是原开发机的历史路径，换成仓库所在目录（现在是 D:\GithubProject\Padreen）即可，脚本本身已不依赖它。
+& "$PSHOME\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File tools\setup-build-env.ps1
+#     发布：tools\make-installer.ps1 -Build（需要 tools\keys\release.jks：没有就先 android\app\build.ps1 -NewKey，见 README「发布」）；构建环境变量 PADREEN_TOOLS / PADREEN_JDK / PADREEN_ISCC / PADREEN_GH / PADREEN_KEYSTORE / PADREEN_KEYSTORE_PASS 可覆盖默认位置
+
 # 0) 日常使用：运行 padreen.exe（安装包装到 D:\Padreen；开发时是 host\padreen\build\padreen.exe）。托盘左键 = 控制面板，右键 = 快捷菜单；平板打开 Padreen 自动连接。
-#    命令行：--console（附带控制台输出）  --debug（额外记录大面积变化帧，并把配对码写进日志——只用于测试）  --gray（画质模式启动）  --debug-touch（逐帧打印触控）  --autostart-on / --autostart-off（安装包用，设置本用户开机启动后退出）
+#    命令行：--console（附带控制台输出）  --debug（额外记录大面积变化帧，并把配对码写进日志——只用于测试）  --gray（画质模式启动）  --debug-touch（逐帧打印触控）  --autostart-on / --autostart-off（安装包用，设置本用户开机启动后退出）  --verify-driver [--package 文件夹]（不需要管理员：核对驱动包是不是这个 exe 要的那份，默认看程序目录的 driver 文件夹，退出码 0 = 是；3 缺文件、4 与内置哈希不符）  --fetch-driver --cache 文件夹（不需要管理员、不弹窗：像首次运行那样从 Parsec 取驱动并核对，只写 --cache 下面；make-dist.ps1 用它当发布检查，退出码 0 = 成功，8 下载失败，9 下载到的不是预期的文件，10 解包/写入失败）  --install-driver [--package 文件夹] [--log 文件]（需要管理员：驱动安装的提权部分，由程序自己经 UAC 拉起，不用手动运行）
 #    配置：padreen.ini + 配对列表 devices.ini（密钥 DPAPI 加密）在程序目录（不可写则 %LOCALAPPDATA%\Padreen）；主界面里的设置会写回。关键项：lan=1 lan_port=38702 lan_discovery_port=38703 pair_minutes=5 usb=1 fast_wave=a2f6 settle=off touch=1 …（见 padreen.ini.sample）
 #    局域网：平板打开 Padreen（主页）→ 自动发现 → 点「配对…」输入电脑「配对新平板」窗口里的 9 位码（或 USB 连一次自动配对）→ 之后自动连接。usb=0 = 忽略 USB 线只走局域网（测试用）。防火墙规则：安装包添加；绿色版首次运行弹窗引导（UAC 一次）；托盘「启用局域网连接（需要允许防火墙）」可重试。
 #    日志：padreen.log（UTF-8，>2 MB 自动轮转）。退出请用托盘「退出」（会还原壁纸、拔虚拟屏、让平板退出显示）；脚本里用 `python host\poc\phctl.py quit|full|reconnect|fast|gray|lan|pair|devices|open|touch|du|a2f6|settle-off|…`（给托盘窗口发 WM_COMMAND）。
@@ -99,6 +113,19 @@
 & "$PSHOME\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File D:\Workspace\MatePadPaper\host\padreen\build.ps1
 #    Padreen 自带的 APK 是 host\padreen\build\padreen.apk —— 重新构建平板 App 后要复制过去：
 #    Copy-Item android\app\build\padreen.apk host\padreen\build\padreen.apk -Force   （appBuild 比 Padreen 要求的低时，Padreen 会自动 adb install -r）
+
+# 1b) 虚拟显示器驱动（Parsec VDD 0.41 + nefconw）：**不进任何发布包**（Parsec 的软件，没有找到允许第三方再分发的授权；2026-11-10 查证：Parsec 官方把它当作 Teams/Warp 功能，通过 Parsec 应用下载，条款里没有授予再分发的内容）。
+#    程序在用户电脑上自己取：首次运行/托盘「安装虚拟显示器驱动」→ 说明并询问 → 后台线程（界面不卡）用 WinHTTP 从 https://builds.parsec.app/vdd/ 下载 parsec-vdd-0.45.0.0.exe（取 nefconw.exe）和 parsec-vdd-0.41.0.0.exe（取 mm.inf/dll/cat），
+#    先核对安装包 SHA-256，再由 vddpack.cpp 解包（NSIS：每个文件是独立的 raw deflate blob；按内容 SHA-256 挑文件，不信压缩包里的名字；自带 inflate，不需要 7-Zip），再核对 4 个文件，放进缓存 <设置文件夹>\driver-cache（安装包+pkg），然后经 UAC 拉起 padreen.exe --install-driver --package <pkg>。
+#    查找顺序：<程序目录>\driver（离线/开发时手放的完整包）→ driver-cache\pkg → driver-cache 里的两个安装包（手动下载放进去也行）→ 联网下载。任何哈希不符 → 拒绝使用并提示更新 Padreen。
+#    发布检查：make-dist.ps1 用刚做好的 exe 跑 --fetch-driver --cache .tmp\vdd-check（真实下载），并断言 dist 里没有 nefconw.exe / mm.* / parsec-vdd-*.exe；Parsec 换文件时出包会失败 → 更新 driver.cpp 里的哈希（和 fetch-vdd.ps1）。
+#    开发用：tools\fetch-vdd.ps1（需要 7-Zip）把同样的 4 个文件取到 tools\vdd\pkg，给旁边的 install-vdd.ps1 / uninstall-vdd.ps1 / status-vdd.ps1 用（这些脚本不分发）
+& "$PSHOME\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File D:\Workspace\MatePadPaper\tools\fetch-vdd.ps1
+#    换驱动版本：同时改 tools\fetch-vdd.ps1 和 host\padreen\src\driver.cpp 里的 SHA-256（kSources 两个安装包 + kPins 四个文件）；padreen.exe --verify-driver --package tools\vdd\pkg 可核对两者是否一致
+#    安装卸载：安装包（Inno）不再带驱动、不装也不卸驱动（卸载 Padreen 不动驱动；卸驱动 = 设备管理器里卸载设备并勾选删除驱动程序，或开发用 uninstall-vdd.ps1）。ini 里 driver_declined=1 表示用户在首次提示时选了"否"（托盘菜单仍可装）
+#    提权部分：先核对哈希、复制到只有管理员能写的 C:\Windows\Temp\Padreen-vdd-*，再用 nefconw.exe 装；--package 指向用户可写的缓存目录是安全的，因为每个文件都按内置哈希核对，装的是核对过的那份字节
+#    测试（2026-11-10，真机 + 真实 UAC）：卸载驱动后 → 测试副本首次启动 → 提问框 → 下载（0.6 s）→ UAC → 安装成功，设备 OK、1872×1404@60 / 1404×1872@60 已登记，程序全程可响应、可正常退出；另有单元测试（.NET DeflateStream 生成的 stored/fixed/dynamic 向量、真实安装包、截断/比特翻转/噪声）和 13 项 CLI 检查（缓存复用、损坏的缓存安装包被拒并重下、被篡改的包被发现并重建）
+#    ShellExecuteEx 的坑：调用线程没初始化 COM 时它转到后台线程立刻返回、拿不到进程句柄（等不到 UAC 和安装结果）→ 要 CoInitializeEx + SEE_MASK_NOASYNC（driver.cpp 已处理）
 
 # 2) 构建并安装平板 App
 $env:TEMP='D:\Workspace\MatePadPaper\.tmp'; $env:TMP=$env:TEMP
@@ -145,7 +172,7 @@ D:\Python3.8\python.exe host\poc\stress.py --log .tmp\lc-eink.txt --gap 3 --plan
 10. **Wi-Fi 要保活**：平板 Wi-Fi 省电让 ping 平均 114 ms；电脑每 50 ms 发 PING 保活后降到 ~4 ms（§14，LAN 会话同样有效）。**局域网架构（PD2）：电脑监听、平板主动连**（因为要"平板端自动发现电脑"）→ 电脑必须有一次防火墙放行（入站 TCP 38702 / UDP 38703，限本地子网）；绿色版首次运行引导，安装包直接加。
 13. **PowerShell/工具坑**：`$s.Replace(a,b,1)` 在 PS 5.1 无此重载；`$a -lt $b` 才是比较（`<` 是重定向）；单引号字符串里的 `` `n `` 不是换行；文件混用 LF/CRLF 时锚点会匹配不上 → 先统一换行。**平板上有人（用户）同时操作时，adb 模拟点击会和用户的输入混在一起**——测试前先问/等。**从隐藏窗口启动的进程第一次 `ShowWindow` 会被 STARTUPINFO 吞掉**（已在 ui.cpp 处理）。
 12. **测试触控/窗口位置的脚本必须 DPI 感知**（`SetProcessDpiAwarenessContext(-4)`），否则 Tk/Python 报的窗口坐标是虚拟化的（虚拟屏缩放 150%）；用 `adb shell input tap/swipe` 可以模拟手指（toolType UNKNOWN、无面积）。Padreen 加 `--debug-touch` 会逐帧打印触控帧。
-11. 升级平板 App 要改 `requiredAppBuild`（`main.cpp`）并同步 `Receiver.APP_BUILD` / manifest `versionCode`，重新构建 APK 后复制到 `host\padreen\build\padreen.apk`；每次升级用户都要在平板上点一次「继续安装」。不要在用户使用时 `Stop-Process` 杀 Padreen（窗口会被 Windows 搬回主屏；用 `phctl.py quit`）。
+11. 升级平板 App 要改 `requiredAppBuild`（`main.cpp`）并同步 `Receiver.APP_BUILD` / manifest `versionCode`，重新构建 APK 后复制到 `host\padreen\build\padreen.apk`；每次升级用户都要在平板上点一次「继续安装」；新旧 APK 必须是同一把密钥签的，否则 `adb install -r` 失败（`INSTALL_FAILED_UPDATE_INCOMPATIBLE`），平板上要先卸载再装（托盘提示会这么说）。不要在用户使用时 `Stop-Process` 杀 Padreen（窗口会被 Windows 搬回主屏；用 `phctl.py quit`）。
 
 ## 7. 工具坑（省得再踩）
 

@@ -1,11 +1,14 @@
 ﻿; Padreen installer (Inno Setup 7).  Build:  powershell -ExecutionPolicy Bypass -File tools\make-installer.ps1
 ; Installs to D: by default (the user's rule: software on D:, not C:), needs administrator rights once for
 ;   - the Windows Firewall rules (inbound TCP 38702 / UDP 38703, local subnet only, this program only)
-;   - the virtual display driver (Parsec VDD 0.41, Microsoft-signed IddCx) - skipped when it is already present
 ;   - the power helper service (padreen.exe --power-service): while the tablet display is in use it sets "closing the lid" to
 ;     "do nothing" and puts the original value back afterwards (changing it needs administrator rights).  Because that service runs
 ;     as SYSTEM, the program folder is locked down (only administrators may modify it); settings and logs then live in %LOCALAPPDATA%.
 ; Nothing else on the PC is touched.  The uninstaller removes what the installer added.
+;
+; The virtual display driver is NOT part of this installer: it is Parsec's software, and no permission to redistribute it has been found.  Padreen offers to
+; fetch it from Parsec's own download address at its first start (one more UAC prompt, no script).  So the installer does not install it, and the
+; uninstaller does not remove it (other programs may use it too): Device Manager > Display adapters > Parsec Virtual Display Adapter > Uninstall device.
 ;
 ; Padreen was called PaperDisplay (its tray program: PaperHost) before version 1.1.  Installing it replaces the old product: the old program,
 ; its service, its firewall rules and its shortcuts are removed first.  The settings and the paired tablets stay where they are (in
@@ -51,7 +54,6 @@ Name: "custom"; Description: "自定义"; Flags: iscustom
 Name: "main"; Description: "Padreen 主程序 + 平板 App 安装包"; Types: full custom; Flags: fixed
 Name: "usb"; Description: "USB 连接支持（adb：插线自动安装平板 App、自动连接）"; Types: full custom
 Name: "power"; Description: "电源助手（合盖不休眠：只在连接平板期间临时让「合上盖子」不使电脑睡眠，断开/退出/崩溃后自动还原；一个很小的 Windows 服务，卸载时一并移除）"; Types: full custom
-Name: "driver"; Description: "虚拟显示器驱动（Parsec VDD 0.41，微软签名；电脑里多出一块只给平板用的屏幕）"; Types: full custom
 
 [Tasks]
 Name: "firewall"; Description: "允许平板通过局域网（Wi-Fi）连接：添加两条只限本地网络、只对本程序的 Windows 防火墙入站规则"; GroupDescription: "网络："
@@ -65,7 +67,6 @@ Source: "{#Src}\padreen-white.png"; DestDir: "{app}"; Flags: ignoreversion; Comp
 Source: "{#Src}\padreen.ini.sample"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "{#Src}\使用说明.txt"; DestDir: "{app}"; Flags: ignoreversion; Components: main
 Source: "{#Src}\adb\*"; DestDir: "{app}\adb"; Flags: ignoreversion recursesubdirs; Components: usb
-Source: "{#Src}\driver\*"; DestDir: "{app}\driver"; Flags: ignoreversion recursesubdirs; Components: driver
 
 [Icons]
 Name: "{autoprograms}\{#AppName}\Padreen"; Filename: "{app}\padreen.exe"
@@ -73,12 +74,6 @@ Name: "{autoprograms}\{#AppName}\平板 App 安装包（padreen.apk）"; Filenam
 Name: "{autoprograms}\{#AppName}\使用说明"; Filename: "{app}\使用说明.txt"
 Name: "{autoprograms}\{#AppName}\卸载 Padreen"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\Padreen"; Filename: "{app}\padreen.exe"; Tasks: desktopicon
-
-[Registry]
-; remembers that WE installed the driver (so only then the uninstaller removes it)
-Root: HKLM; Subkey: "Software\Padreen"; ValueType: dword; ValueName: "VddInstalledByUs"; ValueData: 1; Components: driver; Check: NeedVddInstall; Flags: uninsdeletekey
-; ... or that the old PaperDisplay installer did (the flag moves over; the driver itself stays untouched)
-Root: HKLM; Subkey: "Software\Padreen"; ValueType: dword; ValueName: "VddInstalledByUs"; ValueData: 1; Check: CarryVddFlag; Flags: uninsdeletekey
 
 [Run]
 ; the power helper runs as SYSTEM from this folder: only administrators may modify it (users: read / execute)
@@ -90,7 +85,6 @@ Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Padreen LAN UDP ({app}\padreen.exe)"""; Flags: runhidden; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Padreen LAN TCP ({app}\padreen.exe)"" dir=in action=allow protocol=TCP localport=38702 program=""{app}\padreen.exe"" profile=any remoteip=localsubnet enable=yes"; Flags: runhidden; StatusMsg: "正在添加防火墙规则…"; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Padreen LAN UDP ({app}\padreen.exe)"" dir=in action=allow protocol=UDP localport=38703 program=""{app}\padreen.exe"" profile=any remoteip=localsubnet enable=yes"; Flags: runhidden; StatusMsg: "正在添加防火墙规则…"; Tasks: firewall
-Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -ExecutionPolicy Bypass -File ""{app}\driver\install-vdd.ps1"""; Flags: runhidden waituntilterminated; StatusMsg: "正在安装虚拟显示器驱动（几十秒）…"; Components: driver; Check: NeedVddInstall
 Filename: "{app}\padreen.exe"; Parameters: "--autostart-on"; Flags: runasoriginaluser runhidden; Tasks: autostart
 Filename: "{app}\padreen.exe"; Description: "现在运行 Padreen"; Flags: nowait postinstall skipifsilent runasoriginaluser
 
@@ -100,13 +94,13 @@ Filename: "{app}\padreen.exe"; Parameters: "--autostart-off"; Flags: runhidden; 
 Filename: "{app}\padreen.exe"; Parameters: "--remove-power-service"; Flags: runhidden waituntilterminated; RunOnceId: "RemovePower"; Check: PowerServiceInstalled
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Padreen LAN TCP ({app}\padreen.exe)"""; Flags: runhidden; RunOnceId: "DelFwTcp"
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Padreen LAN UDP ({app}\padreen.exe)"""; Flags: runhidden; RunOnceId: "DelFwUdp"
-Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -ExecutionPolicy Bypass -File ""{app}\driver\uninstall-vdd.ps1"""; Flags: runhidden waituntilterminated; RunOnceId: "DelVdd"; Check: VddInstalledByUs
 
 [UninstallDelete]
 Type: files; Name: "{app}\*.ini"
 Type: files; Name: "{app}\*.log"
 Type: files; Name: "{app}\*.old"
 Type: filesandordirs; Name: "{app}\driver"
+Type: filesandordirs; Name: "{app}\driver-cache"
 Type: dirifempty; Name: "{app}"
 
 [Code]
@@ -121,44 +115,13 @@ const
 var
   LegacyDir: String;            // where the old PaperDisplay is installed ('' = it is not)
   LegacyAutostart: Boolean;     // the old program started with Windows (the choice moves over to Padreen)
-  LegacyVddFlag: Boolean;       // the old installer had installed the virtual display driver (the flag moves over)
+  LegacyVddFlag: Boolean;       // the old installer had installed the virtual display driver: its flag is removed before the old uninstaller runs (it would remove the driver)
 
 function DefaultDir(Param: String): String;
 begin
   // the user's rule: programs go to D: (when there is a D: drive), never C: by default
   if DirExists('D:\') then Result := 'D:\Padreen'
   else Result := ExpandConstant('{autopf}\Padreen');
-end;
-
-// the virtual display adapter (hardware id Root\Parsec\VDA) is already installed?
-function VddPresent: Boolean;
-var
-  Names: TArrayOfString;
-  I: Integer;
-  Ids: String;
-begin
-  Result := False;
-  if RegGetSubkeyNames(HKLM, 'SYSTEM\CurrentControlSet\Enum\ROOT\DISPLAY', Names) then
-    for I := 0 to GetArrayLength(Names) - 1 do
-      if RegQueryMultiStringValue(HKLM, 'SYSTEM\CurrentControlSet\Enum\ROOT\DISPLAY\' + Names[I], 'HardwareID', Ids) then
-        if Pos('root\parsec\vda', Lowercase(Ids)) > 0 then Result := True;
-end;
-
-function NeedVddInstall: Boolean;
-begin
-  Result := not VddPresent;
-end;
-
-function CarryVddFlag: Boolean;
-begin
-  Result := LegacyVddFlag and VddPresent;
-end;
-
-function VddInstalledByUs: Boolean;
-var
-  V: Cardinal;
-begin
-  Result := RegQueryDWordValue(HKLM, 'Software\Padreen', 'VddInstalledByUs', V) and (V = 1);
 end;
 
 // the power helper service runs padreen.exe: it must stop before the files are replaced (stopping it restores the lid action)
@@ -221,7 +184,7 @@ begin
     '-NoProfile -ExecutionPolicy Bypass -Command "Get-NetFirewallRule -DisplayName ''PaperDisplay LAN*'' -ErrorAction SilentlyContinue | Remove-NetFirewallRule -ErrorAction SilentlyContinue"',
     '', SW_HIDE, ewWaitUntilTerminated, Code);
   if LegacyDir = '' then Exit;
-  // the driver must survive the old uninstaller (it only removes the driver when its own flag says so)
+  // the driver must survive the old uninstaller (it only removes the driver when its own flag says so); Padreen itself never removes it
   if LegacyVddFlag then RegDeleteValue(HKLM, 'Software\PaperDisplay', 'VddInstalledByUs');
   Unins := AddBackslash(LegacyDir) + 'unins000.exe';
   if FileExists(Unins) then

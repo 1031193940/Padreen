@@ -11,6 +11,7 @@
 
 #include "adb.h"
 #include "devices.h"
+#include "driver.h"
 #include "input.h"
 #include "lan.h"
 #include "net.h"
@@ -26,7 +27,7 @@ using namespace ph;
 namespace {
 
 constexpr UINT WM_TRAY = WM_APP + 1;
-enum : UINT { IDM_STATUS = 1000, IDM_FAST, IDM_GRAY, IDM_FULL, IDM_WALLPAPER, IDM_RECONNECT, IDM_LOG, IDM_QUIT, IDM_AUTOSTART, IDM_LAN, IDM_TOUCH, IDM_PAIR, IDM_DEVICES, IDM_FIREWALL, IDM_OPEN, IDM_USB, IDM_ROTATE };
+enum : UINT { IDM_STATUS = 1000, IDM_FAST, IDM_GRAY, IDM_FULL, IDM_WALLPAPER, IDM_RECONNECT, IDM_LOG, IDM_QUIT, IDM_AUTOSTART, IDM_LAN, IDM_TOUCH, IDM_PAIR, IDM_DEVICES, IDM_FIREWALL, IDM_OPEN, IDM_USB, IDM_ROTATE, IDM_DRIVER };
 // fast-mode waveform choices: IDM_WAVE_BASE + protocol mode (1 = DU, 5 = A2/MIX, 6..9 = A2 with 6..9 frames)
 constexpr UINT IDM_WAVE_BASE = 1100;
 // automatic gray settle: IDM_SETTLE_BASE + 0 (off) / 1 (light) / 2 (full)
@@ -127,6 +128,7 @@ struct App {
     std::mutex mu;
     std::condition_variable cv;
     std::vector<std::string> devices;
+    std::vector<AdbPending> pendingDevices;   // plugged in, but adb cannot use them yet (e.g. the tablet still waits for "Allow USB debugging"); guarded by mu
     std::atomic<bool> quit{false}, reconnect{false};
     std::wstring status = L"启动中…";
     std::atomic<int> color{0};                // 0 grey, 1 orange, 2 green, 3 red
@@ -169,6 +171,10 @@ struct App {
     bool askFirewall(bool manual);
     bool lanBlocked = false;                  // the firewall rule is missing and the user has not (yet) allowed it
     bool manualFirewall = false;
+    void offerDriver(bool atStart);           // the virtual display driver (Parsec's, downloaded from Parsec on request): ask, install (one UAC prompt), let the tablet retry
+    bool driverBusy = false;                  // offerDriver is open (its message boxes run a nested message loop: a second tray click must not start a second installer)
+    std::atomic<bool> inSession{false};       // runSession is running: the virtual monitor exists (also while a Wi-Fi session waits for its tablet)
+    std::atomic<bool> driverRetry{false};     // the driver was just installed: the supervisor forgets that a tablet was refused for lack of it
 };
 
 App* g = nullptr;
@@ -310,6 +316,7 @@ void showMenu(HWND h) {
     AppendMenuW(m, MF_STRING | (g->cfg.lan ? MF_CHECKED : 0), IDM_LAN, L"允许平板通过局域网连接");
     AppendMenuW(m, MF_STRING | (g->cfg.usb ? MF_CHECKED : 0), IDM_USB, L"插着 USB 线时用 USB 连接（取消 = 始终走 Wi-Fi）");
     if (g->lanBlocked) AppendMenuW(m, MF_STRING, IDM_FIREWALL, L"启用局域网连接（需要允许防火墙）…");
+    AppendMenuW(m, MF_STRING, IDM_DRIVER, Vdd::installed() ? L"重新安装虚拟显示器驱动（修复）…" : L"安装虚拟显示器驱动（从 Parsec 官方下载，需要管理员授权）…");
     AppendMenuW(m, MF_SEPARATOR, 0, nullptr);
     AppendMenuW(m, MF_STRING | (autostartEnabled() ? MF_CHECKED : 0), IDM_AUTOSTART, L"开机自动启动（只为当前用户）");
     AppendMenuW(m, MF_STRING, IDM_RECONNECT, L"重新连接");
@@ -382,6 +389,9 @@ LRESULT CALLBACK WndProc(HWND h, UINT msg, WPARAM w, LPARAM l) {
                     g->startLan();
                     g->manualFirewall = false;
                     break;
+                case IDM_DRIVER:
+                    g->offerDriver(false);
+                    break;
                 case IDM_OPEN:
                     uiShowMain(&g->uiHost);
                     break;
@@ -446,12 +456,21 @@ LRESULT CALLBACK WndProc(HWND h, UINT msg, WPARAM w, LPARAM l) {
 bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err) {
     const std::string pkg = "com.padreen.app", comp = "com.padreen.app/.MainActivity";
     std::string log;
-    if (!adb->packageInstalled(serial, pkg)) {
-        setStatus(L"正在安装到平板：请在平板上点「继续安装」（系统安全确认，只需这一次）", 1);
-        if (!adb->install(serial, cfg.apkPath, log)) {
-            err = L"安装平板 App 失败：" + widen(log);
+    // puts the bundled APK on the tablet; false (with the reason in `err`) when that does not work
+    auto installApk = [&](const wchar_t* what) {
+        if (GetFileAttributesW(cfg.apkPath.c_str()) == INVALID_FILE_ATTRIBUTES) {
+            err = L"找不到平板 App 的安装包 padreen.apk（要和 padreen.exe 放在同一个文件夹）";
             return false;
         }
+        if (adb->install(serial, cfg.apkPath, log)) return true;
+        logf("tablet: apk install failed: %s", log.c_str());
+        err = quit ? L"Padreen 正在退出" : std::wstring(what) + explainInstallFailure(log);
+        return false;
+    };
+    if (!adb->packageInstalled(serial, pkg)) {
+        setStatus(L"正在安装到平板：请在平板上点「继续安装」（系统安全确认，只需这一次）", 1);
+        if (!installApk(L"安装平板 App 失败：")) return false;
+        logf("tablet: app installed");
     }
     // the tablet app was called PaperDisplay (package com.paperdisplay.app) before it became Padreen: keep a single app on the tablet
     static const char* const kLegacyPkg = "com.paperdisplay.app";
@@ -486,10 +505,7 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
         logf("tablet app build %d < required %d: updating", link.appBuild(), cfg.requiredAppBuild);
         link.close();
         setStatus(L"正在更新平板上的 App：请在平板上点「继续安装」（系统安全确认）", 1);
-        if (!adb->install(serial, cfg.apkPath, log)) {
-            err = L"更新平板 App 失败：" + widen(log);
-            return false;
-        }
+        if (!installApk(L"更新平板 App 失败：")) return false;
         adb->forceStop(serial, pkg);
         adb->forward(serial, cfg.port);
     }
@@ -499,7 +515,7 @@ bool App::prepareTablet(const std::string& serial, Link& link, std::wstring& err
 
 bool App::createVirtualDisplay(Vdd& vdd, int w, int h, std::wstring& gdi, std::wstring& err) {
     if (!vdd.open()) {
-        err = L"没有安装虚拟显示器驱动（需管理员运行一次 driver\\install-vdd.ps1，见使用说明）";
+        err = L"没有安装虚拟显示器驱动（托盘右键 →「安装虚拟显示器驱动」，只需管理员授权一次）";
         return false;
     }
     int idx = vdd.addDisplay();
@@ -664,6 +680,46 @@ void App::startLan() {
         setStatus(L"局域网连接不可用：" + widen(err) + L"（端口被占用？）", 3);
     }
 }
+// The virtual display driver is Parsec's software and is not part of Padreen's download.  At the first start without it the user is asked once;
+// "yes" downloads it from Parsec's own address, checks it, and installs it (one UAC prompt, no script).  A "no" is remembered (the tray menu
+// keeps offering it); a cancelled or failed installation is asked again at the next start.  Any time later: tray menu (install, or repair when
+// it is there already).  A tablet that was refused for lack of the driver tries again.
+void App::offerDriver(bool atStart) {
+    if (driverBusy) return;
+    struct Busy {
+        bool& b;
+        explicit Busy(bool& x) : b(x) { b = true; }
+        ~Busy() { b = false; }
+    } busy(driverBusy);
+    const wchar_t* title = L"Padreen - 虚拟显示器驱动";
+    const bool repair = Vdd::installed();
+    if (atStart) {
+        if (repair) return;
+        wchar_t declined[8] = {};
+        GetPrivateProfileStringW(L"padreen", L"driver_declined", L"0", declined, 8, iniPath.c_str());
+        if (declined[0] == L'1') {
+            logf("driver: not installed, and the user declined it earlier (tray menu: install)");
+            return;
+        }
+    } else if (repair && inSession) {
+        MessageBoxW(hwnd, L"平板正在使用中。请先断开平板（或退出平板上的 Padreen），再重新安装驱动。", title, MB_OK | MB_ICONINFORMATION | MB_TOPMOST | MB_SETFOREGROUND);
+        return;
+    }
+    const std::wstring cacheDir = iniPath.substr(0, iniPath.find_last_of(L"\\/")) + L"\\driver-cache";      // next to the settings and the log
+    switch (installDriverInteractive(hwnd, logPath, repair, cacheDir, [this](const std::wstring& s) { setStatus(s, 1); }, &quit)) {
+        case DriverAsk::Installed:
+            WritePrivateProfileStringW(L"padreen", L"driver_declined", L"0", iniPath.c_str());
+            setStatus(L"虚拟显示器驱动已安装", 0);
+            driverRetry = true;
+            cv.notify_all();
+            break;
+        case DriverAsk::Declined:
+            if (atStart) WritePrivateProfileStringW(L"padreen", L"driver_declined", L"1", iniPath.c_str());
+            break;
+        case DriverAsk::Failed:
+            break;
+    }
+}
 // Virtual monitor + wallpaper + capture/stream session + teardown.  `serial` empty = Wi-Fi session.  Returns the end reason.
 // A Wi-Fi session whose link breaks (not on purpose) keeps the virtual monitor for cfg.lanGraceSeconds and continues when the same tablet
 // reconnects: Wi-Fi hiccups, the tablet app being restarted or the tablet sleeping do not end the session, and windows stay where they are.
@@ -674,6 +730,11 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
         explicit BusyGuard(LanServer& x) : l(x) { l.setBusy(true); }
         ~BusyGuard() { l.setBusy(false); }
     } busyGuard(lan);                                  // inbound LAN connections get "busy" while a session runs
+    struct SessionFlag {
+        std::atomic<bool>& f;
+        explicit SessionFlag(std::atomic<bool>& x) : f(x) { f = true; }
+        ~SessionFlag() { f = false; }
+    } sessionFlag(inSession);                          // the driver cannot be reinstalled while the virtual monitor is in use
     // The desktop is created in the shape the tablet has right now (it can be turned to portrait).  Without "rotate" it is always landscape: a
     // tablet that is in portrait then gets T_GEOM "refused" and turns back by itself.
     int vw = link.panelWidth(), vh = link.panelHeight();
@@ -1005,12 +1066,33 @@ std::string App::runSession(Link& link, const std::string& serial, std::wstring&
     return reason;
 }
 
+// A cable is plugged in but adb cannot use the device yet: what has to happen on the tablet (null: nothing to say).
+static const wchar_t* usbWaitingHint(const std::vector<AdbPending>& pending) {
+    bool offline = false;
+    for (const AdbPending& p : pending) {
+        if (p.state == "unauthorized") return L"平板已连上 USB，但还没允许这台电脑调试：请在平板屏幕上的「允许 USB 调试」提示里点「允许／确定」（可勾选「始终允许」），之后会自动安装并连接";
+        if (p.state == "offline") offline = true;
+    }
+    return offline ? L"平板的 USB 连接处于离线状态：请重新插拔数据线（还不行，就在平板上关掉再打开「USB 调试」）" : nullptr;
+}
+
 void App::superviseLoop() {
     CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    std::string pausedSerial;                 // tablet app was closed on purpose: do not relaunch until re-plug / manual reconnect
+    std::string pausedSerial;                 // no more attempts with this tablet until re-plug / manual reconnect: its app was closed on purpose, or preparing it keeps failing
+    std::wstring pausedMsg;                   // what the status says meanwhile
+    int pausedColor = 0;
+    auto pauseOn = [&](const std::string& s, const std::wstring& msg, int color) {
+        pausedSerial = s;
+        pausedMsg = msg;
+        pausedColor = color;
+    };
     std::string rejected;                     // serial of a device that is not a MatePad Paper
     int failures = 0;
     while (!quit) {
+        if (driverRetry.exchange(false)) {        // the driver was installed just now: a tablet that was refused for lack of it tries again
+            pausedSerial.clear();
+            failures = 0;
+        }
         std::string serial;
         {
             std::unique_lock<std::mutex> lk(mu);
@@ -1047,7 +1129,14 @@ void App::superviseLoop() {
                 }
                 continue;
             }
-            if (!cfg.lan) setStatus(L"等待平板（USB 线连接；局域网连接已关闭）", 0);
+            const wchar_t* usbHint = nullptr;
+            if (cfg.usb) {
+                std::lock_guard<std::mutex> lk(mu);
+                usbHint = usbWaitingHint(pendingDevices);
+            }
+            if (usbHint) setStatus(usbHint, 1);
+            else if (!Vdd::installed()) setStatus(L"还没有安装虚拟显示器驱动：托盘右键 →「安装虚拟显示器驱动」（从 Parsec 官方地址下载），装好后才能把平板当显示器", 3);
+            else if (!cfg.lan) setStatus(L"等待平板（USB 线连接；局域网连接已关闭）", 0);
             else if (!lan.running()) setStatus(L"等待平板（请用 USB 线连接）", 0);
             else if (store.list().empty()) setStatus(L"等待平板：右键托盘 →「配对新平板」，在平板上打开 Padreen 输入配对码（或插 USB 线自动配对）", 0);
             else setStatus(L"等待平板：在平板上打开 Padreen 即可连接（或插 USB 线）", 0);
@@ -1057,7 +1146,7 @@ void App::superviseLoop() {
             failures = 0;
         }
         if (serial == pausedSerial) {
-            setStatus(L"平板上的 App 已关闭（右键托盘图标 → 重新连接）", 0);
+            setStatus(pausedMsg, pausedColor);
             continue;
         }
         if (!cfg.deviceModel.empty()) {
@@ -1076,7 +1165,7 @@ void App::superviseLoop() {
         if (!prepareTablet(serial, link, err)) {
             logf("prepare failed: %s", narrow(err).c_str());
             setStatus(err, 3);
-            if (++failures >= 3) pausedSerial = serial;
+            if (++failures >= 3) pauseOn(serial, err + L"。已暂停重试：托盘右键 → 重新连接，或重新插线", 3);
             for (int i = 0; i < 30 && !quit && !reconnect; ++i) Sleep(100);
             continue;
         }
@@ -1085,7 +1174,7 @@ void App::superviseLoop() {
         std::string reason = runSession(link, serial, err, vdFailed);
         if (vdFailed) {
             setStatus(err, 3);
-            pausedSerial = serial;
+            pauseOn(serial, err, 3);
             continue;
         }
         bool unplugged = !deviceStillThere(serial);
@@ -1093,10 +1182,10 @@ void App::superviseLoop() {
             setStatus(L"平板已拔出，虚拟显示器已移除", 0);
             failures = 0;
         } else if (reason == "tablet link closed") {
-            pausedSerial = serial;                     // the app was closed on the tablet
+            pauseOn(serial, L"平板上的 App 已关闭（右键托盘图标 → 重新连接）", 0);     // the app was closed on the tablet
         } else if (!quit) {
             setStatus(L"连接中断：" + widen(reason), 3);
-            if (++failures >= 3) pausedSerial = serial;
+            if (++failures >= 3) pauseOn(serial, L"连接中断：" + widen(reason) + L"。已暂停重试：托盘右键 → 重新连接，或重新插线", 3);
             for (int i = 0; i < 30 && !quit && !reconnect; ++i) Sleep(100);
         }
     }
@@ -1302,6 +1391,30 @@ void setupUiHost(App& app) {
 }
 }  // namespace
 
+// --console: write to the console the program was started from (the program itself is a windowless GUI program)
+static void attachConsoleIfAsked(const std::wstring& commandLine) {
+    if (commandLine.find(L"--console") == std::wstring::npos) return;
+    if (AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole()) {
+        FILE* f;
+        freopen_s(&f, "CONOUT$", "w", stderr);
+        freopen_s(&f, "CONOUT$", "w", stdout);
+    }
+}
+
+// the argument that follows `name` on the command line ("" when there is none)
+static std::wstring commandLineValue(const wchar_t* name) {
+    int n = 0;
+    LPWSTR* argv = CommandLineToArgvW(GetCommandLineW(), &n);
+    std::wstring v;
+    for (int i = 1; argv && i + 1 < n; ++i)
+        if (wcscmp(argv[i], name) == 0) {
+            v = argv[i + 1];
+            break;
+        }
+    if (argv) LocalFree(argv);
+    return v;
+}
+
 int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR cmdLine, int) {
     // physical pixel coordinates everywhere (touch injection must hit the right pixel even if the user scales the tablet screen)
     SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
@@ -1312,6 +1425,18 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR cmdLine, int) {
         if (early.find(L"--remove-power-service") != std::wstring::npos) return removePowerService();
         if (early.find(L"--autostart-on") != std::wstring::npos) { setAutostart(true); return 0; }
         if (early.find(L"--autostart-off") != std::wstring::npos) { setAutostart(false); return 0; }
+        if (early.find(L"--verify-driver") != std::wstring::npos) {            // development: is the package in --package <folder> (default <program folder>\driver) the one this exe expects?
+            attachConsoleIfAsked(early);
+            return verifyDriverPackage(commandLineValue(L"--package"));
+        }
+        if (early.find(L"--fetch-driver") != std::wstring::npos) {             // make-dist.ps1: can this exe get the driver from Parsec by itself?  (writes below --cache only)
+            attachConsoleIfAsked(early);
+            return fetchDriverPackage(commandLineValue(L"--cache"));
+        }
+        if (early.find(L"--install-driver") != std::wstring::npos) {           // elevated: started by App::offerDriver (UAC prompt)
+            attachConsoleIfAsked(early);
+            return runInstallDriver(commandLineValue(L"--log"), commandLineValue(L"--package"));
+        }
     }
     HANDLE single = CreateMutexW(nullptr, TRUE, L"Local\\PadreenSingleton");
     if (GetLastError() == ERROR_ALREADY_EXISTS) {       // started a second time (shortcut double click): show the running instance's control panel instead
@@ -1353,6 +1478,7 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR cmdLine, int) {
     app.cfg.apkPath = findApk(app.cfg.apkPath);
     logf("adb=%s apk=%s model=%s", narrow(app.cfg.adbPath).c_str(), narrow(app.cfg.apkPath).c_str(), app.cfg.deviceModel.c_str());
     app.adb = std::make_unique<Adb>(app.cfg.adbPath);
+    app.adb->abortWhen(&app.quit);
     app.store.load(data + L"\\devices.ini");
     app.store.pcId();                                  // creates the identity on the first run
 
@@ -1383,16 +1509,19 @@ int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR cmdLine, int) {
     Shell_NotifyIconW(NIM_ADD, &app.nid);
     SetTimer(app.hwnd, 1, 1000, nullptr);
 
-    if (!app.cfg.adbPath.empty()) app.watcher.start(app.adb.get(), [&app](const std::vector<std::string>& d) {
+    if (!app.cfg.adbPath.empty()) app.watcher.start(app.adb.get(), [&app](const std::vector<std::string>& d, const std::vector<AdbPending>& p) {
         {
             std::lock_guard<std::mutex> lk(app.mu);
             app.devices = d;
+            app.pendingDevices = p;
         }
-        logf("adb devices: %zu", d.size());
+        logf("adb devices: %zu ready, %zu waiting", d.size(), p.size());
+        for (const AdbPending& w : p) logf("adb device %s is '%s'", w.serial.c_str(), w.state.c_str());
         app.cv.notify_all();
     });
     setupUiHost(app);
     app.startLan();
+    app.offerDriver(true);                              // virtual display driver missing: ask once, before the supervisor can run into it
     app.supervisor = std::thread([&app] { app.superviseLoop(); });
     {   // first run with nothing paired yet: show the pairing window right away (closing it is fine - USB works without)
         wchar_t welcomed[8] = {};

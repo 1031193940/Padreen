@@ -9,6 +9,13 @@ docs/probe/dex/
 docs/probe/dump/
 android/*/build/
 tools/keys/
+# signing keys and their passwords never go into git (the repository is public), wherever they are copied to
+*.jks
+*.keystore
+*.jks.pass
+# a zip / 7z of the keys folder (a backup) would carry the private key and its password: archives stay out of git too
+*.zip
+*.7z
 tools/vdd/*.exe
 *.apk
 docs/probe/getprop.txt

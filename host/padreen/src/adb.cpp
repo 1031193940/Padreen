@@ -4,6 +4,14 @@
 
 namespace ph {
 
+// The adb server's port: ANDROID_ADB_SERVER_PORT, exactly as adb itself reads it (5037 by default).
+static int serverPort() {
+    char v[16] = {};
+    DWORD n = GetEnvironmentVariableA("ANDROID_ADB_SERVER_PORT", v, sizeof(v));
+    int p = n && n < sizeof(v) ? atoi(v) : 0;
+    return p > 0 && p < 65536 ? p : 5037;
+}
+
 static bool serverUp() {
     WSADATA wsa;
     WSAStartup(MAKEWORD(2, 2), &wsa);
@@ -11,7 +19,7 @@ static bool serverUp() {
     if (s == INVALID_SOCKET) return false;
     sockaddr_in a = {};
     a.sin_family = AF_INET;
-    a.sin_port = htons(5037);
+    a.sin_port = htons((u_short)serverPort());
     inet_pton(AF_INET, "127.0.0.1", &a.sin_addr);
     bool ok = ::connect(s, (sockaddr*)&a, sizeof(a)) == 0;
     closesocket(s);
@@ -20,7 +28,7 @@ static bool serverUp() {
 
 bool Adb::ensureServer(std::string& err) {
     if (serverUp()) return true;
-    std::wstring cmd = L"\"" + exe_ + L"\" -P 5037 start-server";
+    std::wstring cmd = L"\"" + exe_ + L"\" -P " + std::to_wstring(serverPort()) + L" start-server";
     STARTUPINFOW si = {};
     si.cb = sizeof(si);
     si.dwFlags = STARTF_USESHOWWINDOW;
@@ -86,7 +94,7 @@ int Adb::run(const std::wstring& args, std::string& out, int timeoutMs) {
             }
             break;
         }
-        if (nowNs() > deadline) {
+        if (nowNs() > deadline || (abort_ && *abort_)) {
             TerminateProcess(pi.hProcess, 1);
             CloseHandle(pi.hThread);
             CloseHandle(pi.hProcess);
@@ -131,6 +139,34 @@ bool Adb::install(const std::string& serial, const std::wstring& apk, std::strin
     return rc == 0 && log.find("Success") != std::string::npos;
 }
 
+std::wstring explainInstallFailure(const std::string& out) {
+    auto has = [&](const char* s) { return out.find(s) != std::string::npos; };
+    if (has("INSTALL_FAILED_UPDATE_INCOMPATIBLE") || has("signatures do not match"))
+        return L"平板上已装的 Padreen 用的是另一把签名密钥，无法直接覆盖。请先在平板上卸载「Padreen」，再重新插线（卸载会清掉旧的配对，插线后自动重新配对）";
+    if (has("INSTALL_FAILED_VERSION_DOWNGRADE"))
+        return L"平板上的 Padreen 比这台电脑自带的更新，不能降级。请先升级这台电脑上的 Padreen";
+    if (has("INSUFFICIENT_STORAGE")) return L"平板存储空间不足，请清理空间后重新插线";
+    if (has("INSTALL_FAILED_OLDER_SDK")) return L"平板系统版本太旧，装不了这个 App";
+    if (has("USER_RESTRICTED") || has("INSTALL_FAILED_ABORTED") || has("INSTALL_CANCELED_BY_USER") || has("canceled by user") || has("User rejected"))
+        return L"平板上没有确认安装（点了取消，或系统禁止通过 USB 安装）。请重新插线，并在平板上点「继续安装」";
+    if (has("device unauthorized")) return L"平板还没有允许这台电脑调试：请在平板上点「允许 USB 调试」";
+    if (has("device offline")) return L"平板的 USB 连接处于离线状态：请重新插拔数据线";
+    if (has("no devices/emulators") || has("error: device '")) return L"平板已断开，请重新插线";
+    // anything else: the last line adb printed is the one that names the problem
+    std::string last;
+    size_t pos = 0;
+    while (pos < out.size()) {
+        size_t nl = out.find('\n', pos);
+        std::string line = out.substr(pos, nl == std::string::npos ? std::string::npos : nl - pos);
+        pos = nl == std::string::npos ? out.size() : nl + 1;
+        while (!line.empty() && (line.back() == '\r' || line.back() == ' ')) line.pop_back();
+        if (!line.empty()) last = line;
+    }
+    if (last.empty()) return L"没有收到安装结果（平板上可能一直没有点「继续安装」），请重新插线再试";
+    if (last.size() > 200) last.resize(200);
+    return L"adb 返回：" + widen(last);
+}
+
 bool Adb::uninstall(const std::string& serial, const std::string& pkg, std::string& log) {
     int rc = run(L"-s " + widen(serial) + L" uninstall " + widen(pkg), log, 60000);
     return rc == 0 && log.find("Success") != std::string::npos;
@@ -167,7 +203,7 @@ static bool readExact(SOCKET s, char* p, int n) {
     return true;
 }
 
-void DeviceWatcher::start(Adb* adb, std::function<void(const std::vector<std::string>&)> onChange) {
+void DeviceWatcher::start(Adb* adb, Callback onChange) {
     stop();
     adb_ = adb;
     cb_ = std::move(onChange);
@@ -196,7 +232,7 @@ void DeviceWatcher::loop() {
         SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         sockaddr_in a = {};
         a.sin_family = AF_INET;
-        a.sin_port = htons(5037);
+        a.sin_port = htons((u_short)serverPort());
         inet_pton(AF_INET, "127.0.0.1", &a.sin_addr);
         if (s == INVALID_SOCKET || ::connect(s, (sockaddr*)&a, sizeof(a)) != 0) {
             if (s != INVALID_SOCKET) closesocket(s);
@@ -220,6 +256,7 @@ void DeviceWatcher::loop() {
             std::string body(len, '\0');
             if (len && !readExact(s, &body[0], len)) break;
             std::vector<std::string> serials;
+            std::vector<AdbPending> pending;
             size_t pos = 0;
             while (pos < body.size()) {
                 size_t nl = body.find('\n', pos);
@@ -227,9 +264,11 @@ void DeviceWatcher::loop() {
                 pos = nl == std::string::npos ? body.size() : nl + 1;
                 size_t tab = line.find('\t');
                 if (tab == std::string::npos) continue;
-                if (line.substr(tab + 1) == "device") serials.push_back(line.substr(0, tab));
+                std::string serial = line.substr(0, tab), state = line.substr(tab + 1);
+                if (state == "device") serials.push_back(serial);
+                else pending.push_back({serial, state});
             }
-            if (cb_) cb_(serials);
+            if (cb_) cb_(serials, pending);
         }
         SOCKET cur = sock_.exchange(INVALID_SOCKET);
         if (cur != INVALID_SOCKET) closesocket(cur);

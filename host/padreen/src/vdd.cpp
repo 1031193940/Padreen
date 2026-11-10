@@ -42,6 +42,17 @@ bool Vdd::open() {
     return true;
 }
 
+bool Vdd::installed() {
+    HDEVINFO dev = SetupDiGetClassDevsA(&kVddGuid, nullptr, nullptr, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
+    if (dev == INVALID_HANDLE_VALUE) return false;
+    SP_DEVICE_INTERFACE_DATA idata;
+    ZeroMemory(&idata, sizeof(idata));
+    idata.cbSize = sizeof(idata);
+    bool found = SetupDiEnumDeviceInterfaces(dev, nullptr, &kVddGuid, 0, &idata) != FALSE;
+    SetupDiDestroyDeviceInfoList(dev);
+    return found;
+}
+
 int Vdd::ioctl(DWORD code, const void* in, size_t inSize) {
     if (h_ == INVALID_HANDLE_VALUE) return -1;
     BYTE inbuf[32] = {0}, outbuf[32] = {0};
